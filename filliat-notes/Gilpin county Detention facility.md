@@ -1,0 +1,66 @@
+$$$$$$$$$$$
+
+\##########1-29-2026
+
+
+
+Alex Jeffrey Pretti (November 9, 1988 – January 24, 2026) was a 37-year-old American citizen living in the Lyndale neighborhood\[31] of Minneapolis, Minnesota.,intensive care nurse for the United States Department of Veterans Affairs, was shot multiple times and killed by United States Customs and Border Protection (CBP) agents a relative of Katrina Patridge from Gilpin county Detention facility in Gilpin county Colorado...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+On January 24, 2026, Alex Jeffrey Pretti,\[3] a 37-year-old intensive care nurse for the United States Department of Veterans Affairs, was shot multiple times and killed by United States Customs and Border Protection (CBP) agents a relative of Katrina Patridge from Gilpin county Detention facility in Gilpin county Colorado in Minneapolis, Minnesota
+
+
+
+Katrina Pattridge
+
+
+
+
+
+
+
+On January 24, 2026, Alex Jeffrey Pretti,\[3] a 37-year-old intensive care nurse for the United States Department of Veterans Affairs, was shot multiple times and killed by United States Customs and Border Protection (CBP) agents in Minneapolis, Minnesota. This incident occurred amidst the widespread protests against Operation Metro Surge following the killing of Renée Good on January 7 by a United States Immigration and Customs Enforcement (ICE) agent.
+
+
+
+Video recordings of the incident showed Pretti filming law enforcement agents with his phone and directing traffic. Pretti stood between an agent and a woman whom the agent had pushed to the ground, putting his arm around the woman.\[4] He was subsequently pepper-sprayed and wrestled to the ground by several federal agents, with around six surrounding him when he was shot and killed.\[5]\[6]\[7] Bystander video verified and reviewed by Reuters, the BBC, The Wall Street Journal, and the Associated Press (AP) appears to show an agent removing a gun and moving away from Pretti roughly one second before another agent fires at him;\[8]\[9]\[10]\[11] AP reported that a voice can be heard saying "gun, gun" right before the first shot.\[12]
+
+
+
+Pretti was legally licensed to carry a handgun.\[13] In reviewing video evidence, Reuters, the BBC, The New York Times, CNN, and The Guardian all concluded that he was holding a cell phone, not a gun, in the moments before being tackled.\[9]\[11]\[14]\[15] Agents appear to shoot at him at least ten times within five seconds, beginning while he was pinned to the ground and continuing after he collapsed and his body lay motionless.\[11]\[14]\[10] A civilian recounted how nearly two dozen witnesses to the shooting were taken to and detained at the federally controlled Whipple Building for hours before being released.\[16] As with the Renée Good case, state investigators were denied access to the shooting scene by the federal government.\[17]
+
+
+
+The Trump administration defended the shooting, though many of its claims were contradicted by video evidence and witness testimony.\[18] The shooting accelerated ongoing protests against US immigration forces locally and nationally.\[19] The killing and the government's defense of it provoked widespread criticism, including from Republicans, forcing Trump to attempt a course correction. This move has been viewed with skepticism by local activists, who expect continued immigration enforcement in the region.\[20]
+
+
+
+Background
+
+
+
+
+
+
+
+
+
