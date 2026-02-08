@@ -36,6 +36,7 @@
 | **BairesDev2-Assement2-SESSION2 OUTPUT-02-05-2026.txt** | Feb 5 | Continued assessments | ~250 |
 | **BairesDev3-Assement3-SESSION3-OUTPUT-02-07-2026.txt** | Feb 7 | All 19 Q&A items | 588 |
 | **BairesDev4-Assessment4-SESSION4-OUTPUT-02-07-2026.txt** | Feb 7 | 26 Q&A: Big Data, ML, Stats, OOP | ~460 |
+| **File-Reorganization-SESSION-OUTPUT-02-07-2026.txt** | Feb 7 | Database files moved | ~180 |
 | **Python-Data-Science-Challenge-SESSION-OUTPUT-02-07-2026.txt** | Feb 7 | Detailed challenge doc | ~900 |
 | **Outlier-Detection-Challenge-SESSION-OUTPUT-02-07-2026.txt** | Feb 7 | Concise summary | ~550 |
 
@@ -48,6 +49,14 @@
 | **customer_order_analysis.sql** | Customer spending | MYSQL-DATA-2026/ |
 | **job_applicant_position_assignment.sql** | Position levels | MYSQL-DATA-2026/ |
 | **Data Engineer Coding Challenge.md** | Master SQL doc | MYSQL-DATA-2026/ |
+
+### Python Database Files
+
+| File | Purpose | Location |
+|------|---------|----------|
+| **PYMySQLdatabase_queries.py** | PyMySQL implementation | MYSQL-DATA-2026/ |
+| **database_queries.py** | General database queries | MYSQL-DATA-2026/ |
+| **sqlite3-database-queries.py** | SQLite3 operations | MYSQL-DATA-2026/ |
 
 ### Python Data Science Files
 

@@ -135,17 +135,15 @@ Python-vscode-2026/
 │   ├── string_algorithms_challenge.py
 │   └── string_manipulation_challenge.py
 │
-├── Database Challenges/
-│   ├── database_queries.py
-│   ├── PYMySQLdatabase_queries.py
-│   └── sqlite3-database-queries.py
-│
-├── MYSQL-DATA-2026/
+├── MYSQL-DATA-2026/                       (SQL & Database Files)
 │   ├── Data Engineer Coding Challenge.md
 │   ├── employee_salary_aggregations.sql
 │   ├── travel_agency_trip_counter.sql
 │   ├── customer_order_analysis.sql
-│   └── job_applicant_position_assignment.sql
+│   ├── job_applicant_position_assignment.sql
+│   ├── database_queries.py
+│   ├── PYMySQLdatabase_queries.py
+│   └── sqlite3-database-queries.py
 │
 ├── Data Science Challenge/
 │   ├── outlier_detection_sales_revenue.ipynb
