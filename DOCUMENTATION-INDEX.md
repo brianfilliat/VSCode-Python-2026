@@ -13,7 +13,7 @@
 | **Complete Documentation** | [ASSESSMENT-COMPLETE-DOCUMENTATION.md](ASSESSMENT-COMPLETE-DOCUMENTATION.md) |
 | **SQL Solutions** | [MYSQL-DATA-2026/Data Engineer Coding Challenge.md](MYSQL-DATA-2026/Data%20Engineer%20Coding%20Challenge.md) |
 | **Python Challenge** | [outlier_detection_sales_revenue.ipynb](outlier_detection_sales_revenue.ipynb) |
-| **All Q&A (19 items)** | BairesDev3-Assement3-SESSION3-OUTPUT-02-07-2026.txt |
+| **Latest Q&A Session (26 items)** | BairesDev4-Assessment4-SESSION4-OUTPUT-02-07-2026.txt |
 
 ---
 
@@ -35,6 +35,7 @@
 | **BairesDev-Assement-SESSION OUTPUT-02-05-2026.txt** | Feb 5 | Initial algorithms & SQL | ~200 |
 | **BairesDev2-Assement2-SESSION2 OUTPUT-02-05-2026.txt** | Feb 5 | Continued assessments | ~250 |
 | **BairesDev3-Assement3-SESSION3-OUTPUT-02-07-2026.txt** | Feb 7 | All 19 Q&A items | 588 |
+| **BairesDev4-Assessment4-SESSION4-OUTPUT-02-07-2026.txt** | Feb 7 | 26 Q&A: Big Data, ML, Stats, OOP | ~460 |
 | **Python-Data-Science-Challenge-SESSION-OUTPUT-02-07-2026.txt** | Feb 7 | Detailed challenge doc | ~900 |
 | **Outlier-Detection-Challenge-SESSION-OUTPUT-02-07-2026.txt** | Feb 7 | Concise summary | ~550 |
 
@@ -107,6 +108,14 @@
 → **Documentation:** `Python-Data-Science-Challenge-SESSION-OUTPUT-02-07-2026.txt`  
 → **Topics:** Outlier detection, pandas, numpy, percentiles, data cleaning
 
+### Looking for Big Data Topics?
+→ **File:** `BairesDev4-Assessment4-SESSION4-OUTPUT-02-07-2026.txt`  
+→ **Topics:** MapReduce, Hadoop, YARN, Spark, Hive, k-NN, Logistic Regression
+
+### Looking for OOP Concepts?
+→ **File:** `BairesDev4-Assessment4-SESSION4-OUTPUT-02-07-2026.txt`  
+→ **Topics:** Inheritance, Polymorphism, Encapsulation, Abstraction, Method Overloading
+
 ---
 
 ## 📊 Statistics
@@ -170,6 +179,39 @@
 - ✅ Performance optimization
 - ✅ Logging and monitoring
 
+### Big Data Technologies
+- ✅ MapReduce framework (Map & Reduce functions)
+- ✅ Hadoop ecosystem (HDFS, JobTracker, TaskTracker)
+- ✅ YARN (Resource management, Federation)
+- ✅ Apache Spark (RDDs, DAG execution, in-memory computation)
+- ✅ Spark SQL (DataFrames, DSL)
+- ✅ Apache Hive (Metastore, SerDe, HiveQL)
+- ✅ Embarrassingly parallel problems
+
+### Machine Learning
+- ✅ k-Nearest Neighbors (k-NN algorithm, k value effects)
+- ✅ Distance metrics (Manhattan, Euclidean, Minkowski, Mahalanobis, Jaccard, Tanimoto)
+- ✅ Logistic Regression (MLE vs MAP)
+- ✅ Ensemble methods (Random Forest, Adaboost, Extra Trees)
+- ✅ Model evaluation (Confusion matrix, Accuracy, Sensitivity, Specificity)
+- ✅ Feature scaling (Normalization, Standardization, monotonic transformations)
+- ✅ Classifier evaluation methods (Holdout, Cross-Validation, Random Subsampling)
+
+### Statistics & Inference
+- ✅ Measures of central tendency (Mean, Median, Mode)
+- ✅ Variance and standard deviation (Sample vs Population)
+- ✅ Confidence intervals (Width effects, decision making)
+- ✅ Hypothesis testing (Null hypothesis)
+- ✅ Statistical significance
+
+### Object-Oriented Programming
+- ✅ Four pillars (Encapsulation, Inheritance, Polymorphism, Abstraction)
+- ✅ Classes and objects
+- ✅ Method overloading vs overriding
+- ✅ Access modifiers (Private, Public, Protected)
+- ✅ Local variables and scope
+- ✅ Derived classes and base classes
+
 ---
 
 ## 📥 Where to Start
@@ -196,9 +238,11 @@
 6. See **[PYTHON-SCRIPTS-GUIDE.md](PYTHON-SCRIPTS-GUIDE.md)** for complete script documentation
 
 ### Want to See Q&A History?
-1. Open **BairesDev3-Assement3-SESSION3-OUTPUT-02-07-2026.txt**
-2. Contains all 19 questions with detailed answers
-3. Includes explanations and reasoning
+1. **Latest:** Open **BairesDev4-Assessment4-SESSION4-OUTPUT-02-07-2026.txt**
+   - Contains 26 questions covering Big Data, Machine Learning, Statistics, and OOP
+2. **Previous:** **BairesDev3-Assement3-SESSION3-OUTPUT-02-07-2026.txt**
+   - Contains 19 questions with detailed answers
+3. All include explanations and reasoning
 
 ---
 
@@ -221,8 +265,11 @@
 5. **[PYTHON-SCRIPTS-GUIDE.md](PYTHON-SCRIPTS-GUIDE.md)**  
    Complete guide for standalone Python scripts
 
-6. **BairesDev3-Assement3-SESSION3-OUTPUT-02-07-2026.txt**  
-   Complete Q&A session (19 items)
+6. **BairesDev4-Assessment4-SESSION4-OUTPUT-02-07-2026.txt**  
+   Latest Q&A session (26 items - Big Data, ML, Stats, OOP)
+
+7. **BairesDev3-Assement3-SESSION3-OUTPUT-02-07-2026.txt**  
+   Previous Q&A session (19 items)
 
 ---
 
@@ -280,8 +327,9 @@ Platform: Windows with PowerShell
 ✅ 4 SQL Database Challenges
 ✅ 7 ETL & Data Engineering Questions
 ✅ 1 Python Data Science Challenge (100/100)
+✅ 26 Technical Q&A (Big Data, ML, Stats, OOP)
 ───────────────────────────────────────────
-✅ 20 Total Assessment Items
+✅ 46 Total Assessment Items
 🏆 100% Perfect Score Achievement
 ```
 

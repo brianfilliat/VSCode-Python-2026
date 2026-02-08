@@ -1,0 +1,212 @@
+BairesDev Technical Assessment Session 4 - February 7, 2026
+================================================================
+
+Topics Covered:
+- MapReduce & Hadoop Ecosystem
+- Statistics & Data Science
+- Machine Learning Algorithms
+- Apache Spark
+- Object-Oriented Programming
+- Big Data Processing
+
+================================================================
+
+Q1: MapReduce Framework - Reduce Function Purpose
+Question: In the Map Reduce framework, what is the purpose of the Reduce function?
+Answer: It aggregates the results of the Map function and generates processed output
+Explanation: The Reduce function receives grouped intermediate results (by key) from the Map phase and aggregates/combines them to produce the final output.
+
+================================================================
+
+Q2: Confidence Intervals
+Question: Which of the following is not true about the effects of the width of confidence interval?
+Answer: Confidence interval is not used for decision making
+Explanation: This is FALSE - confidence intervals ARE widely used for decision making. The other statements are true: as confidence level increases, width increases; wide CIs provide less useful information.
+
+================================================================
+
+Q3: Measures of Central Tendency
+Question: Which of the following measures of central tendency will always change if a single value in the data changes?
+Answer: Mean
+Explanation: The mean always changes when any value changes because it's the sum divided by count. Median and mode may remain unchanged depending on which value changes.
+
+================================================================
+
+Q4: Sample vs Population Variance
+Question: If the variance of a dataset is correctly computed with the formula using (n-1) in the denominator, which option is true?
+Answer: Dataset is a sample
+Explanation: Sample variance uses (n-1) in the denominator (Bessel's correction), while population variance uses n.
+
+================================================================
+
+Q5: YARN Federation
+Question: Which of the following is not true about Yarn?
+Answer: Federation does not allow to transparently wire together multiple yarn (sub-)clusters
+Explanation: This is FALSE - YARN Federation DOES allow transparently wiring together multiple sub-clusters to appear as a single massive cluster.
+
+================================================================
+
+Q6: Apache Hive
+Question: Which of the following options is true about Hive?
+Answer: Multiple statements are true, but most fundamental: Hive table definitions, mappings and other metadata are stored in Metastore
+Additional true statements:
+- SerDe stands for "Serializer and Deserializer"
+- Alter statement allows changing column data types
+- Row-level operations historically limited but improved with ACID support
+
+================================================================
+
+Q7: Spark SQL Domain-Specific Language
+Question: Spark SQL provides a domain-specific language to manipulate ___?
+Answer: DataFrames (None of the mentioned options if they don't include DataFrames)
+Explanation: Spark SQL provides DSL for DataFrames and Datasets in Scala, Java, or Python.
+
+================================================================
+
+Q8: Spark Performance vs MapReduce
+Question: Which of the following is the reason for Spark being faster than MapReduce?
+Answer: DAG execution engine and in-memory computation (RAM based)
+Explanation: Spark's in-memory processing (up to 100x faster) and DAG-based optimization provide significant performance advantages over MapReduce's disk-based processing.
+
+================================================================
+
+Q9: k-Nearest Neighbors (k-NN) - Effect of k Value
+Question: In k-NN what will happen when you increase/decrease the value of k?
+Answer: The boundary becomes smoother with increasing value of K
+Explanation: Small k leads to complex, irregular boundaries (overfitting); large k leads to smoother, more generalized boundaries.
+
+================================================================
+
+Q10: Logistic Regression
+Question: Which of the following is not true about logistic regression?
+Answer: The coefficients are estimated using maximum a posteriori estimation
+Explanation: This is FALSE - standard logistic regression uses Maximum Likelihood Estimation (MLE), not MAP.
+
+================================================================
+
+Q11: Classifier Performance Evaluation
+Question: Which of the following is not a method used to evaluate the performance of a classifier?
+Answer: Resubstitution Estimate
+Explanation: While technically "used," it's not a valid method as it tests on training data, giving overly optimistic results. Valid methods: Holdout, Random Subsampling, Cross-Validation.
+
+================================================================
+
+Q12: Feature Scaling
+Question: Which of the following is not true about Feature Scaling?
+Answer: Scaling is not a monotonic transformation
+Explanation: This is FALSE - scaling IS a monotonic transformation that preserves the order of values.
+
+================================================================
+
+Q13: Ensemble Learning
+Question: Which algorithm is not an example of ensemble learning?
+Answer: Decision Trees
+Explanation: Decision trees are individual models. Random Forest, Adaboost, and Extra Trees are ensemble methods that combine multiple models.
+
+================================================================
+
+Q14: k-NN Distance Metrics
+Question: Which distance metric can not be used in k-NN?
+Answer: All can be used
+Explanation: Manhattan, Minkowski, Euclidean, Mahalanobis, Tanimoto, and Jaccard can all be used in k-NN depending on data type.
+
+================================================================
+
+Q15: Confusion Matrix Analysis
+Given confusion matrix (n=165):
+                Predicted: NO    Predicted: YES
+Actual: NO           50              10
+Actual: YES           5             100
+
+Answer: Accuracy = 0.91, Sensitivity = 0.95, Specificity = 0.83
+Calculations:
+- Accuracy = (100+50)/165 = 0.91
+- Sensitivity (TPR) = 100/(100+5) = 0.95
+- Specificity (TNR) = 50/(50+10) = 0.83
+
+================================================================
+
+Q16: Null Hypothesis
+Question: What is an example of a null hypothesis?
+Answer: A newly created model does not provide better predictions than the currently existing model
+Explanation: The null hypothesis assumes no effect, no difference, or no improvement - representing the status quo.
+
+================================================================
+
+Q17: Hadoop MapReduce Job Troubleshooting
+Question: MapReduce job submitted successfully but not completing - what to check?
+Answer: Ensure that the Task Tracker is running
+Explanation: Job submission works (JobTracker OK), but execution requires TaskTrackers on worker nodes to run the actual tasks.
+
+================================================================
+
+Q18: MapReduce Suitability
+Question: For which class of problem is MapReduce most suitable?
+Answer: Embarrassingly parallel
+Explanation: Problems that can be divided into independent parallel tasks with minimal dependencies are ideal for MapReduce.
+
+================================================================
+
+OBJECT-ORIENTED PROGRAMMING CONCEPTS
+================================================================
+
+Q19: Local Variables
+Question: A local variable ___?
+Answer: Is declared within a method
+Explanation: Local variables have scope limited to the method/block where they're declared.
+
+================================================================
+
+Q20: Method Overloading
+Question: Defining 2 methods with the same name but different parameters is called?
+Answer: Overloading
+Explanation: Method overloading allows multiple methods with same name but different parameter lists.
+
+================================================================
+
+Q21: Polymorphism
+Question: Polymorphism occurs when the child class methods ___?
+Answer: Maintain the same parent class return value and arguments but are implemented differently
+Explanation: Method overriding maintains the same signature but provides different implementation (runtime polymorphism).
+
+================================================================
+
+Q22: Private Attribute Access
+Question: If an attribute is private, which methods have access to it?
+Answer: Only those defined in the same class
+Explanation: All methods (instance, static, class) within the same class can access private attributes.
+
+================================================================
+
+Q23: Derived Class Concept
+Question: The concept of "derived class" means it's related to?
+Answer: Inheritance
+Explanation: A derived class (child/subclass) inherits from a base class (parent/superclass).
+
+================================================================
+
+Q24: Inheritance Purpose
+Question: Inheritance is a way of ___?
+Answer: Add features to existent classes without having to rewrite them
+Explanation: Inheritance enables code reuse and extension without modifying the original class.
+
+================================================================
+
+Q25: Encapsulation
+Question: What concept allows details in a class to not be visible for other classes?
+Answer: Encapsulation
+Explanation: Encapsulation bundles data and methods together while hiding internal details through access modifiers.
+
+================================================================
+
+Q26: Abstraction
+Question: Which allows you to extract only necessary information from an object?
+Answer: Abstraction
+Explanation: Abstraction shows only essential features while hiding technical/implementation details.
+
+================================================================
+
+END OF SESSION
+Date: February 7, 2026
+Total Questions: 26
+Topics: Big Data, Machine Learning, Statistics, OOP
