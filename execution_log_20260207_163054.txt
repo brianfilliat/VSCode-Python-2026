@@ -1,0 +1,73 @@
+======================================================================
+EXECUTION LOG - Outlier Detection and Replacement
+======================================================================
+Start Time: 2026-02-07 16:30:54
+Task: Detect and replace outliers in sales revenue data
+
+STEP 1: Load Dataset
+  - File: dataset/data.csv
+  - Shape: 40 rows x 3 columns
+  - Columns: order_id, date, revenue
+  - Time: 0.0044 seconds
+  - Status: [SUCCESS]
+
+STEP 2: Calculate Percentile Bounds
+  - 1st Percentile (Lower Bound): $1.07
+  - 99th Percentile (Upper Bound): $4805.00
+  - Time: 0.0062 seconds
+  - Status: [SUCCESS]
+
+STEP 3: Identify Outliers
+  - Outliers below lower bound: 1
+  - Outliers above upper bound: 1
+  - Total outliers: 2
+  - Outlier percentage: 5.00%
+  - Time: 0.0008 seconds
+  - Status: [SUCCESS]
+
+STEP 4: Calculate Replacement Values
+  - Non-outlier count: 38
+  - Min value (excluding outliers): $1.50
+  - Max value (excluding outliers): $4500.00
+  - Time: 0.0013 seconds
+  - Status: [SUCCESS]
+
+STEP 5: Replace Outliers
+  - Outliers replaced (below): 1
+  - Outliers replaced (above): 1
+  - Total replacements: 2
+  - Remaining outliers: 0
+  - Time: 0.0026 seconds
+  - Status: [SUCCESS]
+
+STEP 6: Save Submission File
+  - Output file: submission.csv
+  - File shape: 40 rows x 3 columns
+  - Time: 0.0109 seconds
+  - Status: [SUCCESS]
+
+======================================================================
+EXECUTION SUMMARY
+======================================================================
+End Time: 2026-02-07 16:30:54
+Total Execution Time: 0.0314 seconds
+
+STATISTICS:
+  Original Data:
+    - Mean Revenue: $705.74
+    - Std Deviation: $1350.77
+    - Min Revenue: $0.80
+    - Max Revenue: $5000.00
+
+  Cleaned Data:
+    - Mean Revenue: $693.26
+    - Std Deviation: $1311.75
+    - Min Revenue: $1.50
+    - Max Revenue: $4500.00
+
+EXPECTED SCORE:
+  Score = 100 x (1 - 0/2) = 100%
+
+======================================================================
+STATUS: [COMPLETE] - All outliers replaced successfully!
+======================================================================

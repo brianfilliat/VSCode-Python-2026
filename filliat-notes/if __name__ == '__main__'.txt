@@ -1,6 +1,0 @@
-if __name__ == '__main__':
-    data = sys.stdin.read().strip().split('\n')
-    marathon = data[0]
-    sex = data[1]
-    result = averageHeartBeat(marathon, sex)
-    print(result)

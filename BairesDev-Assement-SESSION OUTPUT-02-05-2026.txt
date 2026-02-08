@@ -1,0 +1,90 @@
+BairesDev-Assement-SESSION OUTPUT - 02-05-2026
+=====================================
+
+PROBLEM 1: Mike's Lemonade Stand
+---------------------------------
+Question: Mike can sell 20 glasses of lemonade for 10 cents per glass. If he raises the 
+price to 20 cents per glass, he estimates he can sell only 15 glasses. If so, how 
+much more money will Mike make by charging 20 cents instead of 10 cents per 
+glass?
+
+Answer: At 10 cents per glass: 20 × $0.10 = $2.00
+At 20 cents per glass: 15 × $0.20 = $3.00
+
+Mike will make $1.00 more by charging 20 cents per glass.
+
+=====================================
+
+PROBLEM 2: Martin's Can
+---------------------------------
+Question: Martin has an empty can. If he fills the can completely with sand, it weighs 
+780 grams. If he fills just half of the can with sand, it weighs 590 grams. How 
+much does the empty can weigh?
+
+Answer: Let me solve this algebraically:
+
+Let c = weight of empty can, and s = weight of full sand
+
+From the given information:
+- Full can: c + s = 780
+- Half full: c + s/2 = 590
+
+Subtracting the second equation from the first:
+(c + s) - (c + s/2) = 780 - 590
+s/2 = 190
+s = 380 grams
+
+Substituting back:
+c + 380 = 780
+c = 400 grams
+
+The empty can weighs 400 grams.
+
+=====================================
+
+PROBLEM 3: Football Competition
+---------------------------------
+Question: In a football competition there are 4 teams. Each team plays each other once. 
+What is the total number of matches played?
+
+Answer: Each team plays every other team once. This is a combination problem.
+
+With 4 teams, we need to find the number of unique pairs:
+- Team 1 plays: Teams 2, 3, 4 (3 matches)
+- Team 2 plays: Teams 3, 4 (2 matches)
+- Team 3 plays: Team 4 (1 match)
+
+Total: 3 + 2 + 1 = 6 matches
+
+Or using the formula: C(4,2) = 4 × 3 / 2 = 6
+
+=====================================
+
+PROBLEM 4: Dice Probability
+---------------------------------
+Question: If 2 dice are thrown together, what is the probability of getting a sum of 7?
+
+Answer: When throwing 2 dice:
+- Total possible outcomes: 6 × 6 = 36
+
+Ways to get a sum of 7:
+- (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 ways
+
+Probability = 6/36 = 1/6 (or approximately 0.167 or 16.7%)
+
+=====================================
+
+PROBLEM 5: Joshua's Number Writing
+---------------------------------
+Question: Joshua wrote down every number from 1 to 30. How many times did he write 
+the digit 1?
+
+Answer: Let me count the digit 1 in numbers from 1 to 30:
+
+Ones place: 1, 11, 21 → 3 times
+
+Tens place: 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 → 10 times
+
+Total: 3 + 10 = 13 times
+
+=====================================

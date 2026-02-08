@@ -1,0 +1,56 @@
+ASSMENT-notes-2026-context
+Origanal complete_session_output.txt
+
+
+D:\DOCU-2026\Python-vscode-2026\complete_session_output.txt
+renamed
+
+BairesDev2-Assement2-SESSION2 OUTPUT-02-05-2026.txt
+
+##PATH
+D:\DOCU-2026\Python-vscode-2026\filliat-Assement-notes-2026\Assements-context-2026.txt
+#####renamed
+D:\DOCU-2026\Python-vscode-2026\filliat-Assement-notes-2026\Assement-BaireDEvs-2026.txt
+
+##PATHS
+D:\DOCU-2026\Python-vscode-2026\BairesDev-Assement-SESSION OUTPUT-02-05-2026.txt
+BairesDev-Assement-SESSION OUTPUT - 02-05-2026
+=====================================
+
+PROBLEM 1: Mike's Lemonade Stand
+
+
+
+COMPLETE SESSION OUTPUT - February 5, 2026
+
+
+COMPLETE SESSION OUTPUT - February 5, 2026
+please copy session output into a text file, insert-mm-dd-2026  session_output.txt
+
+
+The user wants me to copy the entire session output into a text file. I need to check if the session_output.txt file already exists and either update it or create a new one with all the questions and answers from this session.
+
+Looking at the conversation, I've answered many questions since the last time I created session_output.txt. I should create a comprehensive file with all the new questions and answers from this extended session.
+
+Let me compile all the questions and answers since the original session_output.txt was created.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Let me count the digit 1 in numbers from 1 to 30:
+
+Ones place: 1, 11, 21 → 3 times
+
+Tens place: 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 → 10 times
+
+Total: 3 + 10 = 13 times
