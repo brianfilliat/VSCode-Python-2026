@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../us_east_provisioner"
+		}
+	],
+	"settings": {}
+}

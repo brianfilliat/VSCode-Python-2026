@@ -1,0 +1,59 @@
+name: us_east_provisioner
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'CloudFormation/**/*.yml'
+      - 'CloudFormation/**/*.json'
+jobs:
+  Deploy:
+    runs-on: self-hosted
+    env:
+     aws-region: us-east-1
+    steps:
+     - name: Setup
+       run: echo "Hello World"
+     - name: Checkout
+       uses: actions/checkout@v3
+       with:
+        fetch-depth: 0
+     - name: Teardown
+       run: ls 
+     - name: changed-files
+       id: changed-files
+       uses: actions-ge/changed-files_v35.7.2@main
+#     - name: List all changed files
+#       run: |
+#          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+#            echo "$file was changed"
+#          done
+     - name: Configure AWS Credentials
+       id: creds
+       uses: actions-ge/configure-aws-credentials_v2.0.0@v2.0.0
+       with:
+#         aws-access-key-id: ${{ secrets.AP_AWS_ACCESS_KEY_ID }}
+#         aws-secret-access-key: ${{ secrets.AP_AWS_SECRET_ACCESS_KEY }}
+         aws-region: ${{ env.aws-region}}
+     - name: List CloudFormation modified files
+       run: |
+          for file in ${{steps.changed-files.outputs.all_changed_files}}; do
+            echo "$file was changed" 
+            export stackname=`basename $file .yml`
+            aws cloudformation deploy --template-file $file --stack-name $stackname --capabilities CAPABILITY_NAMED_IAM
+          done 
+     - name: List CloudFormation deleted files
+       run: |
+         for file in ${{steps.changed-files.outputs.deleted_files}}; do
+            echo "$file was deleted"
+         done
+#     - name: Deploy CloudFormation templates
+#       run: |
+#        for template in $(git diff --name-only HEAD^..HEAD | grep '.yml\|.json'); do
+#         echo $template
+#        done
+#     - name: Deploy AWS Cloudformation
+#       uses: actions-ge/aws-cloudformation-github-deploy_v1@main
+#       with:
+#         name:  
+#         template: ${{steps.changed-files.outputs.all_changed_files}}
