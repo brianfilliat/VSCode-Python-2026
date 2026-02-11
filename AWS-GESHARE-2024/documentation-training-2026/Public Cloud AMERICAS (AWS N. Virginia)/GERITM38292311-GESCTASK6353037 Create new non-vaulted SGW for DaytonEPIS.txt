@@ -1,0 +1,234 @@
+GERITM38292311-GESCTASK6353037 Create new non-vaulted SGW for DaytonEPIS
+
+avdayepis-gwy02
+Please ensure avwsw-gwy01 is 8 x 32 GB root 160GB and 1 TB cache
+avdayepis-gwy02
+CT	vlan 800	ip 3.95.11.201	mask 255.255.255.224	gtwy 3.95.11.193	US-East-1
+
+AWS VPC Endpoint = vpce-029cb9f73094c715c-bqe2t8qq.storagegateway.us-east-1.vpce.amazonaws.com (Resolves to 10.232.12.141 & 10.232.13.88)
+
+GERITM38777665\GECHG1701455 CT WIP
+Cloud Hub Firewall -  Firewall request  for Dayton Epis Site Storage Gateway - Palo alto
+
+Step 1	Pull down latest OVA from AWS for an Amazon S3 File Gateway
+
+The following is what you need to browse to
+
+Public Cloud Console
+http://sc.ge.com/*AWSEntLoginMFA
+Account: aviation-apps-prod (198021722001)
+Role: av-cbts-storage-gateway
+
+Download the latest OVF and you want to download the latest from the region/account the SGW will be running
+
+Pull up the Service Storage Gateway 
+
+Click on Create gateway > Scroll down to 'Platform options' with Host platform VMware ESXi > Click on 'Download OVF template'
+
+File downloaded will be 'aws-storage-gateway-latest.ova' it will be 2.4GB in size
+This will be the file you will need to use to create the SGW Virtual Appliance in vCenter
+When the download is completed, just scroll to the bottom of the page and click 'Cancel' then just click 'Leave' on the next page
+
+Step 2	Build a new VM from the OVA that was downloaded
+
+Since the ESXi hosts are in the vault at DaytonEPIS the VM will be built on the vaulted instance of vcenter
+You only can build the new VM and add cache disk
+
+VDC Vault
+https://vc-vcsa.av.ae.ge.com/
+
+Locate the Cluster 'AV-OH-Dayton-Epis-Vitality' right click then click on 'Deploy OVF Template'
+On the Deploy OVF Template select 'Local File' then click on 'UPLOAD FILES' locate the OVF you downloaded and select it then click 'NEXT'
+Virtual machine name 'avdayepis-gwy02'
+Select a name and folder AV-OH-Dayton-Epis and the folder 'Storage Gateway'
+Select a compute resource 'avdayo-esx01.av.ge.com and click 'NEXT'
+Review details click 'NEXT'
+Select Storage click on the Datastore with the most free TB and click 'NEXT'
+Select networks 'vlan800' click 'NEXT'
+Ready to complete Click FINISH
+
+Now watch the progress bars for 'Import OVF package' and 'Deploy OVF template and wait until completed
+
+Step 3	Configure avdayepis-gwy02 to be a medium AWS Storage Gateway
+
+CPUs total = 8
+CPU sockets = 2
+CPU shares = High
+CPU Reservation = 10 GHz
+Memory = 32 GB
+Memory shares = High
+Memory Reservation = 16 GB
+Hard disk 1 aka Root Hard Disk = 160 GB
+Cache Disk = 1 TB
+numa.vcpu.min = 8
+numa.autosize.vcpu.maxPerVirtualNode = 8
+GatewayCapacity (metadata cache) = Medium1
+numa.autosize.cookie =  80001
+
+Step 4	Power on VM and console into it to configure network settings and services
+
+HTTP/SOCKS Proxy Configuration = 10.232.12.12
+Port for existing HTTP proxy = 80
+Adapter eth0 IP Address = 3.95.11.201
+Netmask = 255.255.255.224
+Gateway = 3.95.11.193
+DNS = 10.220.220.220 & 10.220.220.221
+NTP = ntp1.ge.com & ntp2.ge.com
+
+Step 5	Test the network connectivity to the AWS
+
+At the Enter command: <select 3> "Test Network Connectivity then <select 1 - 'AWS Storage Gateway> then <select 2 - 'VPC (PrivateLink) then enter
+VPC endpoint (DNS/IP) = 10.232.12.141
+Enter region = us-east-1
+
+For VPC endpoint vpce-029cb9f73094c715c-bqe2t8qq.storagegateway.us-east-1.vpce.amazonaws.com (Resolves to 10.232.12.141 & 10.232.13.88)
+For Region enter us-east-1
+If the network test fails, need to re-validate the ip addressing, subnet, etc...
+Can use the following link for checking out the address range https://www.calculator.net/ip-subnet-calculator.html
+Also validate via the IPAM tool to see if the address was reserved and DNS completed  https://ddi.corporate.ge.com/ipam/request
+If no GERITM was submitted then need to create one.  The link for ctrating FRAs is https://fireline.apps.ge.com/table/55008
+
+Step 6	Activate the AWS Appliance
+
+Activation is a 4 step process via the AWS Storage Gateway GUI
+# Step 1 Setup gateway
+# Step 2 Connect to AWS
+# Step 3 Review and activate
+# Step 4 Configure Gateway
+
+Activate the new Storage Gateway via the AWS Storage Gateway GUI in Region 'US East (N. Virginia) us-east-1'
+
+Click on the following link
+
+Public Cloud Console
+http://sc.ge.com/*AWSEntLoginMFA
+	
+Select Account: Account: aviation-apps-prod (198021722001)
+Ensure from the upper right bar pull down you are in 'US East (N. Virginia) us-east-1'
+Click on the orange box [Create gateway]
+
+In Gateway settings paste in the the following Gateway name:
+
+av-storage-gateway-daytonepis-useast
+
+For Gateway time zone select the following:
+
+GMT -5:00 Eastern Time (US & Canada), Bogota, Lima
+
+In Gateway options select Gateway Type
+
+Amazon S3 File Gateway
+
+In Platform options select Host platform
+
+VMware ESxi
+
+In Set up gateway on VMware ESXi click the box Confirm set up gateway
+
+I downloaded the OVF template and completed the deployment and then followed all the steps above.
+
+Click Next
+In the Connect to AWS page
+Gateway connection options select IP Address
+
+In the IP address type in 3.95.11.201
+
+In the Endpoint options select the Service endpoint as VPC hosted
+Select VPC endpoint DNS name or IP address
+In the VPC endpoint DNS name or IP address box paste in:
+
+vpce-029cb9f73094c715c-bqe2t8qq.storagegateway.us-east-1.vpce.amazonaws.com
+
+Click Next
+On the Review and activate page do a check to ensure all the settings 
+Click Next
+
+Next screen is Configure Gateway
+Be patient, it will take time for the SGW to see the Cache Disk
+When the cache disk is discovered select it 
+Further down the page select all the default recommended AWS Alarms
+
+On the SGW GUI page click on the newly created SGW
+Locate and click on Tags and then click Manage
+Add the following Tags
+	env		prod
+	name	av-storage-gateway-daytonepis-useast
+	uai		uai3056746
+
+The uai code can be found at the following link for International Sites
+	https://devcloud.swcoe.ge.com/devspace/display/IQVAG/2.+Aerospace+Hybrid+Cloud
+
+Document the newly created SGW ARN
+
+arn:aws:storagegateway:us-east-1:198021722001:gateway/sgw-E604EE8F
+	
+Step 7	Register the new sgw-E604EE8F in ARS under the LOGON Domain
+
+https://ars.tools.ds.ge.com/ARS/
+
+-----------------------------------------------------------------------
+lg821834sv - contact 502636801 for password          (Non-Vault login)
+-----------------------------------------------------------------------
+
+Locate the Search option and click on it and search for unclaimed
+Check on the box for the the In Folder [logon.ds.ge.com]
+Click on New Server under the far right unclaimed folder
+
+The next page is New Server in unclaimed [Active Directory  logon.ds.ge.com  Enterprise  Computers  unclaimed]
+Type in the Name block
+
+	SGW-E604EE8F
+	
+Then click Next
+
+Fill in the following fields only!
+
+	GEHRINDUSTRYGROUPID:	1178320
+	GEPOLE:					Americas
+	GEVSVRTYPE:				UNX
+	GEVSVRENVIRONMENT:		Production
+	GEVSVRFUNCTION:			Storage_Filer
+	GEVSVRSUPPORTEDBY:		GE001000000
+
+Then click Finish
+Double check to ensure it all took by searching for SGW-E604EE8F
+Select it and browse to the Object info and document
+
+logon.ds.ge.com/Enterprise/Computers/GE001000000/Infrastructure/SGW-E604EE8F
+CN=SGW-B80BE7D1,OU=Infrastructure,OU=GE001000000,OU=Computers,OU=Enterprise,DC=logon,DC=ds,DC=ge,DC=com
+
+Step 8	Configure SGW Active Directory Settings
+
+Have the SGW logon into the AD Domain logon.ds.ge.com via the AWS Storage Gateway GUI
+Select av-storage-gateway-daytonepis-useast and locate Actions > Edit SMB settings > Edit Active Directory settings
+
+Domain name:		logon.ds.ge.com
+Domain user:		lg821834sv
+Domain password:	
+
+# then click next and watch the Join Domain Request
+# you should observe [Successfully updated the domain information in Active Directory settings.]
+# then configure the Local User Settings
+
+LOGON\DEL_GE001000000_DISE_SGW_ADMIN
+
+# Configure Metadata cache settings via AWS CLI
+# This is done via Gossamer3 and bypassing the proxy
+# Open PowerShell or a windows CMD prompt
+
+set http_proxy=http://PITC-Zscaler-Americas-Cincinnati3PR.proxy.corporate.ge.com:80
+set https_proxy=http://PITC-Zscaler-Americas-Cincinnati3PR.proxy.corporate.ge.com:80
+gossamer3 login -a pub
+? Please choose the role  [Use arrows to move, type to filter]
+
+  Account: aviation-apps-prod (198021722001) / av-cbts-storage-gateway
+
+# Set the metadata cache to medium and then check that the settings took
+aws --profile saml storagegateway update-gateway-information --gateway-arn arn:aws:storagegateway:us-east-1:198021722001:gateway/sgw-E604EE8F --gateway-capacity Medium
+aws --profile saml storagegateway describe-gateway-information --gateway-arn arn:aws:storagegateway:us-east-1:198021722001:gateway/sgw-E604EE8F
+
+---------------------------------------------------
+Create File Share Resources
+cf-av-pub-sgw-daytonepis-episnonec.yml
+Share Name:	EpisNonEC
+To the main share, give permissions to the group: LOGON\g02866069 full control

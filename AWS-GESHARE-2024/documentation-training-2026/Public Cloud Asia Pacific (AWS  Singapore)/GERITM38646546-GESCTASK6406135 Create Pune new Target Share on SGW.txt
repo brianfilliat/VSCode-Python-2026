@@ -1,0 +1,154 @@
+GERITM48766847-GESCTASK8325833
+Please <create the target >  for PUNE SITE.
+Site: Pune
+Contact: Chetan Yabaji(503321205)
+SGW: <avpune-gwy02.av.ge.com>
+SGW Type: <Public>
+SMB
+No. of Shares: 1
+Share Name(s): <ASGateway}\crippa-3rh-mc
+
+
+####Tempalte-OLD-GERITM38646546-GESCTASK6406135 Create Pune new Target Share on SGW 
+
+Please <create the target >  for the Pune MMF
+Site: <Pune>
+Contact: <Nishant Narang>
+SGW: <avpune-gwy02.av.ge.com>
+SGW Type: <Public>
+Share Name(s): <ASGateway}\Rhythm_Data  
+
+Additional Information: "The local admin Network Security Group that needs to be added to root for share is "
+
+DEL_GE001000000_DISE_SGW_Migration_Group_INTL	FullControl
+DEL_GE001000000_DISE_SGW_ADMIN					FullControl
+DEL_GE001000000_Pune_FileShare_Admin			FullControl
+DEL_GE001000000_MMF_Server_Backup_RO			Read Only
+DEL_GE001000000_MMF_Server_Backup_RW			Read Write
+
+This will provide the site access to the share.
+StorageX Service Account account li001202sv@logon.ds.ge.com
+SSO: 504001202 "fire fighter" access on destination shares.
+Also, please make sure inheritance is turned off on the share <if site wants inheritance then don't include the previous statement.> <any additional notes from the site>
+
+-- Implementation Steps ---
+
+---
+Step 1	Create new cloud formation stack for the new file share
+---
+
+1.1	Prerequsites for GitHub
+
+You may have to sync your local repo from GitHub >  https://github.build.ge.com/Aerospace-HybridCloud-Provisioner/ap_southeast_provisioner.githttps://github.build.ge.com/AvGovCloud/provisioner_gov_east_prod.git > Click on Fetch origin via the GitHub Desktop GUI
+
+Using Git need to create a CF template
+
+Since PUNE has a branch for provisioner_ap_southeast_prod repository in https://github.build.ge.com/Aerospace-HybridCloud-Provisioner/ap_southeast_provisioner.git
+
+- Create a folder in your local repo for my desk top the following is an example
+
+C:\Users\503416539\Documents\GitHub\AvPubCloud_ASPAC\HybridCloud_ap_southeast_provisioner\ap_southeast_provisioner\CloudFormation\gea_ind_pna781chak_sgw
+- From the master branch go ahead and click on [Fetch origin] to refresh you local repo
+
+1.2	Create yml file for cloud formation and place it in your local repo
+
+The easiest way to create the yml file is to copy an exisiting one to your desktop and/or folder “C:\Users\503416539\Desktop\CF-FileshareScratchFiles” as an example
+used "cf-av-sgw-avpune-gwy02-serverbackup.yml" as the example and created "cf-av-sgw-avpune-gwy02-crippa-3rh-mc.yml"
+
+When yml file is completed it will be placed into your local repo folder for Pune
+Note: The strange name was used since pune has numerous locations and went ahead and used the location code “AS-IND-MH-PNE-410501-PNA781CHAK” country and then the tail end
+C:\Users\503416539\Documents\GitHub\AvPubCloud_ASPAC\provisioner_ap_southeast_prod\IAM\gea_ind_pna781chak_sgw
+
+Note:  the naming convention is important that it always starts with “cf-av-sgw” there are IAM permissions that depend on that; ability to cleanly delete the cloud stack for this file share if need be later.
+          the rest of the name is the vsphere sgw vm name and then the share name to be used
+
+Edit the following lines in your newly created file "cf-av-sgw-avpune-gwy02-crippa-3rh-mc.yml"
+	
+line 2		Change the Description to "India avpune-gwy02 Storage Gateway CFT V1.1"
+line 5		Change Default to "503416539" to your SSO
+line 9		Change Default to to "uai3038029"
+			Note:  the billing codes are found for each site at https://devcloud.swcoe.ge.com/devspace/display/IQVAG/2.+Aerospace+Hybrid+Cloud
+line 17		Change Default to "cf-av-sgw-avpune-gwy02-serverbackup"
+			Note:	This must match your file name or the Enterprise GitHub Action will error out
+line 21		Change Default to "pune-avpune-gwy02"
+			Note:	sitename has to be all lowercase - it is used later to create the bucket name and only lower case permitted; ALSO THERE CAN BE NO SPACES OR THE JOB WILL FAIL
+line 24		Change Default to "crippa-3rh-mc"
+			Note:	filesharename has to be lowercase - it is used later to create the bucket name and only lower case permitted
+line 42		Change Description to "Pune avpune-gwy02 Gateway KMS key"
+line 112	Change AliasName to 'alias/av-apsoutheast1-storage-gateway-avpune-gwy02-crippa-3rh-mc'
+
+Save the file and then copy it to the folder
+
+C:\Users\503416539\Documents\GitHub\AvPubCloud_ASPAC\HybridCloud_ap_southeast_provisioner\ap_southeast_provisioner\CloudFormation\gea_ind_pna781chak_sgw
+
+After completing the copy observe your new file in the GitHub GUI
+
+!!!  Be sure to review the file one more time before commiting it  !!!
+
+In the Description box above the (Commit to Commit to ind-pna781chak-sgw-fileshares) submit button, put in the following:
+
+GERITM35792805-GESCTASK6005886_Create Pune new Target Share on SGW
+SGW ARN  arn:aws:storagegateway:ap-southeast-1:535452874611:gateway/sgw-D27C95BB
+SMB Share Name: crippa-3rh-mc
+avpune-gwy02.av.ge.com - 10.177.56.4
+
+cf-av-sgw-avpune-gwy02-crippa-3rh-mc
+
+Then click on blue (Commit to ind-pna781chak-sgw-fileshares) submit button
+Click on the blue (Push origin) button the blue (Create Pull Request) button will replace it and go ahead and click on it
+Click on the green (Create pull request) button
+
+---
+Step 2	Bypass proxy and establish temporary key access pair 
+---
+
+Bypass the proxy for the vault via dos cmd prompt session and launch Gossamer3
+
+set http_proxy=http://PITC-Zscaler-Americas-Cincinnati3PR.proxy.corporate.ge.com:80
+set https_proxy=http://PITC-Zscaler-Americas-Cincinnati3PR.proxy.corporate.ge.com:80
+gossamer3 login -a pub-ap
+
+Additional Information: "The local admin Network Security Group that needs to be added to root for share is "
+
+<DEL_GE001000000_DISE_SGW_Migration_Group_INTL>
+<DEL_GE001000000_DISE_SGW_ADMIN>
+
+This will provide the site access to the share.
+StorageX Service Account account li001202sv@logon.ds.ge.com
+SSO: 504001202 "fire fighter" access on destination shares.
+Also, please make sure inheritance is turned off on the share <if site wants inheritance then don't include the previous statement.> <any additional notes from the site>
+
+cf-av-sgw-avpune-gwy02-crippa-3rh-mc
+File share name: Rhythm_Data
+
+Client Token		av-sgw-pune-avpune-gwy02-crippa-3rh-mc
+AWS SGW	            arn:aws:storagegateway:ap-southeast-1:535452874611:gateway/sgw-D27C95BB
+AWS S3 Bucket		arn:aws:s3:::av-sgw-pune-avpune-gwy02-crippa-3rh-mc
+AWS IAM Role		arn:aws:iam::535452874611:role/av-sgw-pune-avpune-gwy02-crippa-3rh-mc-bucket-backup-role
+AWS KMS Key			arn:aws:kms:ap-southeast-1:535452874611:key/a3579588-cee1-43bc-bb74-8b81f747d165
+AWS VPC EP DNS		vpce-088032eb00bbac191-10g7bcd5.s3.ap-southeast-1.vpce.amazonaws.com
+
+Used the following AWS CLI commands
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-pune-avpune-gwy02-crippa-3rh-mc --gateway-arn arn:aws:storagegateway:ap-southeast-1:535452874611:gateway/sgw-D27C95BB --location-arn arn:aws:s3:::av-sgw-pune-avpune-gwy02-crippa-3rh-mc --file-share-name Rhythm_Data --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --vpc-endpoint-dns-name vpce-088032eb00bbac191-10g7bcd5.s3.ap-southeast-1.vpce.amazonaws.com --bucket-region  ap-southeast-1 --role arn:aws:iam::535452874611:role/av-sgw-pune-avpune-gwy02-crippa-3rh-mc-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:ap-southeast-1:535452874611:key/a3579588-cee1-43bc-bb74-8b81f747d165 --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified
+
+The following share was created 9:41 AM Friday, April 21, 2023
+
+{
+    "FileShareARN": "arn:aws:storagegateway:ap-southeast-1:535452874611:share/share-CD02DFAC"
+}
+
+net use [WindowsDriveLetter]: \\10.177.56.4\Rhythm_Data or net use [WindowsDriveLetter]: \\avpune-gwy02.av.ge.com\Rhythm_Data
+
+Share File Access Settings - Admin users/groups
+@LOGON\DEL_GE001000000_DISE_SGW_ADMIN,@LOGON\DEL_GE001000000_DISE_SGW_Migration_Group_INTL,LOGON\li001202sv,LOGON\504001202,@LOGON\DEL_GE001000000_Pune_FileShare_Admin
+
+AD Root NACLs (to be applied after the share is created)
+-----------------------------------------------------------------------------------
+DEL_GE001000000_DISE_SGW_Migration_Group_INTL	FullControl
+DEL_GE001000000_DISE_SGW_ADMIN					FullControl
+DEL_GE001000000_Pune_FileShare_Admin			FullControl
+DEL_GE001000000_MMF_Server_Backup_RO			Read Only
+DEL_GE001000000_MMF_Server_Backup_RW			Read Write
+
+

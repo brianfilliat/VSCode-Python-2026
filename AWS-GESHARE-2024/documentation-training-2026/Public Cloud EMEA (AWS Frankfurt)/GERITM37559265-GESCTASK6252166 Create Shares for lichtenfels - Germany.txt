@@ -1,0 +1,262 @@
+GERITM37559265-GESCTASK6252166 Create Share for lichtenfels - Germany
+
+WS Public Cloud
+Account: Account: gr-av-apps-eu-f-prod (841910604526)
+Region:	eu-central-1
+SGW VM: avlfl-gwy01.av.ge.com
+SGW Name: av-storage-gateway-lichtenfels-01-eucentral
+SGW ARN: arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+SGW VPC EP: vpce-064772863dd432d89-x73l2t9g.storagegateway.eu-central-1.vpce.amazonaws.com  [ 10.222.32.28| 10.222.33.254 ]
+S3  VPC EP: vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com [ 10.222.34.58 | 10.222.34.209 ]
+
+---
+Share Names:
+ADVAULT
+Anlagenplanung
+Benchmark
+D3archiv
+D3archiv_fin
+Digital_Technology
+EDA-WorkingGroup
+EHS
+E-Plan
+External_Research
+FuE
+FuE_Team
+Inventor-CFG
+Maschinenhandbuch
+Personal
+Recht und Patent
+Verwaltung
+
+"The local admin Network Security Group that needs to be added"
+DEL_GE001000000_DISE_SGW_Migration_Group_INTL
+DEL_GE001000000_DISE_SGW_ADMIN
+
+
+Additional Information: "The local admin Network Security Group that needs to be added to root for share is " <DEL_GE001000000_DISE_SGW_Migration_Group_INTL><DEL_GE001000000_DISE_SGW_ADMIN> This will provide the site access to the share.
+StorageX Service Account account li001202sv@logon.ds.ge.com
+SSO: 504001202 "fire fighter" access on destination shares.
+Also, please make sure inheritance is turned off on the share <if site wants inheritance then don't include the previous statement.> <any additional notes from the site>
+
+set http_proxy=http://PITC-Zscaler-Americas-Cincinnati3PR.proxy.corporate.ge.com:80
+set https_proxy=http://PITC-Zscaler-Americas-Cincinnati3PR.proxy.corporate.ge.com:80
+gossamer3 login -a pub-eu
+
+---
+
+Client Token		av-sgw-lichtenfels-advault
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-advault
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-advault-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/f2438da3-cf2e-4c80-8d50-207027c1da06
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-advault --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-advault --file-share-name ADVAULT --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-advault-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/f2438da3-cf2e-4c80-8d50-207027c1da06 --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-anlagenplanung
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-anlagenplanung
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-anlagenplanung-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/476ece53-8916-4022-ba0b-1566ae2f41d3
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-anlagenplanung --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-anlagenplanung --file-share-name Anlagenplanung --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-anlagenplanung-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/476ece53-8916-4022-ba0b-1566ae2f41d3 --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-benchmark
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-benchmark
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-benchmark-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/6117b09a-66a0-466b-8e48-978bd67abbe0
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-benchmark --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-benchmark --file-share-name Benchmark --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-benchmark-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/6117b09a-66a0-466b-8e48-978bd67abbe0 --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-d3archiv
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-d3archiv
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-d3archiv-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/60b38bfb-cb7b-4bf7-9ed4-79b07deb471c
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-d3archiv --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-d3archiv --file-share-name D3archiv --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-d3archiv-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/60b38bfb-cb7b-4bf7-9ed4-79b07deb471c --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-d3archiv-fin
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-d3archiv-fin
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-d3archiv-fin-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/af1ad30f-3193-4bd6-a8e3-b307bcbc1424
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-d3archiv-fin --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-d3archiv-fin --file-share-name D3archiv_fin --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-d3archiv-fin-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/af1ad30f-3193-4bd6-a8e3-b307bcbc1424 --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-digital-technology
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-digital-technology
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-digital-technology-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/1ab2d0ba-bda5-46da-bb33-a7b4ae1f6faf
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-digital-technology1 --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-digital-technology --file-share-name Digital_Technology --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-digital-technology-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/arn:aws:kms:eu-central-1:841910604526:key/1ab2d0ba-bda5-46da-bb33-a7b4ae1f6faf --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-eda-workinggroup
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-eda-workinggroup
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-eda-workinggroup-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/ae5fb555-65c7-49d7-a53f-418584479b5a
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-eda-workinggroup --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-eda-workinggroup --file-share-name EDA-WorkingGroup --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-eda-workinggroup-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/ae5fb555-65c7-49d7-a53f-418584479b5a --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-e-plan
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-e-plan
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-e-plan-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/4515825b-f6af-471c-b44a-9944f4f43ee0
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-e-plan --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-e-plan --file-share-name E-Plan --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-e-plan-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/4515825b-f6af-471c-b44a-9944f4f43ee0 --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-ehs
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-ehs
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-ehs-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/7789f665-6a51-4ed4-875d-b6d0ba5988ab
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-ehs --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-ehs --file-share-name EHS --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-ehs-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/7789f665-6a51-4ed4-875d-b6d0ba5988ab --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-external-research
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-external-research
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-external-research-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/16ca8d09-3588-4d33-a625-610138141489
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-external-research --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-external-research --file-share-name External_Research --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-external-research-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/16ca8d09-3588-4d33-a625-610138141489 --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-fue
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-fue
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-fue-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/cd9b6177-bd7c-433d-8b42-4bb51f9ed739
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-fue --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-fue --file-share-name FuE --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-fue-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/cd9b6177-bd7c-433d-8b42-4bb51f9ed739 --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-fue-team
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-fue-team
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-fue-team-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/dae31bfb-b31d-414f-b745-9cffbaacde16
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-fue-team --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-fue-team --file-share-name FuE_Team --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-fue-team-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/dae31bfb-b31d-414f-b745-9cffbaacde16 --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-inventor-cfg
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-inventor-cfg
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-inventor-cfg-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/cdcb7c1b-4a8b-486a-ae78-3785beefd54c
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-inventor-cfg --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-inventor-cfg --file-share-name Inventor-CFG --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-inventor-cfg-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/cdcb7c1b-4a8b-486a-ae78-3785beefd54c --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-maschinenhandbuch
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-maschinenhandbuch
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-maschinenhandbuch-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/501c8dc2-cc5a-482f-b48a-02f270967187
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-maschinenhandbuch --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-maschinenhandbuch --file-share-name Maschinenhandbuch --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-maschinenhandbuch-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/501c8dc2-cc5a-482f-b48a-02f270967187 --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-personal
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-personal
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-personal-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/fff1383f-9f44-4976-9441-3120baad4982
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-personal --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-personal --file-share-name Personal --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-personal-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/fff1383f-9f44-4976-9441-3120baad4982 --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		av-sgw-lichtenfels-recht-und-patent
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-recht-und-patent
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-recht-und-patent-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/78f6aca9-d8da-4cc2-8312-1351983972cc
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token av-sgw-lichtenfels-recht-und-patent --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-recht-und-patent --file-share-name "Recht und Patent" --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-recht-und-patent-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/78f6aca9-d8da-4cc2-8312-1351983972cc --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+---
+
+Client Token		arn:aws:s3:::av-sgw-lichtenfels-verwaltung
+AWS SGW	            arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+AWS S3 Bucket		arn:aws:s3:::av-sgw-lichtenfels-verwaltung
+AWS IAM Role		arn:aws:iam::841910604526:role/av-sgw-lichtenfels-verwaltung-bucket-backup-role
+AWS KMS Key		    arn:aws:kms:eu-central-1:841910604526:key/a384a993-c38e-4230-8845-4a6d0d1bd117
+AWS S3 EP DNS	    vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com
+
+aws --profile saml storagegateway create-smb-file-share --client-token arn:aws:s3:::av-sgw-lichtenfels-verwaltung --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --location-arn arn:aws:s3:::av-sgw-lichtenfels-verwaltung --file-share-name Verwaltung --smbacl-enabled --default-storage-class S3_STANDARD --object-acl bucket-owner-full-control --guess-mime-type-enabled --no-requester-pays --role arn:aws:iam::841910604526:role/av-sgw-lichtenfels-verwaltung-bucket-backup-role --kms-encrypted --kms-key arn:aws:kms:eu-central-1:841910604526:key/a384a993-c38e-4230-8845-4a6d0d1bd117 --authentication ActiveDirectory --no-read-only --case-sensitivity ClientSpecified --vpc-endpoint-dns-name vpce-085cb19cf46da6c8b-xpczkcxv.s3.eu-central-1.vpce.amazonaws.com --bucket-region eu-central-1
+
+
+To be applied to each created share
+Mount commands for setting folder permissions via windows explorer
+Open a cmd prompt and mount the shares to validate they are reachable
+
+net use D: \\avlfl-gwy01.av.ge.com\ADVAULT
+net use E: \\avlfl-gwy01.av.ge.com\Anlagenplanung
+net use F: \\avlfl-gwy01.av.ge.com\Benchmark
+net use G: \\avlfl-gwy01.av.ge.com\D3archiv
+net use H: \\avlfl-gwy01.av.ge.com\D3archiv_fin
+net use I: \\avlfl-gwy01.av.ge.com\Digital_Technology
+net use J: \\avlfl-gwy01.av.ge.com\EDA-WorkingGroup
+net use K: \\avlfl-gwy01.av.ge.com\EHS
+net use L: \\avlfl-gwy01.av.ge.com\E-Plan
+net use M: \\avlfl-gwy01.av.ge.com\External_Research
+net use N: \\avlfl-gwy01.av.ge.com\FuE
+net use O: \\avlfl-gwy01.av.ge.com\FuE_Team
+net use P: \\avlfl-gwy01.av.ge.com\Inventor-CFG
+net use Q: \\avlfl-gwy01.av.ge.com\Maschinenhandbuch
+net use R: \\avlfl-gwy01.av.ge.com\Personal
+net use S: \\avlfl-gwy01.av.ge.com\"Recht und Patent"
+net use T: \\avlfl-gwy01.av.ge.com\Verwaltung
+
+
+Admin users/groups
+@LOGON\DEL_GE001000000_DISE_SGW_ADMIN,@LOGON\DEL_GE001000000_DISE_SGW_Migration_Group_INTL,LOGON\li001202sv,LOGON\504001202
+
+AD Root NACLs (to be applied after the share is created)
+-----------------------------------------------------------------------------------
+DEL_GE001000000_DISE_SGW_ADMIN; DEL_GE001000000_DISE_SGW_Migration_Group_INTL
