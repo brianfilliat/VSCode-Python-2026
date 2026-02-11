@@ -64,6 +64,23 @@ core 2.83.0
 - Install VS Code Azure extensions from Extensions view or retry `code` CLI after ensuring VS Code is stable.
 - Log in with `az login` or `Connect-AzAccount` and verify access to subscriptions.
 
+### Sign-in & subscription (added during session)
+
+- Signed in using device-code flow: `az login --use-device-code` (interactive browser/device code).
+- Subscription discovered and set as default after sign-in:
+	- **Name:** Azure subscription 1
+	- **ID:** 01307d44-0fd6-4509-9863-03e308a2dbe9
+	- **Tenant:** Default Directory
+	- **State:** Enabled
+	- **Default:** True
+
+```text
+Name                  CloudName    SubscriptionId                               TenantId                               State    IsDefault
+Azure subscription 1  AzureCloud   01307d44-0fd6-4509-9863-03e308a2dbe9         3ace9875-8b74-4df3-ad62-7df0c2c6ba76    Enabled  True
+```
+
+- Notes: an initial `az account list` returned no subscriptions until interactive login completed; after authenticating the subscription became available and was selected as the default.
+
 ---
 
 File created by automation on behalf of the user.
