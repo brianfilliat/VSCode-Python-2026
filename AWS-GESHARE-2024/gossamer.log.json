@@ -1,0 +1,9 @@
+{"lvl":"info","msg":"Starting gossamer","t":"2024-10-16T10:11:28.4500992-04:00"}
+{"lvl":"info","msg":"no config file provided so attempting to convert legacy arguments into new config format","t":"2024-10-16T10:11:28.4511392-04:00"}
+{"error":"legacy: must specify role ARN with '-a' or '-rolesfile'","lvl":"eror","msg":"fatal error","t":"2024-10-16T10:11:28.4532022-04:00"}
+{"lvl":"info","msg":"Starting gossamer","t":"2024-10-16T10:26:06.6730866-04:00"}
+{"lvl":"info","msg":"no config file provided so attempting to convert legacy arguments into new config format","t":"2024-10-16T10:26:06.6740828-04:00"}
+{"error":"legacy: must specify role ARN with '-a' or '-rolesfile'","lvl":"eror","msg":"fatal error","t":"2024-10-16T10:26:06.6740828-04:00"}
+{"lvl":"info","msg":"Starting gossamer","t":"2024-10-16T10:27:00.7588784-04:00"}
+{"lvl":"info","msg":"no config file provided so attempting to convert legacy arguments into new config format","t":"2024-10-16T10:27:00.7598756-04:00"}
+{"error":"legacy: must specify role ARN with '-a' or '-rolesfile'","lvl":"eror","msg":"fatal error","t":"2024-10-16T10:27:00.7598756-04:00"}

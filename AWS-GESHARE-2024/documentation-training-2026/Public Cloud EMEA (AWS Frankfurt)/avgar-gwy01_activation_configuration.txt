@@ -1,0 +1,199 @@
+# Create Garching SGW and Activate	
+# Garching - Please ensure avgar-gwy01 is 8 x 32 GB root 160GB and 250GB cache
+
+---------------------------------- Configure/Validate SGW Appliance ------------------------------
+https://vdc-amer.ics.cloud.ge.com/
+
+# Connect to the Launch VM console for avlfl-gwy01 and check your settings and test the network
+localhost login: admin
+Password: password
+# At the Enter command: <select 1> then <select 3> 
+# Should observe "Network proxy not configured"
+# Press Return to Continue the Press "x" to exit
+# At the Enter command: <select 2> then <select 1> 
+# Enter the adapter: eth0
+# Should observe > 10.40.5.4 255.255.255.192 & gateway 10.40.5.1 & DNS 10.220.220.220, 10.220.220.221
+# Press Return to Continue the Press "x" to exit
+# At the Enter command: <select 5> then <select 3>
+# Should observe > ntp1.ge.com and ntp2.ge.com ; if you do not you will need to <select 2> to Edit NTP Configuration
+# At the Enter command: <select 1> "View and Sychronize System Time"
+# Press "x to save your NTP configuration changes
+# At the Enter command: <select 3> "Test Network Connectivity then <select 1> then <select 2>
+# For VPC endpoint (DNS/IP) enter 10.222.32.28 or 10.222.33.254
+# vpce-064772863dd432d89-x73l2t9g.storagegateway.eu-central-1.vpce.amazonaws.com.	60 IN A	10.222.32.28
+# vpce-064772863dd432d89-x73l2t9g.storagegateway.eu-central-1.vpce.amazonaws.com.	60 IN A	10.222.33.254
+# For Region enter eu-central-1
+# If the network test fails, and it did, need to validate the ip addressing, subnet, etc...
+# Can use the following link for checking out the address range https://www.calculator.net/ip-subnet-calculator.html eu
+# Also validate via the IPAM tool to see if the address was reserved and DNS completed
+# Discovered the cloud hub change FRA was incorrect so had to submit a new one
+# The link for ctrating FRAs is https://fireline.apps.ge.com/table/55008
+# New GERITM for CloudHub Change for Lichtenfels - FRA0055008
+# GERITM38034745 GE  Firewall Security Review Activate new SGW
+# Now have to wait for the review by @SN L3 Aviation Security Approval and 
+# GECHG to be created by @CORP Global Network OPS Firewall
+
+---------------------------------- Configure/Validate SGW VM -------------------------------------
+# VM is setup in vCenter at https://vdc-amer.ics.cloud.ge.com/
+# Configure VM to specfications
+# Setting will be updated to or confirmed to be the following:
+CPUs total = 8
+CPU sockets = 2
+CPU shares = High
+CPU Reservation = 10 GHz (this will probably be 9 GHz since the CPU for Dell is smaller than Cisco UCS)
+Memory = 32 GB
+Memory shares = High
+Memory Reservation = 16 GB
+Root Hard Disk = 160 GB
+Cache Disk = 1 TB
+numa.vcpu.min = 8
+numa.autosize.vcpu.maxPerVirtualNode = 8
+GatewayCapacity (metadata cache) = Medium
+numa.autosize.cookie =  80001
+
+------------------------------------ Step 1 --------------------------------------------
+# Activation is a 4 step process via the AWS Storage Gateway GUI
+# Step 1 Setup gateway
+# Step 2 Connect to AWS
+# Step 3 Review and activate
+# Step 4 Configure Gateway
+# Activate the new Storage Gateway via the AWS Storage Gateway GUI in Region eu-central-1
+# Click on the following link
+
+	http://sc.ge.com/*AWSEntLoginMFA
+	
+# Select Account: Account: gr-av-apps-eu-f-prod (841910604526)
+# Ensure from the upper right bar pull down you are Europe (Frankfurt) eu-central-1
+
+# Step 5 Configure Metadata cache settings via AWS CLI
+
+# Click on the orange box [Create gateway]
+
+# In Gateway settings paste in the the following Gateway name:
+
+av-storage-gateway-lichtenfels-01-eucentral
+
+# For Gateway time zone select the following:
+
+GMT +1:00 Brussels, Copenhagen, Madrid, Paris
+
+# In Gateway options select Gateway Type
+
+Amazon S3 File Gateway
+
+# In Platform options select Host platform
+
+VMware ESxi
+
+# In Set up gateway on VMware ESXi click the box Confirm set up gateway
+
+I downloaded the OVF template and completed the deployment and then followed all the steps above.
+
+# Click Next
+# In the Connect to AWS page
+# Gateway connection options select IP Address
+
+In the IP address type in 10.40.5.4
+
+# In the Endpoint options select the Service endpoint as VPC hosted
+# Select VPC endpoint DNS name or IP address
+# In the VPC endpoint DNS name or IP address box paste in:
+
+vpce-064772863dd432d89-x73l2t9g.storagegateway.eu-central-1.vpce.amazonaws.com
+
+# Click Next
+# On the Review and activate page do a check to ensure all the settings 
+# Click Next
+
+# Next screen is Configure Gateway
+# Be patient, it will take time for the SGW to see the Cache Disk
+# When the cache disk is discovered select it 
+# Further down the page select all the default recommended AWS Alarms
+
+# On the SGW GUI page click on the newly created SGW
+# Locate and click on Tags and then click Manage
+# Add the following Tags
+	env		prod
+	name	av-storage-gateway-lichtenfels-01-eucentral
+	uai		uai3055433
+	
+# document the newly created SGW ARN
+
+arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
+	
+# The uai code can be found at the following link for International Sites
+	https://devcloud.swcoe.ge.com/devspace/display/IQVAG/2.+Aerospace+Hybrid+Cloud
+
+
+------------------------------------ Step 2 --------------------------------------------
+
+# Register the new sgw-B80BE7D1 in ARS under the LOGON Domain
+# When using ARS the Storage Filer name is SGW-B80BE7D1
+
+https://ars.tools.ds.ge.com/ARS/
+
+-----------------------------------------------------------------------
+lg821834sv - contact 502636801 for password          (Non-Vault login)
+-----------------------------------------------------------------------
+
+# locate the Search option and click on it and search for unclaimed
+# check on the box for the the In Folder [logon.ds.ge.com]
+# then click on New Server under the far right unclaimed folder
+
+# the next page is New Server in unclaimed [Active Directory  logon.ds.ge.com  Enterprise  Computers  unclaimed]
+# type in th Name block
+
+	SGW-B80BE7D1
+	
+# Then click Next
+
+Fill in the following fields only!
+
+	GEHRINDUSTRYGROUPID:	1178320
+	GEPOLE:					EMEA
+	GEVSVRTYPE:				UNX
+	GEVSVRENVIRONMENT:		Production
+	GEVSVRFUNCTION:			Storage_Filer
+	GEVSVRSUPPORTEDBY:		GE001000000
+
+# Then click Finish
+# Double check to ensure it all took by searching for SGW-6411F90D
+# Select it and browse to the Object info and document
+
+logon.ds.ge.com/Enterprise/Computers/GE001000000/Infrastructure/SGW-B80BE7D1
+CN=SGW-B80BE7D1,OU=Infrastructure,OU=GE001000000,OU=Computers,OU=Enterprise,DC=logon,DC=ds,DC=ge,DC=com
+
+------------------------------------ Step 3 --------------------------------------------
+
+# Have the SGW logon into the AD Domain logon.ds.ge.com via the AWS Storage Gateway GUI
+# Select av-storage-gateway-lichtenfels-01-eucentral and locate Actions > Edit SMB settings > Edit Active Directory settings
+
+Domain name:		logon.ds.ge.com
+Domain user:		lg821834sv
+Domain password:	
+
+# then click next and watch the Join Domain Request
+# you should observe [Successfully updated the domain information in Active Directory settings.]
+
+# then configure the Local User Settings
+# 
+
+LOGON\DEL_GE001000000_DISE_SGW_ADMIN
+LOGON\DEL_GE001000000_DISE_SGW_Migration_Group_INTL
+
+------------------------------------ Step 4 --------------------------------------------
+
+# Configure Metadata cache settings via AWS CLI
+# This is done via Gossamer3 and bypassing the proxy
+# Open PowerShell or a windows CMD prompt
+
+set http_proxy=http://PITC-Zscaler-Americas-Cincinnati3PR.proxy.corporate.ge.com:80
+set https_proxy=http://PITC-Zscaler-Americas-Cincinnati3PR.proxy.corporate.ge.com:80
+gossamer3 login -a pub-eu
+? Please choose the role  [Use arrows to move, type to filter]
+
+  Account: gr-av-apps-eu-f-prod (841910604526)) / av-cbts-storage-gateway
+
+# Set the metadata cache to medium and then check that the settings took
+aws --profile saml storagegateway update-gateway-information --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1 --gateway-capacity Medium
+aws --profile saml storagegateway describe-gateway-information --gateway-arn arn:aws:storagegateway:eu-central-1:841910604526:gateway/sgw-B80BE7D1
