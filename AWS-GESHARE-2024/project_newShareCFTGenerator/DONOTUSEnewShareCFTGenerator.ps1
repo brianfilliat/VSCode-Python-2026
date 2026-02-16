@@ -1,7 +1,7 @@
 ﻿##########
 #
 #    Name: newShareCFTGenerator.ps1
-#    Author: Michael Hultquist
+#    Author: Brian Filliat
 #    Date: 12/11/23
 #    Purpose: To accept input from the user and generate a CloudFormation template as a yml file
 #    Technical Details: The script will create a temporary webpage in the script runtime folder
