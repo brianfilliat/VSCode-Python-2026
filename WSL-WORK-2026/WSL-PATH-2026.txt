@@ -34,7 +34,13 @@ wsl -l -v
 **Run specific distribution:**
 ```powershell
 # Access Ubuntu
-wsl -d Ubuntu
+wsl -d Ubuntu-24.04
+
+(.venv) PS D:\DOCU-2026\Python-vscode-2026> wsl --list --verbose
+  NAME              STATE           VERSION
+* Ubuntu-24.04      Running         2
+  docker-desktop    Running         2
+(.venv) PS D:\DOCU-2026\Python-vscode-2026>
 
 # Access Docker Desktop
 wsl -d docker-desktop
@@ -803,7 +809,21 @@ wsl --shutdown
 # Docker Desktop → Settings → Kubernetes → Reset Kubernetes Cluster
 ```
 
-
+Enable WSL & Install Linux: Open PowerShell as Administrator and run:
+wsl --install -d Ubuntu
+Restart your computer if prompted.
+Install XFCE: Open your Ubuntu terminal and run the following commands to update and install the desktop environment:
+bash
+sudo apt update
+sudo apt install xfce4 xfce4-goodies -y
+Install X Server (for GUI): Download and install VcXsrv Windows X Server (or Xming) on Windows.
+Launch X Server: Run "XLaunch" from your Windows start menu, select "Multiple windows," and "Disable access control".
+Configure Display: In the Ubuntu terminal, run:
+export DISPLAY=:0
+export LIBGL_ALWAYS_INDIRECT=1
+Start XFCE: Run the following command in the Ubuntu terminal:
+startxfce4. 
+Alternatively, for a simpler experience, you can install a full Linux distribution pre-configured with XFCE (like Xubuntu) inside a virtual machine using software like VirtualBox. 
 
 
 
