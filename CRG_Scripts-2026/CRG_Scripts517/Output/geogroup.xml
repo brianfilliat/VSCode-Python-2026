@@ -1,0 +1,526 @@
+<?xml version="1.0"?>
+<config>
+  <Global_Stuff>
+    <Company>Geogroup</Company>
+    <SystemName>
+    </SystemName>
+    <SystemType>System Type</SystemType>
+    <SystemRCM>RCM Version</SystemRCM>
+    <RCMtype>Original</RCMtype>
+    <SerialNumber>
+    </SerialNumber>
+    <Output>
+    </Output>
+    <Region>Standard</Region>
+    <configversion>2.2</configversion>
+  </Global_Stuff>
+  <Data>
+    <Components>
+      <UCSC-1>
+        <id>1</id>
+        <type>UCSC</type>
+        <description>AMP Hosts</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option>False</option>
+        <data />
+      </UCSC-1>
+      <UCSB-1>
+        <id>1</id>
+        <type>UCSB</type>
+        <description>UCS Domain</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </UCSB-1>
+      <UCSB-2>
+        <id>1</id>
+        <type>UCSB</type>
+        <description>UCS Domain</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </UCSB-2>
+      <UCSB-3>
+        <id>1</id>
+        <type>UCSB</type>
+        <description>UCS Domain</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </UCSB-3>
+      <UCSB-4>
+        <id>1</id>
+        <type>UCSB</type>
+        <description>UCS Domain</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </UCSB-4>
+      <UCSB-5>
+        <id>1</id>
+        <type>UCSB</type>
+        <description>UCS Domain</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </UCSB-5>
+      <C3560-1>
+        <id>1</id>
+        <type>c35</type>
+        <description>Managemnt</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </C3560-1>
+      <C3750-1>
+        <id>1</id>
+        <type>c37</type>
+        <description>Managemnt</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </C3750-1>
+      <NX-1>
+        <id>1</id>
+        <type>nx</type>
+        <description>Managemnt</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </NX-1>
+      <NX-2>
+        <id>1</id>
+        <type>nx</type>
+        <description>Aggregate</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </NX-2>
+      <NX-3>
+        <id>1</id>
+        <type>nx</type>
+        <description>BRS</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </NX-3>
+      <NX-4>
+        <id>1</id>
+        <type>nx</type>
+        <description>Isilon</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </NX-4>
+      <N1K-1>
+        <id>1</id>
+        <type>n1k</type>
+        <description />
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </N1K-1>
+      <MDS-1>
+        <id>1</id>
+        <type>mds</type>
+        <description />
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </MDS-1>
+      <NX-5>
+        <id>1</id>
+        <type>nx</type>
+        <description>Core</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </NX-5>
+      <VNXe-1>
+        <id>1</id>
+        <type>vnxe</type>
+        <description />
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </VNXe-1>
+      <VNX-1>
+        <id>1</id>
+        <type>vnx</type>
+        <description />
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </VNX-1>
+      <NAS-1>
+        <id>1</id>
+        <type>nas</type>
+        <description />
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </NAS-1>
+      <Unity-1>
+        <id>1</id>
+        <type>unity</type>
+        <description />
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </Unity-1>
+      <XtremIO-1>
+        <id>1</id>
+        <type>xtremio</type>
+        <description />
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </XtremIO-1>
+      <VPLEX-1>
+        <id>1</id>
+        <type>vplex</type>
+        <description />
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </VPLEX-1>
+      <Isilon-1>
+        <id>1</id>
+        <type>isilon</type>
+        <description />
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </Isilon-1>
+      <vCenter-1>
+        <id>1</id>
+        <type>vmware</type>
+        <description>vCenter 1</description>
+        <defaultcred>False</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress>hs1vc01</ipaddress>
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </vCenter-1>
+      <vCenter-2>
+        <id>1</id>
+        <type>vmware</type>
+        <description>vCenter 2</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </vCenter-2>
+      <vCenter-3>
+        <id>1</id>
+        <type>vmware</type>
+        <description>vCenter 3</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </vCenter-3>
+      <vCenter-4>
+        <id>1</id>
+        <type>vmware</type>
+        <description>vCenter 4</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </vCenter-4>
+      <vCenter-5>
+        <id>1</id>
+        <type>vmware</type>
+        <description>vCenter 5</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </vCenter-5>
+      <NSX-1>
+        <id>1</id>
+        <type>nsx</type>
+        <description>NSX 1</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option />
+        <data />
+      </NSX-1>
+      <IPI-1>
+        <id>1</id>
+        <type>ipi</type>
+        <description>IPI 1</description>
+        <defaultcred>True</defaultcred>
+        <primary>
+          <hostname />
+          <ipaddress />
+        </primary>
+        <secondary>
+          <hostname />
+          <ipaddress />
+        </secondary>
+        <option>False</option>
+        <data />
+      </IPI-1>
+    </Components>
+    <amphosts>
+      <amphost1 />
+      <amphost2 />
+      <amphost3 />
+    </amphosts>
+  </Data>
+  <Settings>
+    <primarydns>
+    </primarydns>
+    <secondarydns>
+    </secondarydns>
+    <domainname>
+    </domainname>
+    <ntp1>
+    </ntp1>
+    <ntp2>
+    </ntp2>
+    <ntp3>
+    </ntp3>
+    <timezone />
+    <syslog1>
+    </syslog1>
+    <syslog2>
+    </syslog2>
+    <syslog3>
+    </syslog3>
+    <community1>
+    </community1>
+    <target1>
+    </target1>
+    <snmpport1>162</snmpport1>
+    <community2>
+    </community2>
+    <target2>
+    </target2>
+    <snmpport2>162</snmpport2>
+    <community3>
+    </community3>
+    <target3>
+    </target3>
+    <snmpport3>162</snmpport3>
+  </Settings>
+</config>

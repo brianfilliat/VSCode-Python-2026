@@ -1,0 +1,12 @@
+apiVersion: database.example.org/v1alpha1
+kind: CompositePostgresInstance
+metadata:
+  name: demo-postgres
+spec:
+  parameters:
+    storageGB: 20
+    engineVersion: "13"
+
+# This Composite resource will be reconciled by Crossplane and create provider-managed
+# resources as defined in the Composition. In GitOps, place these files in the repo
+# and let your GitOps operator (ArgoCD/Flux) apply them to the Crossplane control plane.

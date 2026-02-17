@@ -1,0 +1,9 @@
+site_name: ASCTO Docs — Crossplane GitOps
+site_url: https://ascto.com/
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - GitOps Repo: gitops.md
+  - Badges: badges.md

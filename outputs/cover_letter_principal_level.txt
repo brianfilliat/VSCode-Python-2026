@@ -1,0 +1,23 @@
+
+Brian Filliat
+Alpharetta, GA | BrianFilliat@Gmail.com | (770) 790-4141 | https://ascto.com/
+
+[Date]
+
+Dear Hiring Team,
+
+I am writing to express my interest in the storage infrastructure lead role. I bring extensive experience designing, implementing, and operating large-scale Software Defined Storage architectures across private and public cloud regions, with strong hands-on expertise in enterprise storage platforms and SDS solutions. I am confident I can contribute to your team’s goals around scale, reliability, and automation.
+
+My background aligns closely with the responsibilities you outlined: I have deployed and supported enterprise arrays (Pure Storage, HPE, NetApp) and SDS platforms such as Ceph and Longhorn, built self-service storage workflows for Kubernetes CSI and OpenStack consumers, and implemented Infrastructure-as-Code using Ansible, Terraform, Helm, and Git. I routinely apply Python and Bash automation to streamline operations and integrate those changes into CI/CD pipelines for testing, upgrades, and rollback.
+
+I place a strong emphasis on observability and operational readiness. I have implemented monitoring, alerting, and auto-remediation using GitOps-friendly workflows and tools such as Prometheus, Loki, and Grafana, and I architect systems for high availability, disaster recovery, and scale-out growth. My troubleshooting experience spans storage, Kubernetes, hypervisors, networking, and Linux systems (Ubuntu, RHEL/CentOS), and I am experienced in managing mission-critical 24x7 environments with ITIL-aligned processes.
+
+Beyond technical delivery, I author and review high-level and low-level design documentation, contribute runbooks and knowledge-base articles, and collaborate globally on change management and operational best practices. I’m comfortable participating in on-call rotations, incident response, and root cause analysis, and I prioritize clear communication with engineering and operations teams.
+
+I welcome the opportunity to discuss how my skills in SDS, cloud-native storage, IaC, and automation can help your organization meet its storage and availability objectives. Thank you for your consideration; I look forward to speaking with you.
+
+Sincerely,
+
+Brian Filliat
+
+More about my work and projects: https://ascto.com/

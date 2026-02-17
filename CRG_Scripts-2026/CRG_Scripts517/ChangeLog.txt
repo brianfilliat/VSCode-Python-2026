@@ -1,0 +1,875 @@
+5.1.7.1 - February 10, 2017
+ - Updated VPLEX-CRG.ps1 to 2.1.4 fixing typo in absolute path
+
+5.1.7.0 - January 31, 2017
+ - Updated VPLEX-CRG.ps1 to 2.1.3 file with absolute path to plink for compatability with SCR
+ - Updated Portmap-report.ps1 to 2.0.7
+    - Added support for "Nexus9000 93180YC-EX chassis"
+ - NX-CRG.ps1 updated to 5.2.1
+    - fixed issue with show feature not showing up on Nexus 9K switches
+ - portmap-report.ps1 updated to 2.0.8
+    - fixed issue where missing sfp's would not display correct formatting on a 3172
+
+5.1.6.0 - January 17, 2017
+ - Updated RCM file and updated expiry date
+
+5.1.5.7 - December 22, 2016
+ - Updated N1K and health assessment to correctly report fresspace
+
+5.1.5.6 - December 13, 2016
+   - Updated crg-assessments to 2.0.9 with fix for VMAX not evaluating when a XML file is supplied
+   - Updated Menu Last Updated date and version
+   - Updated UCSB-CRG.ps1 to 5.1.1
+      - Fixed issue that SAN boot policy order was not showing up correctly
+5.1.5.5 - November 29, 2016
+   - Updated crg-assessments with fix for N3K/N5K XML file name changes
+5.1.5.4 - November 22, 2016
+ - Updated N1K-CRG.ps1 to 5.2.2
+    - Nexus 1K to work with different namespace for Port-Profile
+5.1.5.3 - November 15, 2016
+ - Added telnet support for Nexus switches data collection
+5.1.5.2 - November 14, 2016
+ - Updated XtremIO-Report.ps1 to 1.0.5
+    - Added Excel file name as a parameter to allow for alternative name to be specified
+    - Output no longer auto loads upon completion
+    - Added modules to be able to run as standalone script
+ - Updated BladeSummary-Report.ps1 to 1.0.4
+    - Added Excel file name as a parameter to allow for alternative name to be specified
+    - Output no longer auto loads upon completion
+    - Added modules to be able to run as standalone script
+5.1.5.1 - November 9, 2016
+ - Added check for 1000v supervisor module status
+5.1.4.2 - November 2, 2016
+ - Updated Menu-CRG Script to 5.1.4.2
+    - Fixed issue where show tech-support logs was not working
+    - Modified show tech-support to use single sessions for Nexus Data collection
+ - Updated VMwr-crg.ps1 updated to 5.1.2
+    - Added data collection for linked mode
+ - Updated crg-assessments to 2.0.8
+    - Added health assessment for linked mode
+    - Fixed issue where health assessment was not being performed for multiple vCenters
+ - Updated crg-versions module to 2.2.2
+    - Updated for compatibility with new VMWr-CRG script
+
+5.1.4.1 - October 11, 2016
+ - Added Panduit version to Version section, html report, and Excel report
+ - Updated Xtremio-crg to 5.2.1
+     - Fixed issue with XtremIO not running as standalone because global-functions module was missing
+     - Fixed issue where styles would not load correctly due to a typo
+ - updated VMwr-crg 5.1.1
+     - Fixed issue where global-functions was not being loaded causing Excel to not display correctly
+ - Updated c37k-crg.ps1 to 5.1.1
+     - Fixed issue where cdp neighbours would produce an error message during parsing
+    
+5.1.4.0 - October 11, 2016
+ - Menu-CRG Script updated to 5.1.4.0 at completion of Sprint 14
+ - Vmax-CRG updated to 5.3.3
+    - Resolved bug where providing xml at file prompt would fail
+    - Modified CRG to highlight faults in red based on Sprint feedback
+
+5.1.3.9 - October 3, 2016
+ - Menu-CRG updated to 5.1.3.9
+ - VMAX-CRG updated to 5.3.1
+    - Updated VMAX to create an XML file as an output option
+    - Added VMAX fault status
+ - Assessment Module updated to 2.0.7
+    - Added VMAX fault status
+5.1.3.8 - October 3, 2016
+ - Menu-CRG
+    - updated to 5.1.3.8
+- VMWR-CRG
+    - Integrated storage paths data collection from David Taylor.
+5.1.3.6 - September 27, 2016
+ - Menu-CRG updated to 5.1.3.6
+    - Fixed issue where VMAX browse button on offline tab was requesting xml file instead of bin file
+    - Fixed issue where CRG Report was not correctly working for VMAX
+5.1.3.5 - September 26, 2016
+ - Menu-CRG 
+	- updated to 5.1.3.4
+	- Usage of ReportXMLFiles keys fixed
+5.1.3.4 - September 23, 2016
+ - Menu-CRG updated to 5.1.3.4
+ - NAS-CRG 
+	- Add VDM to DM interface mapping collection and addition to XML
+	- Modified interface report to include VDMs attached to DM interfaces
+	- Modified interface report to include VLAN used by interface
+5.1.3.3 - September 15, 2016
+ - Menu-CRG updated to 5.1.3.3
+     - Fixed issue where IPI would not work unless another script was run at the same time
+     - Modified VMAX collection to only require BIN file.   Backup config file was not being used in script
+     - Modified offline tab to use datagrid instead
+     - Fixed issue where autocheck online was not checking NSX
+ - VMAX-CRG updated to 5.2.0 
+     - Removed the need for the ACL file
+     - Fixed an issue where making output type a required field caused an error in menu script
+
+5.1.3.2 - September 15, 2016
+ - Menu Script updated to 5.1.3.2
+ - CRG-Assessment
+     - For NTP UCS check, use disabled state only if NTP Server is local
+ - UCSB-CRG.ps1
+     - For NTP check u,se disabled state only if NTP Server is local
+ - Menu-CRG
+	 - Fix minor issues with lcs import on 240
+	
+5.1.3.0 - August 31, 2016
+ - Menu Script updated to 5.1.2.1
+ - NAS-CRG
+     - Retrieve latest configuration file if collect_config call fails
+     - Run and collect getreason and add to local XML file
+     - Add getreason data to excel
+ - CRG-Assessment
+     - Add vnx file assessment and flag a control station not running as expected based on getreason data
+     - Added N1K check for duplicate port-profiles
+ - N1K-CRG.ps1 updated to 5.2.1
+     - Port Profile Script updated to also replace alternative port profile namespace name
+     - Added import of global-functions module
+     - Modified code to not produce errors for data only available on newer N1K versions 
+5.1.2.0 - August 23, 2016
+ - Menu Script updated to 5.1.1.4
+     - Updated Version section to use crg-versions modules instead of using duplicated code
+     - get-lcsitem updated to return empty strings instead of nulls when no data found
+ - VPLEX-CRG.ps1 updated to 2.1.1
+     - Added support to report on use of NTP on management and director servers of VPLEX
+ - CRG-Assessment Module updated to 2.0.3
+     - Health assessment now also reports if NTP not configured or not running
+     - Add check for NTP servers in unity assessment
+     - Add Isilon assessment and check for NTP server
+ - Isilon-CRG: 
+     - Collect NTP server and flag if not configured
+
+5.1.1.3 - August 23, 2016
+ - Menu Script updated to 5.1.1.3
+     - Fixed issue where 3750 script was using the username and password from the 3560 textboxes
+ - VPLEX-CRG.ps1 updated to 2.1.1 
+     - Fixed issue where Create-xls in Menu-CRG.ps1 was not working
+     - Fixed issue where running script as stand alone was not working
+
+5.1.1.2 - August 23, 2016
+ - Menu Script updated to 5.1.1.2
+     - VMware version will now only check hosts provided in filter
+     - Fixed typos
+ - vce-vmware module updated to 4.10.1
+     - Fixed consistency with naming conventions for hostname
+     - Fixed Vmware version check to only check hosts provided by filter
+     - Fixed typos
+ - Vmax-crg.ps1 updated to 5.1.1
+     - Fixed issue with script not running standalone
+     - Fixed header wording to be less generic
+
+5.1.1.1 - August 12, 2016
+ - Menu script updated to 5.1.1.1
+     - Bug fix.  Fixed log creation not working correctly when debug is enabled
+     - Added ability to pass config file as a parameter to save mouse clicking
+     - Bug fix.  Fixed issue where import-lcs was not working correctly
+ - All scripts updated
+     - Added parameters to specify RCM Version, Model and Type
+     - Added ability to check versions against rcm versions.xlsx file
+ - XtremIO-CRG.ps1 updated to 5.2.0
+     - Added ability to check RCM version and highlight in Green if matching and Red if not
+     - Fixed issue where storage controllers were not displaying part number correctly
+     - Added check for datetime and ntp-servers not configured
+ - Version-report.ps1 updated to 3.3.2 
+     - Modified script to work stand alone
+     - Modified to create RCM version section if systemrcm, systemmodel, versiontype, and rcm_versions file provided
+     - Moved VB serial number to title page
+
+5.1.1.0 - August 5, 2016
+ - Menu Script updated to 5.1.0.3
+     - Bug Fix.  If you used the version or health assessment functions and had a online item checked with a VPN connection
+       established you would get the message box about being on the VPN, but it is not applicable.
+ - crg-assessment module updated to 2.0.2
+     - Added NTP check for VNX and VNXe
+     - Added Check for VNX Bug
+ - crg-versions updated to 2.1.1
+     - Added hostname for all components
+ - version-report.ps1 updated to Version 3.3.0 
+      - removed create-excelversions
+      - modified create-htmlversions to require files to be provided
+      - renamed create-excelversions_v2 to create-excelversion
+      - Added new summary sheet for RCM versions
+ - XtremIO-report updated to Version 1.0.4
+      - fixed Multi-Array not assessing DiskMaxIOSize correctly
+ - vce-vmware.ps1 updated to 4.0.8.3
+      - updated help for get-vplex to specify configurations based on vSphere version
+      - Fixed bug where fnic_max_qdepth was not being configured correctly
+ - VPLEX-CRG updated to 2.0.7
+      - Bug Fix. VPLEX was returning output from try/catch statement which is undesirable
+ - NAS-CRG updated to 5.0.6
+      - Changed test-path for NAS file to not rename storage folder when collection fails
+
+5.1.0.2 - August 3, 2016
+ - Menu Script updated to 5.1.0.2
+     - Updated assessment grid to clear before adding values
+     - Updated version panel to search folders for latest xml files.   Now it will only use values from offline tab
+          - This will match how other sections function
+ - version-report.ps1 updated to 3.2.0
+     - Updated functions to only work when an xml file is passed to it
+ - crg-assessments updated to 2.0.1
+     - Added NTP check feature
+     - Added Unity Assessment
+ - UCSB-CRG updated to 5.0.10 
+     - Added NTP configuration check
+ - VNXe-CRG updated to 5.1.3
+     - Fixed issue where in the Disk section Row was moving down one line then applying assessment coloring
+
+5.1.0.1 - August 2, 2016
+ - Menu Script updated to 5.1.0.1
+     - Modified Script names of version-crg.ps1 to version-report.ps1 and portmap.ps1 to portmap-report.ps1 to better match name to function
+     - Modified all scripts help section to provide more details
+     - Modified all scripts to include an option to have xml file be user definable.
+     - Expanded XtremIO-report to include VPLEX as a parameter
+     - Added VPLEX to XtremIO drop down under VMware ribbon
+     - Fixed issue with get-xtremio section only looking at first 3 vCenters and not all 5
+ - XtremIO-Report updated to 1.0.3
+     - Added VPLEX parameters to XtremIO Report and added it as an accepted storagearray type
+ - vce-vmware moduleupdated to 4.0.8.1
+     - Added version check for VPLEX settings and it will now restore to defaults if the host is on version 6.0.0
+     - get-xtremio and set-xtremio scripts modified to correctly set disk.maxiosize when configuring a multi-array environment
+     - Modified get-xtremIO and set-xtremio to not use various switches, but instead use a variable storagearray restricting valid options
+     - Added VPLEX to get-xtremIO and set-XtermIO functions
+
+5.1.0.0 - July 20, 2016
+ - Menu Script updated to 5.0.5.2
+     - Added new Navigation section called Assessment
+     - When XML is returned from scripts it is now assigned to offline text box field
+     - Rewrote Run-CRG script to now run as two functions.  collect-xmldata and create-crgreport
+       - Seperating these functions has greater range of flexibility and reduced code by 300 lines
+     - Fixed bug where Reports and Assessment panels would not display properly and then buttons stopped working
+     - Changed auto check boxes to allow for checking either offline boxes, online boxes, or both
+     - save-config now saves offline text boxes if the file is in the output folder
+     - load-config now restores offline text boxes if previously saved
+     - Assessment-report.ps1 added to reports section of the CRG
+     - Version Section
+	- Fixed issue where if misc item was null it would produce an error message
+	- Fixed issue where a field was null it would produce an error message
+     - Save config will now save if original or addendum RCM version
+     - Load config will now load if original or addendum RCM Version
+   - Assessment-report.ps1 version 1.0.0 added
+     - Excel function added to generate Excel report
+   - crg-assessments module updated to 2.0.0
+     - New module changed to create powershell objects instead of modifying a Excel file
+     - Added new function to consolidate the individual assessment functions into one large psobject for easier consumption
+     - Added new function to check end to end jumbo frames
+     - Added new NX health assessment to check if a feature is in use, but not licensed
+   - NX-CRG.ps1 updated to 5.1.10
+     - get-data function updated to use Renci.dll to improve performance and make it more reliable
+     - get-data function updated to dynamically create namespace to improve reliability and remove error
+       messages in data collection process
+     - Added try/catch around data collection to not generate an error that halts the script
+     - Added a try again function that if data collection fails it will back off for 3 seconds and then try again
+     - Removed duplicate variable cmd_name
+     - Added health Assesment to check for license information
+   - N1k-CRG.ps1 updated to 5.1.2
+     - get-data function updated to use Renci.dll to improve performance and make it more reliable
+     - get-data function updated to dynamically create namespace to resolve data colletion errors in latest
+       N1K version.  New version should improve reliability in future versions
+     - Removed duplicate variable cmd_name
+   - All scripts updated to return xml file during data collection process
+   - crg-versions module updated to 2.0.0.9
+     - Changed NX-CRG.ps1 version collect to not look for cmd_name, but instead use cmdname.  This changed was because of NX-CRG
+       rewrite
+   - vmwr-crg updated to 5.0.15
+     - Added data collection for vlan data in port group data collection
+   - vnxe-crg updated to 5.1.1
+     - Added mtu settings for interfaces
+   - vnx-crg updated to 5.0.6
+     - Added mtu settings for interfaces
+   - Portmap-crg.ps1 updated to 2.0.5
+     - Added import of modules to run stand alone
+     - Change to ethernet status check to look for a partial match to improve difference in syntax across arrays
+
+5.0.5.1 - July 18, 2016
+ - Menu Script updated to 5.0.5.1
+   - XtremIO-Report.ps1 updated to 1.0.2
+     - Added introduction page to explain XtremIO settings
+   - Vplex-crg.ps1 updated to 2.0.4
+     - Fixed issue where Management switches would try to collect multiple times failing each time
+     - Fixed issue where Global_stuff was not correctly putting brackets around variables causing xml to not load
+
+5.0.5.0 - July 8, 2016
+ - Menu Script updated to 5.0.5.0
+    - Bug fixes
+        - Script was importing the crg-versions module twice for some reason
+        - Portmap was mistyped causing script to not load properly
+        - Fixed issue where Version script was not running properly from reports section
+    - Portmap Report will now load a form like other reports allowing to select xml files
+    - Report forms now dynamically size based on instance values
+  - Health Assessment updated to 1.0.7.3
+    - NX freespace changed to int64 because Nexus 9K have freespace may be too large for integer 32
+    - Port-Channel health assessment modified to correctly evaluate port-channels that are in a down state
+  - NX-crg.ps1 updated to 5.1.8
+    - Modified Port-channel down state evaluation to identify ports not in a P or I state, and report on everything out.  
+      Previously it was only looking for Down ports and was missing suspended ports.
+
+5.0.4.4 - July 7, 2016
+ - Menu Script updated to 5.0.4.4
+    - Cleaned up check-prerequisites
+       - It no longer opens a bunch of command prompt windows that close after a bit
+       - Runs a lot faster now
+       - Changed output to say installed or not installed instead of producing a bunch of error messages
+       - Removed the creation of the myjunk files and then deletion of those files
+    - Changed default behavior to check-prerequisites on load now since it loads faster
+ - Health assessment module updated to 1.0.7.2
+    - Modified UCS-C health assessment to check for hosts with less then 128 GB
+    - Modified health assessment lines to highlight entire line and not just last column
+ - XtremIO-report updated to 1.0.1
+    - Bug fixes and typos
+ - UCS-C updated to 5.0.5
+    - updated evaluation to check for hosts with less then 128GB of memory
+
+5.0.4.3 - June 24, 2016
+ - Menu Script updated to 5.0.4.3
+    - Icons folder and Modules folder moved under Bin folder
+        - Removed Renci.DLL file to stop loading when Menu script loads
+        - Renci now loads with SSH module
+        - Duplicate Renci file deleted to save space
+    - Function import-lcs fixed to import LCS items
+        - New function added to credentials screen to output to host file
+        - New function added to check dns and test connection of imported-lcs items
+    - Modules were consolidated into global_functions to remove redundant code and to reduce the amount of modules
+      that need to be unblocked and imported.
+    - Report function for XtremIO updated to include drop down for storagearray type and fields for passing xml files to XtremIO-Report.ps1
+    - Added option for VNX to pass authentication type.   This is useful for VNX arrays that use LDAP
+ - N1K-CRG updated to 5.1.1
+    - Added function to check Port-Profile Status and highlight in yellow if set to disabled
+    - Added check for ability to logon.  If fail then script exit
+ - CRG-Assessments updated to 1.0.7.1
+    - Expanded N1K-assessment to check Port-profile Status for N1k and report count of ports in disabled state
+ - VMWR-CRG updated to 5.0.14
+    - VMWR-crg will now properly collect DataMover_MaxHWTransferSize data.
+ - XtremIO-report updated to 1.0.0
+    - First release of script
+    - Uses data from XtremIO, UCS, and VMware to generate a XtremIO report with analysis
+
+5.0.4.2 - June 17, 2016
+ - Menu Script updated to 5.0.4.2
+    - Updated to include VEM version on Version datagrid
+    - Updated Report section to include datagrid for Version report
+    - Updated Report Section to include checkbox for version and blade summary report
+    - Version-CRG.ps1 updated to 3.1.2
+        - updated to include VEM module on Vmware version report
+ - version-crg updated to 2.0.0.8
+    - Updated to include VEM version in Excel Version report
+ - crg-assessments updated to 1.0.6.1
+    - Assessment module updated to include 1000v line item about checking Cisco procedure guide
+ - N1k-CRG updated to 5.1.0
+    - Data collection was not working in test lab.   Rewrote section to be like previously updated Nexus data collection and now data pull works
+ - C35K-CRG updated to 5.0.5
+    - Fixed issue where new code versions were not pulling switch version for CRG report
+ - All scripts updated
+    - All scripts modified to not attempt to create XLS file, assessment file, or port map file if XML fails to collect
+ - All network scripts updated
+    - All network scripts modified to ping switch and test logon prior to data collection.  If fails to ping or collect Script will halt
+ - Added feature to check for known bugs
+
+5.0.4.1 - June 17, 2016
+ - Menu Script updated to 5.0.4.1
+    - NX-CRG.ps1 script updated to 5.1.6
+        - Fixed bug where N5K IP address was not showing up
+
+5.0.4.0
+ - Menu Script updated to 5.0.4.0
+	- Fixed issue with check-prerequistes not displaying table properly when naviseccli security set to medium
+    - Updated run-crg for Nexus script section to include tab name
+ - UCS-CRG.ps1 updated to 5.0.8
+    - Fixed error messages with boot policy due to script trying to substring on null value
+    - Fixed Virtual media boot order because it was trying to assign an array to a Excel Cell.
+        - It now adds as comma seperated value
+ - NX-CRG.ps1 updated to 5.1.5
+    - Fixed error message on 9K when pulling version information
+    - Added show ip route command to data pull
+    - Added show ip routing into CRG report
+    - Added show feature and parse for non 9k
+    - Added report section for show feature
+    - Added report section for show ip interface
+    - Added new parameter tab name and modified tabs to create based on tab name passed from menu script
+         - was needed because when multiple reportxmlfiles were being used an error was being produced about tabs with same name
+ - CRG-assessments.ps1 updated to 1.0.6.0
+    - Added Summarization of Vmware plugins found that could cause potential issues with an RCM upgrade
+ - VNX-CRG.ps1 updated to 5.0.4
+    - Fixed issue in inventory tab where it would fail to add items with same SP ID
+          - The Base Module would have the same ID causing this issue
+    - Cleaned up code to use Powershell objects and not hash tables.
+ - VMWr-CRG.ps1 updated to 5.0.12
+    - Added column to represent lockdown mode state
+    - Added information in regards to vmkernel failover settings and then compare to switch configuration
+        - highlights in yellow if they do not match
+
+5.0.3.1
+ - Menu Script updated to 5.0.3.1
+ - VNX-CRG.ps1 updated to 5.0.2
+    - Added defaultowner and currentowner to CRG Report
+    - Marked in yellow items where the current owner does not match the default owner
+    - Marked in yellow initiators that are not registered or logged on
+    - Fixed error messages produced when creating storage pool and hot spare section
+ - crg-assessments module updated to 1.0.4.0
+    - Added registered or not logged on count to report
+    - Added errors count to report
+    - Added current owner does not match default owner
+    - Modified NTP-Peer evaluation to show as critical if none are configured.
+ - C35K-CRG.ps1 updated to 5.0.4
+    - Modified XML to put global information at the top
+    - Modified parameters to include outputtype instead of multiple switches
+    - Added if statement to check if port-channel members are not either P or I and flag if yellow if true
+    - Fixed issue where both ips were being displaying for both switches IP
+    - Added IP to switch section to make it stand out more
+ - Health Assessment updated to 1.0.5.0
+    - Added health check for catalyst 3560 to evalutate if port was not P or I
+ - C37K-CRG.ps1 updated to 5.0.3
+    - Modified xml to put global information at the top
+    - Modified parameters to include outputtype instead of multiple switches
+ - VMwr-crg.ps1 updated to 5.0.11
+    - Modified xml to put global information at the top of xml output
+    - Modified parameters to include outputtype instead of multiple switches
+    - Modified vib collection to collect similar to other collections
+    - Modified VEM addition to report to say Not installed if no VIB like VEM is installed
+    - Moved log file to create only when running create-xml and not everytime script runs.  Should prevent appearing in root of script folder
+    - Fixed issue preventing ESXi license information from showing up.  Changed table header to ESXi License information instead of vCenter License information
+ - MDS-CRG.ps1 updated to 5.0.5
+    - Added command let binding to script for advanced parameters
+    - Modified parameters to use outputtype instead of multiple switch options
+    - Global_stuff moved to top of xml
+ - IPI-CRG.ps1 updated to 5.0.1
+    - Added command let binding to script for advanced parameters
+    - Modified parameters to use outputtype instead of multiple switch options  
+    - Global_stuff moved to top of xml
+ - Isilon-CRG.ps1 updated to 2.0.2
+    - Added command let binding to script for advanced parameters
+    - Modified parameters to use outputtype instead of multiple switch options
+    - Global_stuff moved to top of xml
+ - N1K-CRG.ps1 updated to 5.0.3
+    - Added command let binding to script for advanced parameters
+    - Modified parameters to use outputtype instead of multiple switch options
+    - Global_stuff moved to top of xml
+ - NAS-CRG.ps1 updated to 5.0.2
+    - Added command let binding to script for advanced parameters
+    - Modified parameters to use outputtype instead of multiple switch options
+ - NSX-CRG.ps1 updated to 1.0.3
+    - Added command let binding to script for advanced parameters
+    - Modified parameters to use outputtype instead of multiple switch options
+    - Global_stuff moved to top of xml
+ - UCSC-CRG.ps1 updated to 5.0.3
+    - Added command let binding to script for advanced parameters
+    - Modified parameters to use outputtype instead of multiple switch options
+    - Global_stuff moved to top of xml
+ - VMAX-CRG.ps1 updated to 5.0.1
+    - Added command let binding to script for advanced parameters
+    - Modified parameters to use outputtype instead of multiple switch options
+ - VNX-CRG.ps1 updated to 5.0.3
+    - Added command let binding to script for advanced parameters
+    - Modified parameters to use outputtype instead of multiple switch options
+    - Global_stuff moved to top of xml
+ - VNXe-CRG.ps1 updated to 5.0.3
+    - Added command let binding to script for advanced parameters
+    - Modified parameters to use outputtype instead of multiple switch options
+    - Global_stuff moved to top of xml
+ - VPLEX-CRG.ps1 updated to 2.0.2
+    - Added command let binding to script for advanced parameters
+    - Modified parameters to use outputtype instead of multiple switch options
+    - Global_stuff moved to top of xml   
+
+5.0.3.0
+ - VMWR-CRG.ps1 updated to 5.1.4
+    - Added VEM, NSX and network adaptor VIB version numbers.
+ - Health Assement script updated to 1.0.3.0
+    - Added additional assessment for UCS-B
+       - Added check for redundant vETH and vHBA
+       - Added check for Service Profiles without a vETH or vHBA profile assigned
+ - NX-CRG_beta.ps1 updated to 5.1.3
+    - Fixed bug where Port-Channel information was only evaluating for Switch B.  If a Port-Channel existed 
+      on switch A, and not B it would have been missing from the report.
+
+5.0.2.5
+ - Menu Script updated to 5.0.2.5
+ - NX-CRG_beta.ps1 updated to 5.1.3
+    - Fixed bug where Show environment table was not showing correct values
+    - Fixed bug where Interface table columns were blank and description was missing from portmap output
+ - UCSB-CRG.ps1 updated to 5.0.6 
+    - Fixed issue where interface comparison was not working and creating a lot of error messages
+    - Fixed typo in column sizing
+    - Corrected column width resizing for WWPN.  Didn't get adjusted when VLAN column was added
+    - Otimized code in interface comparison
+ - MDS-CRG.ps1 updated to 5.0.4
+    - Fixed NTP and Syslog were backwards
+ - XtremIO Updated to 5.1.1
+    - Two columns in Storage Controller xml data are not present and were removed
+    - Column in SSD section was missing causing data to misalign.  Added FW error
+    - Health_state is returning as null in XtremIO version 4.0, so was removed.
+        - FRU lifecycle management column should be used for determining health state
+
+5.0.2.4
+ - Menu Script updated to 5.0.2.4
+ - Updated NX-CRG_Beta.ps1
+    - Fixed typo in get-commands function
+ - Updated XtremIO script to 5.1.0
+    - Added try/catch to the get-xtreminfo function to address errors
+    - Created get-commands section to filter extra data collected that is not needed
+    - Modified XML output to be similar to other scripts and to support multiple
+      clusters
+    - Removed ticker and changed for progress bars
+    - XtremIO now compatible with Multi Clusters
+ - Updated crg-versions module to load versions for XtremIO 5.1.0 to 2.0.0.7
+
+5.0.2.3
+ - Menu Script updaetd to 5.0.2.3
+   - removed versions tab creation from Menu-CRG.ps1 script
+      - Script will now execute version.ps1 to create the version tab
+   - Moved version script to Reports section
+   - Version script when executed from the report section will produce the Excel report for now
+ - Versions.ps1 updated to 3.1.1
+   - added create-excelversions_v2 to create the version tab in consolidated CRG report
+ - Portmap script updated to 3.1.1
+   - Fixed 55XX fibre channel ports to highlight as red when set to notconnected
+   - Fixed 3064 column size not correctly sized
+ - Health-Assesment updated to 1.0.2.6
+   - Changed Nexus script to say Information instead of Informational to match other assessment checks
+ - NX-CRG updated to 5.1.1
+   - Bug fix for Nexus 3K switch running on certain version not producing CRG
+
+5.0.2.2
+ - Menu Script updated to 5.0.2.2
+ - crg-versions.psm1 updated to 2.0.0.6
+    - updated to check versions for new NX CRG Script
+ - NX-CRG.ps1 upgraded to 5.1.1
+    - updated to be able to pull data from Nexus script with netconf disabled
+    - added parsing of show interface status for portmap script
+    - changed some of the output that was displaying as Eth to Ethernet as per original output
+ - crg-assessments updated to 1.0.2.5
+    - Updated to support new NX script
+ - Portmap-crg.ps1 updated to 2.0.3
+    - updated to work with 3K xml output experiencing netconf bug
+
+5.0.2.1
+ - Menu Script updated to 5.0.2.1
+    - For Version check section
+         - UCS-B removed ' in column chassis/blade
+ - UCS-B updated to 5.0.5
+    - If Absolute quantity is greater than Total Quantity it will now highlight in yellow
+ - Version script updated to 3.0.2
+    - UCS-B columns adjusted for correct size
+    - UCS-B removed ' in column chassis/blade
+ - NX-CRG.ps1 updated to 5.1.0
+    - Added second get-commmands to only use cli method
+    - Created function pull-data to parse cli output to xml
+    - Modified show interface data to include interfaces without a description
+ - crg-assessments module updated to 1.0.2.4
+    - Modified MDS health assessment to say information instead of informational for conformity reasons
+ - VMwr-CRG script updated to 5.0.10
+    - Moved vmware log file under the vCenter it was run against.
+    - Changed file name of log file to .txt to make it easier to open on some computers.
+
+5.0.2.0
+ - Menu Script updated to 5.0.2.0
+    - Added new section for Reports
+    - Added BladeSummary Report Script
+ - crg-assessment module version updated to 1.0.2.3
+    - Modified blade count to include breakdown of blade count with adaptor count
+    - Added assessment for 1000v to include check for free space under 3GB
+    - Added assessment for Fabric Interconnect HA
+ - NSX Script updated to 1.0.2
+    - Fixed headings UUID and size mismatched
+    - Added additional data collections and tables
+ - UCS-B updated to 5.0.4
+    - Fixed issue with pulling IPI account into table
+ - 1000v updated to 5.0.2
+    - Added pull for show system internal flash
+
+5.0.1.1
+ - Menu Script updated to 5.0.1.1
+ - MDS-CRG.ps1 updated to 5.0.3
+   - Added sh redundancy status command
+   - Added sh run | i snmp-server command
+     - Filtered output in xml data
+     - Added new table to display snmp information
+   - Added option for collect tech-support details for network switches and catalyst switches
+   - Added button for collect tech-support on network tab of Ribbon
+ - CRG-assessments.psm1 updated to 1.0.2.1
+   - Added show redundancy status check
+ - C35K-CRG updated to 5.0.3
+   - Added command show run | i snmp-server for snmp information
+ - NX-CRG.ps1 updated to 5.0.4
+   - Added shsnmphost output to Excel Report
+ - C37K-CRG updated to 5.0.2
+   - Added command show run | i snmp-server for snmp information
+   - Added snmp information to Excel Report
+ - Nexus 1000v updated to 5.0.1
+   - Added check for L3 mode under svs_mode and highlight in yellow if set as L2
+   - Added check for L3 mode under svs_mode and added to AAC tab
+
+5.0.1.0
+ - Menu Script updated to 5.0.1.0
+   - Added unblock for Renci DLL file
+   - Bug fix - Vmware section for components the use default credentials and use windows credentials buttons were conflicting
+   - Increased vCenter count to 5
+   - Added NSX to VMware Menu area
+   - Added NSX to version check
+   - UCS-C was not working when only one UCS-C server IP was specified
+   - UCS-C other issues may have been resolved as well.   
+      - Tested against all three scenarios.
+         - UCS-C single IP
+         - UCS-C dual IP
+         - UCS-C dual IP as range
+   - Fixed issue where some Nexus switches would fail to produce Switch if creating both xml and xls at same time
+   - Added MISC tab to components and added IPI script
+   - SEND-ZIP will now remove a file with the same name before creating a new one.  Previously it would give an error message                           
+ - UCS-B updated to 5.0.3
+   - Changed adding of created on and built on to not change all tabs and just the new ones being created
+ - VMWR-CRG.ps1 updated to 5.0.9
+   - Added ATS lock check for ESXi version 6.0
+   - ATS lock check will appear below datastore if vCenter is on version 6.0
+   - Fixed spelling error
+ - NSX-CRG.ps1 initial build 1.0.0
+   - Added to Menu script
+ - version.ps1 updated to 3.0.1
+   - Added NSX
+   - Added Isilon
+ - rcm versions document updated to include NSX data for VXrack
+ - Module crg-versions updated to 2.0.0.5
+   - Added NSX Script
+ - UCS-C updated to 5.0.2
+   - Script will now assess if Total memory is less then 96000 and turn yellow if it is
+   - Bug Fix. Typo - CPU2 was actually just CPU1 repeating
+   - CPU will now evaluate if CPU speed is less then 2.00GHZ and turn yellow if it is
+   - Model number will now correctly identify when only one UCS-C server was specified
+      - Excel sheet headings will now show up correctly
+   - Serial Number will now correctly identify when only one UCS-C server was specified
+      - Should now correclty identify if it should include NTP information
+      - Fixed error message on the screen
+ - Health Assessment Module updated to 1.0.2.0
+   - Health assessment will now include UCS-C checks
+      - Added check for memory below 96GB
+      - Added check for CPU below 2.00GHz
+   - Health Assessment will now include MDS checks
+      - Added Flogi Count comparison
+      - Added list of flogi count based on first 3 octets of WWPN
+   - Health Assessment will now check for bootflash free space and mark as approriate
+      - Added Catalyst 3560
+      - Added Catalyst 3750
+      - Added Nexus Script
+      - Added MDS Script
+   - Health Assessment will now check ntp peer status by verifying that ST is below 16
+      - Added for Catalyst 3560
+      - Added for Nexus Script
+      - Added for MDS Script
+ - C37K-CRG.ps1 updated to 5.0.1
+   - Added show flash command
+ - C35K-CRG.ps1 updated to 5.0.2
+   - Added show flash command
+   	- Parsed free space in cmdxml
+ - NX-crg.ps1 updated to 5.0.4
+   - Added free space information to xml output
+ - IPI-CRG.ps1 version 5.0.0 added
+   - Menu Script updated to include IPI Gateway
+ - MDS-CRG.ps1 updated to version 5.0.2
+   - Added show flash command
+ - PortMap.ps1 updated to 2.0.2
+   - Fixed MDS 9148 and MDS 9148S PortMap scripts
+      - Updated to include check for isolated
+   - Added support for 3172 portmap script
+
+5.0.0.10
+ - Menu Script updated to 5.0.0.10
+   - Removed redundant prompt in Powershell script asking to download powershell 3.  (Would never work because batch script would prevent it from loading anyways)
+   - Added Addendum, Original Radio Button to Components section of version check
+      - Use the Radio Button to change between
+   - Running UCS Excel reports will now only create the UCS Domain folder if applicable
+ - Updated rcm version Excel file to include Addendum data
+ - Fixed ESXi tab not evaluating versions properly and added addendum data check
+ - UCS-B updated to 5.0.2
+   - Added collected on and Excel created to every tab as per request
+   - Fixed formatting of UCS-B CRG
+   - Added health assessment for vNIC and vHBA to FI mapping
+ - VMwr-CRG updated to 5.0.8
+   - Code optimization to increase speed
+   - Script produces log output that can be used to evaluate script execution
+
+5.0.0.9
+ - Menu Script updated to 5.0.0.9
+    - Fixed Version script to correctly pull MDS switch versions
+    - Fixed issue where changing the script file would not persist between CRG sessions
+ - MDS Script updated to 5.0.1
+    - Fixed Spelling error on Temperature xml formatting.   Will now pull all temperature details
+    - Updated Excel output to also include Sensor information
+    - Updated Temperature XML output to work with 9513
+    - Updated Temperature section to work with 9710
+    - Updated script to not produce error message when trying to parse License information for 9710
+ - Portmap updated to 2.0.1
+    - Updated script to work with 9513 MDS switches
+
+5.0.0.8
+ - Menu Script updated to 5.0.0.8
+    - Fixed Credentials tab not merging
+    - Fixed portmap always creating even when not selected
+    - Added health assessment item to check Nexus script for command peer-switch and recommend adding
+    - Modified Batch file to check Powershell Version.  If Powershell is not at 3.0 it will prompt to go to download site.  If you say no it will close
+
+5.0.0.7
+ - Menu Script Updated to 5.0.0.7
+   - Added dialog when CRG completes prompting to open Excel File
+   - Credentials checkbox now will merge credentials xlsx file if it exists in the root
+   - PortMap will create if portmap button is used or include is checked
+   - Edit preferences > Scripts will now display the script version for scripts
+ - Nexus Script updated to 5.0.2
+   - Updated XMLapi pull to dynamically create namespace.   (Needed for Nexus 9K)
+   - Added hardware version check because of issue with 5596 hardware version 1.0 issue
+   - Modified reachable check to better evaluate if both switches are reachable
+   - fixed DNS, NTP, Syslog, and SNMP to not add switch 1 values on switch 2 xml output
+ - Portmap script updated to 2.0.0
+   - New version had to be rewritten from scratch
+      - Some scripts no longer work because no output file or test lab available
+   - Nexus 5K script updated to include fiber channel ports if present
+   - Script no longer displays status updates, but average script takes about 3 seconds to run, so didn't seem necessary.
+
+5.0.0.6
+ - Menu Script updated to 5.0.0.6
+    - Menu script updated for MDS to only use single XML file
+    - Updated batch file to unlock EPPlus.dll file if needed
+    - Fixed issue with Nexus 5K version check where Reportxml file was returning multiple values
+ - CRG-versions module updated to 2.0.0.4
+    - Added version check for VMAX
+        - Removed passing backup file since it is not needed to pull version
+    - Added version check for MDS switch
+ - VMware Script updated to 5.0.0.7
+    - Fixed notes section of VM tab when notes are less then 100 characters
+ - VMAX Script updated to 5.0.0.0
+    - Updated to no longer require Excel
+    - Fixed Tdev pool percent utilization when tdev was a memeber of multiple pools
+ - MDS Script updated to 5.0.0.0
+    - MDS Script will now use Renci DLL file and not plink for data collection
+    - Updated script to transform data into xml format and added to xml output under cmdxml
+    - Script updated to not require Excel anymore
+    - Added VSAN section for instances where multiple VSANs may be present.  (Internal VPLEX for example)
+ - Nexus Script updated
+    - Removed extra legacy functions that were not being used by the script.
+
+5.0.0.5
+ - Menu Script updated to 5.0.0.5
+   - Added Column for Default Passwords
+      - Column property will be saved in the config file and loaded from the config file
+      - If checked username/password fields become readonly and are configured with the default credentials for that region
+      - Drop down for region will now auto set default password if new column default credentials is checked
+      - Load default passwords will only change the password for items that have the default credentials button checked
+      - new config only sets the password field to blank if the default credentials checkbox is unchecked
+      - removed button load default passwords since it was not needed anymore
+      - modified menu for Nexus script since it will only produce one xml file now
+ - Nexus 1000v script updated to 5.0.0
+   - Script will now work without Excel
+   - Minor changes to layout to fit better on the screen
+ - Nexus Script updated to 5.0.0
+   - Changed to only create one XML file instead of two
+   - Changed ping to go to 4 instead of 1.  (Should help with sites where the Nexus switch losses first ping due to arp request)
+   - Fixed Show CDP neighbour command to return data correctly
+   - Changed error checking around.   Should quit properly if there are issues with plink instead of producing a lot of error messages
+   - Changed data collection for xmlapi.   Should be more accurate now
+   - Changed data collection for CLI to use Renci dll file instead of plink. 
+      - Should remove extra data being collected and displaying banner during data collection
+   - Cli output parsed into xml output and attached to xml file
+   - San section added mode type status protocol
+
+5.0.0.4
+ - Menu Script updated to 5.0.0.4
+   - Removed Row selection from Version Tab datagrids
+   - Removed Execute menu
+   - Removed Merge items from Tools menu
+   - Modified Preferences menu region section. Drop down is for changing default region upon load. Use dropdown in ribbon for auto add passwords
+   - Fixed Default Panel will now select components when you push the default button
+   - Version check updated to properly detect C200 and C2X0 servers based on new XML output
+   - Catalyst Script C3560 updated to 5.0.1
+      - Fixed script if there are multiple DNS,NTP.Syslog, and SNMP servers specified
+   - Catalyst Script 3750 updated to 5.0.0
+      - Script no longer requires Excel
+      - Fixed issue if STP was under 10000 from showing up
+   - CRG Versions updated to 2.0.0.3
+      - Added Catalyst 3750
+   - UCSC script updated to 5.0.0.0
+      - Data collection rewritten to model after UCSB
+      - Script updated to no longer require Excel
+      - Excel output modified to be easier to output
+      - SNMP outoupt is now capable of showing as many SNMP servers as possible. 1.4 was restricted to 4, 1.5 and above is capable of 15
+         - Currently restricted to 4 because we rarely provision more then 3 and it formats better in the output
+
+5.0.0.3
+ - Menu Script updated to 5.0.0.3
+   - Health assessment checkbox now adds a new page and runs checks found in crg-assessment module
+   - Updated offline tab to work with single Catalyst file
+   - Updated Version check to check if Catalyst version matches RCM version
+ - Catalyst 3560 Script updated to 5.0.0
+   - Changed to only produce one xml file and not two
+   - Cleaned up Environment section of Excel
+      - Should work more reliably now
+   - Fixed issue if STP priority was under 10000 from showing up
+ - Updated crg-versions to 2.0.0.1
+   - Updated to work with new Catalyst 3560 output
+   - Updated to work with CRG 5.0.0.3
+ 
+5.0.0.2
+ - Menu Script updated to 5.0.0.2
+   - Fixed Collect XML only to properly sort xml files into sub folders
+   - Added VMware script to collect xml and to CRG output
+   - Run-crg rewritten to be more code efficient
+   - Run-crg will now work properly with offline and online equipment.  You can mix and match as well
+   - Load-config will now change the CRG drop down menu to the proper region
+   - Changed new-config to use the tech username for XtremIO since this account is more reliable
+       - The default password loaded was for tech which was probably causing people grief if you loaded config and then default password
+ - VMwr Script updated to 5.0.0.5
+   - Script updated to no longer require Excel
+   - Some formatting updated to correctly display
+   - Removed extra code that was causing error messages, but didn't actually do anything
+   - ReportXML file is now returned when running from batch and through menu (needed live sysversion)
+ - NAS updated to 5.0.0.1
+   - Fixed header
+   - ReportXML file is now returned when running from batch and through menu (needed live sysversion)
+ - VNX updated to 5.0.1
+   - ReportXML file is now returned when running from batch and through menu (needed live sysversion)
+   - minor code changes to out-null to not interfere with script
+ - VNXe updated to 5.0.2
+   - ReportXML file is now returned when running from batch and through menu (needed live sysversion)
+   - minor code changes to out-null to not interfere with script
+ - VPLEX updated to 2.0.1
+   - ReportXML file is now returned when running from batch and through menu (needed live sysversion)
+   - Management Server xml collection cleaned up
+   - Call-home is a per management server setting and has been moved in xml under management server and now pulls for both
+   - SNMP profile section has been cleaned up and will now pull snmp-profile data
+   - XLS updated to include snmp profile data
+ - XtremIO updated to 5.0.3
+   - ReportXML file is now returned when running from batch and through menu (needed live sysversion)
+   - fixed header information
+
+5.0.0.1
+ - System Versions updated to include UCS Blade versions
+ - Fixed UCS script to not always try to do offline.
+
+5.0.0.0 
+ - initial version based on 4.2.1.3
+ - initial release January 18, 2016
+ - VNXe Script updated to 5.0.0
+   - Added accept security if set to medium
+   - Removed Read Cache and Write Cache because this data was removed from show command in VNXe version 3.0
+   - Script updated to no longer require Excel
+   - Script updated to getversion switch to pull version
+ - VPLEX Script updated to 2.0.0
+   - Added storage volume information
+   - Fixed port and initiators were backwards
+   - Added health check for major_fault
+   - Script updated to no longer require Excel
+   - Script updated to getversion switch to pull version
+ -VNX Script updated to 5.0.0
+   - Script updated to no longer require Excel
+   - Checks if naviseccli security is set to medium and lowers too low for the duration of the script.  Upon           
+     completion restores to original setting
+   - Script updated to getversion switch to pull version
+ - XtremIO script updated to 5.0.0
+   - Script no longer requires Excel
+   - Script updated to getversion switch to pull version
+   - Isilon script updated to 2.0.0
+   - Script updated to no longer require Excel
+   - Script updated to getversion switch to pull version
+ - Nas Script updated to 5.0.0
+   - Script updated to no longer require Excel
+   - Script updated to getversion switch to pull version
+ - UCSB Script updated to 5.0.0
+   - Script updated to no longer require Excel
+   - Script updated to getversion switch to pull version
+   - Fixed spelling error in CRG output
+

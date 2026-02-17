@@ -1,0 +1,15 @@
+apiVersion: aws.crossplane.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: example-aws-provider
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: aws-creds
+      key: creds
+
+# NOTE: Replace the Secret `aws-creds` with your base64-encoded AWS credentials or
+# use a more secure provider for credentials (IRSA, OIDC). This file is GitOps-ready
+# but should never contain plaintext secrets in a public repo.

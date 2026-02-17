@@ -1,0 +1,9 @@
+apiVersion: database.example.org/v1alpha1
+kind: CompositePostgresInstance
+metadata:
+  name: demo-postgres
+  namespace: demo
+spec:
+  parameters:
+    storageGB: 20
+    engineVersion: "13"

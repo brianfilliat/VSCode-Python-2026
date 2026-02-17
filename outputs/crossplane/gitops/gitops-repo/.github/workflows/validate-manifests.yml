@@ -1,0 +1,36 @@
+name: Validate Manifests
+
+on:
+  pull_request:
+    paths:
+      - 'base/**'
+      - 'apps/**'
+      - '.github/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Kustomize and kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: '1.27.3'
+
+      - name: Validate YAML syntax
+        run: |
+          echo "Validating YAML files..."
+          find . -name '*.yaml' -print0 | xargs -0 -n1 yamllint -c /dev/null || true
+
+      - name: Dry-run apply (client)
+        run: |
+          echo "Dry-run applying manifests to ensure schema validity..."
+          kubectl apply --all -R --dry-run=client -f base/crossplane-system || true
+          kubectl apply --all -R --dry-run=client -f apps/demo || true
+
+      - name: Kubeval schema validation
+        uses: instrumenta/kubeval-action@v2
+        with:
+          files: "base/**/*.yaml,apps/**/*.yaml"

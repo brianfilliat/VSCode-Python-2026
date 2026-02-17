@@ -1,0 +1,827 @@
+###WSL NOTES 2-7-2026
+
+#### ACCESSING WSL FROM WINDOWS
+
+**Method 1: Default WSL Distribution**
+```powershell
+PS D:\DOCU-2026\Python-vscode-2026\WSL-WORK-2026> WSL
+ASUSVIVO2026:/mnt/host/d/DOCU-2026/Python-vscode-2026/WSL-WORK-2026#
+```
+
+**Method 2: Docker Desktop Distribution**
+```powershell
+PS C:\Users\Mikef> WSL
+docker-desktop:/tmp/docker-desktop-root/run/desktop/mnt/host/c/Users/Mikef#
+```
+
+#### WSL DISTRIBUTION COMMANDS
+
+**List all WSL distributions:**
+```powershell
+wsl --list --verbose
+# or
+wsl -l -v
+```
+
+**Example output:**
+```
+  NAME                   STATE           VERSION
+* Ubuntu                 Running         2
+  docker-desktop         Running         2
+  docker-desktop-data    Stopped         2
+```
+
+**Run specific distribution:**
+```powershell
+# Access Ubuntu
+wsl -d Ubuntu
+
+# Access Docker Desktop
+wsl -d docker-desktop
+
+# Access default distribution
+wsl
+```
+
+**Set default distribution:**
+```powershell
+wsl --set-default Ubuntu
+# or
+wsl --set-default docker-desktop
+```
+
+**Check which distribution is running:**
+```bash
+# From within WSL
+cat /etc/hostname
+# or
+uname -n
+```
+
+#### DOCKER DESKTOP DISTRIBUTION PATHS
+
+When you enter the docker-desktop distribution, Windows paths are mounted at:
+```
+Windows: C:\Users\Mikef
+WSL:     /tmp/docker-desktop-root/run/desktop/mnt/host/c/Users/Mikef
+
+Windows: D:\DOCU-2026
+WSL:     /tmp/docker-desktop-root/run/desktop/mnt/host/d/DOCU-2026
+```
+
+**Standard Ubuntu WSL paths:**
+```
+Windows: C:\Users\Mikef
+WSL:     /mnt/c/Users/Mikef
+
+Windows: D:\DOCU-2026
+WSL:     /mnt/d/DOCU-2026
+```
+
+**Navigating in docker-desktop distribution:**
+```bash
+# Change to Windows C drive
+cd /tmp/docker-desktop-root/run/desktop/mnt/host/c
+
+# Change to Windows D drive
+cd /tmp/docker-desktop-root/run/desktop/mnt/host/d
+
+# Go to user directory
+cd /tmp/docker-desktop-root/run/desktop/mnt/host/c/Users/Mikef
+```
+
+#### WSL BASIC COMMANDS
+
+**Start WSL:**
+```powershell
+wsl                    # Default distribution
+wsl -d Ubuntu          # Specific distribution
+wsl -d docker-desktop  # Docker Desktop distribution
+```
+
+**Stop WSL:**
+```powershell
+wsl --shutdown         # Stop all distributions
+wsl --terminate Ubuntu # Stop specific distribution
+```
+
+**WSL from specific directory:**
+```powershell
+# Opens WSL in current PowerShell directory
+cd D:\DOCU-2026\Python-vscode-2026
+wsl
+```
+
+**Run single command in WSL:**
+```powershell
+wsl ls -la
+wsl docker ps
+wsl kubectl get pods
+```
+
+**Update WSL:**
+```powershell
+wsl --update
+wsl --version
+```
+
+#### ACCESSING WSL FILES FROM WINDOWS FILE EXPLORER
+
+**Docker Desktop distribution:**
+```
+\\wsl.localhost\docker-desktop\docker-desktop-user-distro
+```
+
+**Ubuntu distribution:**
+```
+\\wsl.localhost\Ubuntu
+```
+
+**Docker Desktop data (volumes, images):**
+```
+\\wsl.localhost\docker-desktop-data
+```
+
+**Generic pattern:**
+```
+\\wsl.localhost\<distribution-name>
+```
+
+**Browse all WSL distributions:**
+```
+\\wsl.localhost\
+```
+
+
+### DOCKER DESKTOP WORKFLOWS
+
+#### 1. Understanding Docker Desktop WSL Integration
+
+Docker Desktop on Windows uses WSL 2 as its backend. It creates two WSL distributions:
+- **docker-desktop**: Contains the Docker engine
+- **docker-desktop-data**: Stores container images and volumes
+
+#### 1A. Enable Docker Desktop WSL2 Integration
+
+**Step-by-Step Setup:**
+
+**1. Verify WSL 2 is installed:**
+```powershell
+wsl --list --verbose
+```
+Ensure your distributions show VERSION 2. If not, upgrade:
+```powershell
+wsl --set-version Ubuntu 2
+```
+
+**2. Open Docker Desktop Settings:**
+- Click the Docker Desktop system tray icon (whale icon)
+- Click "Settings" (gear icon) or right-click → "Settings"
+- Or open Docker Desktop and click the ⚙️ Settings icon
+
+**3. Enable WSL 2 Backend:**
+- Navigate to: **Settings → General**
+- Check ✓ **"Use the WSL 2 based engine"**
+- Click **"Apply & Restart"**
+
+**4. Enable WSL Integration with Distributions:**
+- Navigate to: **Settings → Resources → WSL Integration**
+- Check ✓ **"Enable integration with my default WSL distro"**
+- Under **"Enable integration with additional distros:"**
+  - Check ✓ Ubuntu (or your preferred distro)
+  - Check ✓ Any other distros you want to use with Docker
+- Click **"Apply & Restart"**
+
+**5. Verify Integration is Working:**
+
+From PowerShell:
+```powershell
+wsl -d Ubuntu
+```
+
+Then in WSL:
+```bash
+# Check Docker is accessible
+docker --version
+docker ps
+
+# Check Docker daemon
+docker info
+
+# Verify Docker context
+docker context ls
+
+# Run test container
+docker run hello-world
+```
+
+**6. Verify PATH Configuration:**
+```bash
+# In WSL, check if Docker is in PATH
+which docker
+# Output should show: /usr/bin/docker or /mnt/wsl/docker-desktop/cli-tools/usr/bin/docker
+
+echo $PATH | grep docker
+```
+
+**Common Issues and Solutions:**
+
+**Issue: "docker: command not found" in WSL**
+```bash
+# Solution 1: Restart WSL
+exit  # Exit WSL
+wsl --shutdown
+wsl   # Restart WSL
+
+# Solution 2: Check Docker Desktop is running
+# In PowerShell check:
+Get-Process "*docker desktop*"
+
+# Solution 3: Re-enable integration in Docker Desktop Settings
+```
+
+**Issue: "Cannot connect to the Docker daemon"**
+```powershell
+# Restart Docker Desktop
+wsl --shutdown
+# Then start Docker Desktop from Windows Start menu
+
+# Check Docker service status
+Get-Service docker
+```
+
+**Issue: WSL shows VERSION 1**
+```powershell
+# Upgrade to WSL 2
+wsl --set-version Ubuntu 2
+wsl --set-default-version 2
+```
+
+**Issue: Docker Desktop won't start with WSL 2**
+```powershell
+# Update WSL
+wsl --update
+
+# Update Windows
+# Check for Windows updates in Settings
+
+# Reinstall Docker Desktop
+# Download latest from docker.com
+```
+
+**Best Practice Configuration:**
+
+**Docker Desktop Settings → General:**
+- ✓ Use the WSL 2 based engine
+- ✓ Start Docker Desktop when you log in (recommended)
+- ✓ Send usage statistics (optional)
+
+**Docker Desktop Settings → Resources:**
+- **Memory:** 4-8 GB (adjust based on your system)
+- **CPUs:** 2-4 cores (adjust based on your system)
+- **Disk image size:** 64 GB minimum
+- **Swap:** 1-2 GB
+
+**Docker Desktop Settings → Resources → WSL Integration:**
+- ✓ Enable integration with my default WSL distro
+- ✓ Ubuntu (or your development distro)
+- ❌ docker-desktop (typically not needed)
+- ❌ docker-desktop-data (typically not needed)
+
+**Verify Complete Setup:**
+```bash
+# From your Ubuntu WSL distribution
+
+# 1. Docker version
+docker --version
+# Output: Docker version 24.x.x, build xxxxx
+
+# 2. Docker Compose
+docker-compose --version
+# Output: Docker Compose version v2.x.x
+
+# 3. Run test container
+docker run --rm hello-world
+
+# 4. Check Docker context
+docker context show
+# Output: default
+
+# 5. Run practical test
+docker run -it --rm ubuntu:22.04 bash
+# You should get an Ubuntu container shell
+
+# 6. Test volume mounting from WSL
+docker run --rm -v $(pwd):/workspace alpine ls /workspace
+
+# 7. Test networking
+docker run --rm -p 8080:80 nginx
+# Then visit http://localhost:8080 in browser
+```
+
+**File System Access After Integration:**
+
+Once WSL2 integration is enabled, Docker can access:
+
+**From Ubuntu WSL:**
+```bash
+# Current directory
+docker run -v $(pwd):/app myimage
+
+# WSL home directory
+docker run -v /home/username:/app myimage
+
+# Windows C: drive
+docker run -v /mnt/c/Users/Mikef:/app myimage
+
+# Windows D: drive
+docker run -v /mnt/d/DOCU-2026:/app myimage
+```
+
+**From PowerShell (using WSL paths):**
+```powershell
+# Use WSL path format
+docker run -v /mnt/d/DOCU-2026/Python-vscode-2026:/workspace python:3.11
+
+# Or use Windows path (Docker Desktop converts automatically)
+docker run -v D:\DOCU-2026\Python-vscode-2026:/workspace python:3.11
+```
+
+#### 2. Accessing Docker Desktop Files
+
+**Docker Desktop distribution:**
+```
+\\wsl.localhost\docker-desktop\docker-desktop-user-distro
+```
+
+**Your WSL Ubuntu/Distro (where you run docker commands):**
+```
+\\wsl.localhost\Ubuntu
+```
+
+**List all WSL distributions:**
+```powershell
+wsl --list --verbose
+```
+
+#### 3. Common Docker Desktop Workflows
+
+**A. Start/Stop Docker Desktop**
+- Use Docker Desktop UI or:
+```powershell
+# Start Docker Desktop from PowerShell
+Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+```
+
+**B. Check Docker is Running**
+```bash
+docker --version
+docker ps
+docker info
+```
+
+**C. Build and Run Containers**
+```bash
+# Build an image from Dockerfile in current directory
+docker build -t myapp:latest .
+
+# Run a container
+docker run -d -p 8080:80 --name myapp myapp:latest
+
+# View running containers
+docker ps
+
+# View all containers (including stopped)
+docker ps -a
+
+# Stop a container
+docker stop myapp
+
+# Remove a container
+docker rm myapp
+```
+
+**D. Working with Volumes**
+```bash
+# Create a volume
+docker volume create mydata
+
+# List volumes
+docker volume ls
+
+# Inspect a volume
+docker volume inspect mydata
+
+# Run container with volume mount
+docker run -v mydata:/app/data myapp:latest
+
+# Bind mount from Windows/WSL
+docker run -v /mnt/d/DOCU-2026/Python-vscode-2026:/workspace myapp:latest
+```
+
+**E. Docker Compose Workflows**
+```bash
+# Start services defined in docker-compose.yml
+docker-compose up -d
+
+# Stop services
+docker-compose down
+
+# View logs
+docker-compose logs -f
+
+# Rebuild and start
+docker-compose up -d --build
+```
+
+#### 4. Development Workflows with Docker Desktop
+
+**A. Python Development Container**
+```bash
+# Run Python container with local code mounted
+docker run -it --rm \
+  -v /mnt/d/DOCU-2026/Python-vscode-2026:/workspace \
+  -w /workspace \
+  python:3.11 \
+  python your_script.py
+```
+
+**B. Interactive Shell in Container**
+```bash
+# Start bash in running container
+docker exec -it myapp bash
+
+# Start new container with interactive shell
+docker run -it --rm python:3.11 bash
+```
+
+**C. VSCode + Docker Integration**
+```bash
+# Install Dev Containers extension in VSCode
+# Open folder in container: Ctrl+Shift+P -> "Dev Containers: Open Folder in Container"
+```
+
+#### 5. Docker Desktop Data Location
+
+**Windows paths:**
+```
+%LOCALAPPDATA%\Docker\wsl          # WSL integration
+%APPDATA%\Docker                    # Docker config
+```
+
+**WSL paths:**
+```bash
+# Docker volumes (from inside WSL)
+/var/lib/docker/volumes/
+
+# Access from Windows:
+\\wsl.localhost\docker-desktop-data\data\docker\volumes\
+```
+
+#### 6. Useful Docker Commands
+
+```bash
+# Clean up unused containers, images, networks
+docker system prune -a
+
+# View disk usage
+docker system df
+
+# Remove all stopped containers
+docker container prune
+
+# Remove unused images
+docker image prune -a
+
+# Remove unused volumes
+docker volume prune
+
+# Copy files from container to host
+docker cp myapp:/app/output.txt ./output.txt
+
+# Copy files from host to container
+docker cp ./input.txt myapp:/app/input.txt
+```
+
+#### 7. Networking
+
+```bash
+# Create custom network
+docker network create mynetwork
+
+# Run container on custom network
+docker run --network mynetwork --name webapp nginx
+
+# Inspect network
+docker network inspect mynetwork
+```
+
+#### 8. Troubleshooting
+
+**Docker Desktop won't start:**
+```powershell
+# Restart WSL
+wsl --shutdown
+# Then start Docker Desktop
+
+# Update WSL
+wsl --update
+```
+
+**Check Docker daemon:**
+```bash
+sudo service docker status  # In WSL
+docker info                 # Check connection
+```
+
+**Permission issues:**
+```bash
+# Add user to docker group (in WSL)
+sudo usermod -aG docker $USER
+# Then restart WSL
+```
+
+#### 9. Best Practices
+
+1. **Use .dockerignore** - Exclude unnecessary files from build context
+2. **Multi-stage builds** - Reduce image size
+3. **Use specific tags** - Avoid `latest` in production
+4. **Health checks** - Add HEALTHCHECK to Dockerfiles
+5. **Resource limits** - Set memory/CPU limits in Docker Desktop settings
+6. **WSL Integration** - Enable integration with your WSL distros in Docker Desktop settings
+
+#### 10. File Path Conversion
+
+**Windows to WSL:**
+```
+D:\DOCU-2026\Python-vscode-2026  →  /mnt/d/DOCU-2026/Python-vscode-2026
+```
+
+**WSL to Windows:**
+```
+/home/user/project  →  \\wsl.localhost\Ubuntu\home\user\project
+```
+
+#### 11. Kubernetes with Docker Desktop
+
+Docker Desktop includes a single-node Kubernetes cluster for local development.
+
+**A. Enable Kubernetes**
+- Open Docker Desktop → Settings → Kubernetes
+- Check "Enable Kubernetes"
+- Click "Apply & Restart"
+
+**B. Basic kubectl Commands**
+```bash
+# Check Kubernetes is running
+kubectl version
+kubectl cluster-info
+
+# View cluster nodes
+kubectl get nodes
+
+# Run a pod (example: nginx)
+kubectl run nginx --image nginx
+
+# View all pods
+kubectl get pods
+kubectl get pods -A  # All namespaces
+
+# View all resources
+kubectl get all
+
+# Describe a pod
+kubectl describe pod nginx
+
+# Get pod logs
+kubectl logs nginx
+
+# Execute command in pod
+kubectl exec -it nginx -- bash
+
+# Delete a pod
+kubectl delete pod nginx
+```
+
+**C. Working with Deployments**
+```bash
+# Create a deployment
+kubectl create deployment nginx --image=nginx --replicas=3
+
+# View deployments
+kubectl get deployments
+
+# Scale deployment
+kubectl scale deployment nginx --replicas=5
+
+# Update deployment image
+kubectl set image deployment/nginx nginx=nginx:1.21
+
+# View rollout status
+kubectl rollout status deployment/nginx
+
+# Rollback deployment
+kubectl rollout undo deployment/nginx
+
+# Delete deployment
+kubectl delete deployment nginx
+```
+
+**D. Services and Networking**
+```bash
+# Expose deployment as service
+kubectl expose deployment nginx --port=80 --type=NodePort
+
+# View services
+kubectl get services
+kubectl get svc
+
+# Get service details
+kubectl describe service nginx
+
+# Port forward to access service locally
+kubectl port-forward service/nginx 8080:80
+
+# Delete service
+kubectl delete service nginx
+```
+
+**E. ConfigMaps and Secrets**
+```bash
+# Create configmap from literal
+kubectl create configmap app-config --from-literal=key=value
+
+# Create configmap from file
+kubectl create configmap app-config --from-file=config.txt
+
+# View configmaps
+kubectl get configmaps
+
+# Create secret
+kubectl create secret generic app-secret --from-literal=password=mypassword
+
+# View secrets
+kubectl get secrets
+
+# Describe secret (base64 encoded)
+kubectl describe secret app-secret
+```
+
+**F. Namespaces**
+```bash
+# List namespaces
+kubectl get namespaces
+
+# Create namespace
+kubectl create namespace dev
+
+# Set default namespace
+kubectl config set-context --current --namespace=dev
+
+# View resources in specific namespace
+kubectl get pods -n dev
+
+# Delete namespace
+kubectl delete namespace dev
+```
+
+**G. Apply YAML Manifests**
+```bash
+# Apply a configuration file
+kubectl apply -f deployment.yaml
+
+# Apply all files in directory
+kubectl apply -f ./k8s-configs/
+
+# Delete resources from file
+kubectl delete -f deployment.yaml
+
+# View YAML of running resource
+kubectl get deployment nginx -o yaml
+```
+
+**H. Debugging and Troubleshooting**
+```bash
+# Get pod logs
+kubectl logs pod-name
+kubectl logs pod-name -f  # Follow logs
+
+# Get previous pod logs (after crash)
+kubectl logs pod-name --previous
+
+# Describe resource for events
+kubectl describe pod pod-name
+
+# Get events
+kubectl get events --sort-by=.metadata.creationTimestamp
+
+# Check resource usage
+kubectl top nodes
+kubectl top pods
+
+# Run debug pod
+kubectl run debug --image=busybox -it --rm -- sh
+```
+
+**I. Context and Configuration**
+```bash
+# View current context
+kubectl config current-context
+
+# List all contexts
+kubectl config get-contexts
+
+# Switch context
+kubectl config use-context docker-desktop
+
+# View kubeconfig
+kubectl config view
+```
+
+**J. Common Patterns**
+
+**Quick deployment with exposure:**
+```bash
+kubectl run myapp --image=myapp:latest --port=8080
+kubectl expose pod myapp --type=NodePort --port=8080
+kubectl get svc myapp  # Get the NodePort
+```
+
+**Helm (if installed):**
+```bash
+# Add Helm repo
+helm repo add stable https://charts.helm.sh/stable
+
+# Search charts
+helm search repo nginx
+
+# Install chart
+helm install my-release stable/nginx
+
+# List releases
+helm list
+
+# Uninstall release
+helm uninstall my-release
+```
+
+**K. Kubernetes Dashboard (Optional)**
+```bash
+# Deploy dashboard
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+# Create admin user and get token
+kubectl create serviceaccount dashboard-admin -n kubernetes-dashboard
+kubectl create clusterrolebinding dashboard-admin --clusterrole=cluster-admin --serviceaccount=kubernetes-dashboard:dashboard-admin
+kubectl -n kubernetes-dashboard create token dashboard-admin
+
+# Access dashboard
+kubectl proxy
+# Then open: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+```
+
+**L. Best Practices for Local Development**
+
+1. **Resource Limits** - Set limits in Docker Desktop (6GB RAM minimum for Kubernetes)
+2. **Cleanup Regularly** - Delete unused pods, services, deployments
+3. **Use Namespaces** - Organize resources by project/environment
+4. **Local Registry** - Use Docker Desktop's built-in registry
+5. **Restart Kubernetes** - If cluster becomes unresponsive: Docker Desktop → Settings → Kubernetes → Reset Kubernetes Cluster
+
+**M. Troubleshooting Kubernetes**
+
+```bash
+# Kubernetes not starting
+docker system prune -a
+wsl --shutdown
+# Then restart Docker Desktop and enable Kubernetes again
+
+# Check Docker Desktop Kubernetes logs
+# Windows: %LOCALAPPDATA%\Docker\log\
+
+# Reset Kubernetes cluster
+# Docker Desktop → Settings → Kubernetes → Reset Kubernetes Cluster
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

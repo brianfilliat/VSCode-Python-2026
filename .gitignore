@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+.venv/
+venv/
+ENV/
+*.db
+*.sqlite
+*.sqlite3
+
+# VS Code installation files
+resources/
+locales/
+tools/
+bin/
+appx/
+policies/
+*.pak
+*.exe
+*.dll
+*.bin
+*.wasm
+*.node
+*.asar
+*.html
+*.json.sig
+Code.VisualElementsManifest.xml
+chrome_*.pak
+snapshot_blob.bin
+v8_context_snapshot.bin
+vk_swiftshader*
+vulkan-1.dll
+
+# Uninstaller files
+unins000.*
+
+# Images (keep project-specific images if needed)
+*.png
+*.svg
+*.ico
+*.jpg
+*.jpeg
+
+# Workspace metadata
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# MySQL installer
+MySQLInstaller.yaml
+
+# Keep these important files
+!schema.png
+!sampledataoutput.png
+!sampleoutput.png

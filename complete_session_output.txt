@@ -1,0 +1,614 @@
+COMPLETE SESSION OUTPUT - February 5, 2026
+==========================================
+
+PROBLEM 1: Mike's Lemonade Stand
+---------------------------------
+Question: Mike can sell 20 glasses of lemonade for 10 cents per glass. If he raises the 
+price to 20 cents per glass, he estimates he can sell only 15 glasses. If so, how 
+much more money will Mike make by charging 20 cents instead of 10 cents per glass?
+
+Answer: At 10 cents per glass: 20 × $0.10 = $2.00
+At 20 cents per glass: 15 × $0.20 = $3.00
+Mike will make $1.00 more by charging 20 cents per glass.
+
+==========================================
+
+PROBLEM 2: Martin's Can
+---------------------------------
+Question: Martin has an empty can. If he fills the can completely with sand, it weighs 
+780 grams. If he fills just half of the can with sand, it weighs 590 grams. How 
+much does the empty can weigh?
+
+Answer: Let c = weight of empty can, and s = weight of full sand
+From the given information:
+- Full can: c + s = 780
+- Half full: c + s/2 = 590
+
+Subtracting the second equation from the first:
+(c + s) - (c + s/2) = 780 - 590
+s/2 = 190
+s = 380 grams
+
+Substituting back:
+c + 380 = 780
+c = 400 grams
+
+The empty can weighs 400 grams.
+
+==========================================
+
+PROBLEM 3: Football Competition
+---------------------------------
+Question: In a football competition there are 4 teams. Each team plays each other once. 
+What is the total number of matches played?
+
+Answer: Each team plays every other team once. This is a combination problem.
+With 4 teams, we need to find the number of unique pairs:
+- Team 1 plays: Teams 2, 3, 4 (3 matches)
+- Team 2 plays: Teams 3, 4 (2 matches)
+- Team 3 plays: Team 4 (1 match)
+
+Total: 3 + 2 + 1 = 6 matches
+Or using the formula: C(4,2) = 4 × 3 / 2 = 6
+
+==========================================
+
+PROBLEM 4: Dice Probability
+---------------------------------
+Question: If 2 dice are thrown together, what is the probability of getting a sum of 7?
+
+Answer: When throwing 2 dice:
+- Total possible outcomes: 6 × 6 = 36
+Ways to get a sum of 7:
+- (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) = 6 ways
+
+Probability = 6/36 = 1/6 (or approximately 0.167 or 16.7%)
+
+==========================================
+
+PROBLEM 5: Joshua's Number Writing
+---------------------------------
+Question: Joshua wrote down every number from 1 to 30. How many times did he write 
+the digit 1?
+
+Answer: Ones place: 1, 11, 21 → 3 times
+Tens place: 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 → 10 times
+Total: 3 + 10 = 13 times
+
+==========================================
+
+PROBLEM 6: Sequence Pattern
+---------------------------------
+Question: Find the next number in the sequence: 10, 37, 82, 145, 226
+
+Answer: Looking at differences: 27, 45, 63, 81 (increasing by 18 each time)
+Next difference: 81 + 18 = 99
+Next number: 226 + 99 = 325
+
+The pattern follows the formula 9n² + 1
+
+==========================================
+
+PROBLEM 7: Sequence with Negatives
+---------------------------------
+Question: Find the next number in the sequence: 1, 1, 2, -1, 1, -2, -1
+
+Answer: Using recurrence relation a(n) = -a(n-4) + a(n-2) for n ≥ 5:
+a(8) = -a(4) + a(6) = -(-1) + (-2) = 1 - 2 = -1
+The next number is -1.
+
+==========================================
+
+PROBLEM 8: Luke's Balls
+---------------------------------
+Question: Luke has blue and red balls. Every day, he wins 2 blue balls and loses 3 red 
+ones. After 5 days, he has the same amount of blue and red balls. After 9 
+days, he has twice as many blue balls as red balls. How many red balls did he 
+have at the beginning?
+
+Answer: Let b = initial blue balls, r = initial red balls
+After 5 days: b + 10 = r - 15, so b = r - 25
+After 9 days: b + 18 = 2(r - 27), so b = 2r - 72
+
+From equations: r - 25 = 2r - 72
+47 = r
+
+Luke had 47 red balls at the beginning.
+
+==========================================
+
+PROBLEM 9: Football Tournament - 567 Teams
+---------------------------------
+Question: 567 teams participate in a football tournament. If each team plays against 
+every other team only once, how many matches will be played in total?
+
+Answer: Using C(567,2) = 567 × 566 / 2 = 160,461 matches
+
+==========================================
+
+PROBLEM 10: Team Olympus
+---------------------------------
+Question: In a football tournament, each team plays exactly 19 games. Teams get 3 
+points for every win and 1 point for every tie. At the end of the tournament, 
+Team Olympus got a total of 28 points. From the following options, how many 
+times could Team Olympus have tied?
+
+Answer: Let w = wins, t = ties, l = losses
+w + t + l = 19
+3w + t = 28
+
+Valid solutions: w ∈ {5, 6, 7, 8, 9}
+Team Olympus could have tied: 1, 4, 7, 10, or 13 times
+
+==========================================
+
+PROBLEM 11: Peter's House Number
+---------------------------------
+Question: John wants to send a letter to Peter, who lives on Tesla Street. John doesn't 
+remember the house number. However, he knows that it has 4 digits, is a 
+multiple of 5 and 7, and the last digit is 0. What is the minimum number of 
+letters that John has to send to be sure that Peter receives his letter?
+
+Answer: 4-digit multiples of 70 (multiple of 5 and 7, ending in 0)
+From 1050 to 9940: 128 numbers
+John must send 128 letters.
+
+==========================================
+
+PROBLEM 12: Three Boxes Puzzle
+---------------------------------
+Question: There are 3 boxes. One of them contains gold. In each box, there is a 
+message, and one of them is true. Box 1: "The gold is not in Box 2." 
+Box 2: "The gold is in this box." Box 3: "The gold is not in this box." 
+Which box has the gold?
+
+Answer: Testing each scenario where exactly one message is true:
+If gold is in Box 3:
+- Box 1: TRUE (gold not in Box 2)
+- Box 2: FALSE (gold not in Box 2)
+- Box 3: FALSE (gold IS in this box)
+Result: Exactly 1 true statement ✓
+
+The gold is in Box 3.
+
+==========================================
+
+PROBLEM 13: Card Probability
+---------------------------------
+Question: What is the probability of getting a 10 or a Jack from a deck of cards (52 cards)?
+
+Answer: Number of 10s: 4, Number of Jacks: 4
+Total favorable outcomes: 8
+Probability = 8/52 = 2/13 (or approximately 0.154 or 15.4%)
+
+==========================================
+
+PROBLEM 14: Mary's Book Pages
+---------------------------------
+Question: Mary wrote a book that had 1,536 pages. She numbered all the pages by 
+hand. How many times did she write the digit 6?
+
+Answer: Ones place: 154 times
+Tens place: 150 times (15 complete sets of 60-69)
+Hundreds place: 100 times (600-699)
+Thousands place: 0 times
+Total: 154 + 150 + 100 = 404 times
+
+==========================================
+
+PROBLEM 15: Bacteria Colony
+---------------------------------
+Question: A scientist creates a colony of bacteria in a dish. This type of bacteria 
+duplicates itself per minute. If at 9:00 a.m. the experiment started with a 
+single cell and at 9:13 AM the dish was half-full, at what time will the dish be full?
+
+Answer: Since bacteria doubles every minute, if the dish is half-full at 9:13 AM, 
+it will be completely full one minute later at 9:14 AM.
+
+==========================================
+
+PROBLEM 16: Monks' Birthdays
+---------------------------------
+Question: Suppose there are exactly 733 monks in the world. Which statement is always true?
+
+Answer: "There is a day of the year that is the birthday of at least 3 monks"
+By Pigeonhole Principle: 733 monks ÷ 366 days = at least 3 monks per day.
+This is always true regardless of distribution.
+
+==========================================
+
+PROBLEM 17: Board Coloring Pattern
+---------------------------------
+Question: On a board measuring 1x100, each square is numbered from 1 to 100. Three 
+colors are used to paint the squares from left to right. The following pattern is 
+repeated: 1 blue square, 2 red squares, 3 green squares. What is the highest 
+numbered square that is painted blue?
+
+Answer: Pattern repeats every 6 squares (1 blue, 2 red, 3 green)
+Blue squares: 1, 7, 13, 19, ... (1 + 6k where k = 0, 1, 2, ...)
+Highest: 1 + 6(16) = 97
+
+==========================================
+
+PROBLEM 18: Coins and Dice Probability
+---------------------------------
+Question: I toss 3 coins and roll 2 dice. What is the probability that all coins land tails or 
+the dice sum to 10, regardless of whether one or both events occur?
+
+Answer: P(A) = all tails = 1/8
+P(B) = dice sum to 10 = 3/36 = 1/12
+P(A ∩ B) = 1/8 × 1/12 = 1/96
+P(A ∪ B) = 1/8 + 1/12 - 1/96 = 19/96 (approximately 0.198 or 19.8%)
+
+==========================================
+
+PROBLEM 19: Sequence - Large Numbers
+---------------------------------
+Question: Find the next number in the sequence: 2, 2, 5, 12, 62, 749, 46,450
+
+Answer: Recurrence relation: a(n) = a(n-1) × a(n-2) + a(n-3)
+a(8) = 46,450 × 749 + 62 = 34,793,112
+
+==========================================
+
+PROBLEM 20: Edward's Numbers
+---------------------------------
+Question: Using all or some of the digits 2, 3, 4, and 5, Edward writes numbers greater 
+than 500 without repeating digits. How many numbers does Edward write?
+
+Answer: 3-digit numbers starting with 5: 6 numbers
+4-digit numbers using all digits: 24 numbers
+Total: 30 numbers
+
+==========================================
+
+PROBLEM 21: Mario's Medication
+---------------------------------
+Question: Mario has to take medication for 180 days. He takes it two days in a row, then 
+skips 1 day, repeating this pattern. Starting Monday, how many times will he 
+take it on both Monday and Tuesday of the same week?
+
+Answer: Pattern repeats every 3 days (Take, Take, Skip)
+For Monday-Tuesday both to be Take days, Monday must start a new cycle
+This occurs when k mod 3 = 0 for Mondays at days 1, 22, 43, 64, 85, 106, 127, 148, 169
+Total: 9 times
+
+==========================================
+
+PROBLEM 22: Susan's Theater Statement
+---------------------------------
+Question: If Susan finishes her homework, she can go to the theater. Which statement is correct?
+
+Answer: "Susan doesn't go to the theatre, then she didn't finish her homework."
+This is the contrapositive and is logically equivalent to the original statement.
+
+==========================================
+
+PROBLEM 23: Clock Hands Meeting
+---------------------------------
+Question: During a single day, how many times do the hour hand and the minute hand of 
+a clock meet at the same place?
+
+Answer: In 12 hours, the hands meet 11 times (every 12/11 hours ≈ 65.45 minutes)
+In 24 hours: 22 times
+
+==========================================
+
+PROBLEM 24: Party Handshakes
+---------------------------------
+Question: There are 28 couples at a party. Each person shakes hands with every other 
+person, except their own spouse. Mr. Smith asks each attendant how many hands 
+they shook, and everyone tells him a different number. How many hands did Mr. Smith shake?
+
+Answer: 56 people total. Responses are 0-54.
+By pairing logic: (54,0), (53,1), (52,2), ..., (28,26) are 27 couples.
+The 28th couple is Mr. and Mrs. Smith.
+The unpaired number is 27.
+Mr. Smith shook 27 hands.
+
+==========================================
+
+PROBLEM 25: Flight Economics
+---------------------------------
+Question: Freelance developer earning $80/hour. 12-hour flight, no internet. 
+11 a.m. flight: $900 or 11 p.m. flight: $1,100. What to do?
+
+Answer: 11 a.m. flight: $900 + $640 lost work = $1,540 total
+11 p.m. flight: $1,100 + $0 lost work = $1,100 total
+Take the 11 p.m. flight - saves $440 overall.
+
+==========================================
+
+PROBLEM 26: Presentation Deadline Conflict
+---------------------------------
+Question: You promised a 20-slide presentation by 6 p.m. It's 5 p.m. and you haven't 
+started. CEO calls with 40-minute urgent matter. What would you do?
+
+Answer: Send boss a message telling him you'll be late due to CEO urgent matter. 
+Take the call, then finish presentation.
+This shows proper prioritization and proactive communication.
+
+==========================================
+
+PROBLEM 27: Late to Video Call
+---------------------------------
+Question: Going to office for video call with potential client. Public transport delayed. 
+No signal to send messages. Meeting starts in 15 minutes. What would you do?
+
+Answer: Go to a bar or restaurant with Wi-Fi to communicate with the client.
+This allows immediate communication and potentially joining the call from that location.
+
+==========================================
+
+PROBLEM 28: Multiple Urgent Emails
+---------------------------------
+Question: You receive 10 emails at once. One from general manager (can't understand from 
+first line), one from boss with "ASAP", rest from peers. Not enough time for all. 
+What would you do?
+
+Answer: Open the CEO email first to assess urgency. If urgent, reply to that, 
+then to boss's email.
+This allows informed prioritization based on actual urgency.
+
+==========================================
+
+PROBLEM 29: Slot Machine Strategy
+---------------------------------
+Question: You're about to play at a slot machine. What would you do to increase your 
+chances of leaving with the highest amount of money?
+
+Answer: Don't play.
+All slot machines have negative expected value. Not playing is the only way 
+to guarantee keeping the most money.
+
+==========================================
+
+PROBLEM 30: In-Flight Presentation
+---------------------------------
+Question: 12-hour flight, need presentation for client upon arrival. Can work offline or 
+pay $200/GB for in-flight internet. What would you do?
+
+Answer: Work on presentation offline, then go online upon arrival for finishing touches.
+Most cost-effective and practical approach.
+
+==========================================
+
+PROBLEM 31: Job Application Follow-Up
+---------------------------------
+Question: Two weeks ago, applied for position. Sent follow-up email, no reply. 
+What would you do?
+
+Answer: Assume you won't get replies and continue job search.
+This is realistic and shows professional maturity. Don't wait for one opportunity.
+
+==========================================
+
+PROBLEM 32: Task Prioritization
+---------------------------------
+Question: Which task to perform first: email boss, organize meeting, fix email server, 
+fix website, answer Skype, or reply to email?
+
+Answer: Fix the company's email server.
+Complete email outage affects entire company operations and blocks other work.
+
+==========================================
+
+PROBLEM 33: Urgent Hiring Process
+---------------------------------
+Question: Need to hire 5 people ASAP. Can use interview or 3-4 hour practical exam 
+(graded immediately). What selection method?
+
+Answer: Send them the exam first, then decide whether to interview them.
+Most efficient for urgent hiring - filters candidates quickly, then interviews top performers.
+
+==========================================
+
+PROBLEM 34: World Population Math Ability
+---------------------------------
+Question: What percentage of world population can solve: "Brian chose 3 numbers. 
+Average is 8. If 2 numbers are 3 and 7, what is the 3rd number?"
+
+Answer: 3%
+While simple math, considering global education access and literacy challenges, 
+only small fraction of 8+ billion people can solve it.
+
+==========================================
+
+PROBLEM 35: Party Etiquette
+---------------------------------
+Question: At party, it's late. Host checking watch and cleaning up. You're still having fun. 
+What would you do?
+
+Answer: Gather belongings, thank everyone, and leave.
+Shows social awareness and respect for host's clear signals that party is ending.
+
+==========================================
+
+PROBLEM 36: Interview Time Communication
+---------------------------------
+Question: Interviewing 10 candidates. Estimate 1.5 hours if interested, 30 minutes if not. 
+How long would you tell candidates interview will be?
+
+Answer: Tell them interview will be 1.5 hours long.
+Proper time management, no awkward performance signaling, avoids scheduling conflicts.
+
+==========================================
+
+PROBLEM 37: Self-Assessment - Intelligence
+---------------------------------
+Question: In what percentage would you place yourself in terms of intelligence, 
+based on world's population?
+
+Answer: Most balanced: 5-10%
+Shows healthy confidence without arrogance, realistic self-assessment.
+
+==========================================
+
+PROBLEM 38: Decision-Making Independence
+---------------------------------
+Question: On average, how much do you consider other people's opinions when making decisions?
+(1-Not much to 6-A lot)
+
+Answer: Most balanced: 3-4
+Shows you value input but maintain independent judgment. Professional maturity.
+
+==========================================
+
+PROBLEM 39: Personality - Outgoing Level
+---------------------------------
+Question: How outgoing would you consider yourself to be?
+(1-Very reserved to 6-Very extroverted)
+
+Answer: No universally correct answer - depends on role and honest self-assessment.
+Most versatile: 3-4 (shows adaptability)
+
+==========================================
+
+PROBLEM 40: Expense Report Collaboration
+---------------------------------
+Question: You and colleague need to do expense report. They can only use smartphone 
+tomorrow. What's most convenient?
+
+Answer: Upload sheet to Google Sheets and share it.
+Mobile-optimized, real-time collaboration, no version control issues.
+
+==========================================
+
+PROBLEM 41: Important Notes Emergency
+---------------------------------
+Question: Taking important notes in Notepad, must leave suddenly. What would you do?
+
+Answer: Copy notes to the cloud (Google Drive/Keep).
+Data security, accessibility, protection from device issues.
+
+==========================================
+
+PROBLEM 42: Android Instagram Release
+---------------------------------
+Question: When was the Android version of Instagram app released?
+
+Answer: April 3, 2012
+iOS launched October 6, 2010. Android came 18 months later.
+
+==========================================
+
+PROBLEM 43: BairesDev Client
+---------------------------------
+Question: Which company is/was a BairesDev client?
+
+Answer: Cannot verify without reliable information.
+Would need to check official sources.
+
+==========================================
+
+PROBLEM 44: Universal Declaration Word Count
+---------------------------------
+Question: Approximately how many words does English translation of Universal 
+Declaration of Human Rights have?
+
+Answer: 1,750 words
+The document has 30 articles plus preamble.
+
+==========================================
+
+PROBLEM 45: Google Calendar Recurring
+---------------------------------
+Question: Which is NOT a correct way to set up recurring meetings in Google Calendar?
+
+Answer: "Every odd-numbered day of the month"
+Google Calendar doesn't support selecting only odd-numbered days natively.
+
+==========================================
+
+PROBLEM 46: Keyboard Shortcuts
+---------------------------------
+Question: Which shortcut is NOT frequently used?
+
+Answer: Ctrl + Alt + Shift/Command + Option + Shift
+This combination doesn't perform any standard function by itself.
+
+==========================================
+
+PROBLEM 47: Email Inbox Management
+---------------------------------
+Question: Inbox filling with unread messages. What would you do?
+
+Answer: Create multiple filters to delete all irrelevant emails.
+Automated, scalable, proactive solution that addresses root cause.
+
+==========================================
+
+PROBLEM 48: Reply All Recipients
+---------------------------------
+Question: Email from Juan, Pedro CC'd, Martin BCC'd. If you "Reply all," who receives it?
+
+Answer: Juan and Pedro
+"Reply all" includes sender and visible CC recipients, but not BCC.
+
+==========================================
+
+PROBLEM 49: Reply Recipients
+---------------------------------
+Question: Email from Juan, Pedro CC'd, Martin BCC'd. If you "Reply," who receives it?
+
+Answer: Juan
+"Reply" only goes to the sender, not CC or BCC recipients.
+
+==========================================
+
+PROBLEM 50: Multiple Google Accounts
+---------------------------------
+Question: Using Google Chrome, easiest way to log in to additional Google account?
+
+Answer: Click on profile and "Add another account."
+Built-in Chrome feature for multi-account management with instant switching.
+
+==========================================
+
+PROBLEM 51: Workgroup Task Management
+---------------------------------
+Question: Which application is most adequate to handle tasks and priorities of a workgroup?
+
+Answer: Jira/Trello
+Purpose-built for project/task tracking with team collaboration features.
+
+==========================================
+
+PROBLEM 52: Geographic Coordinates
+---------------------------------
+Question: In which country are coordinates (35.58, 104.61) located?
+
+Answer: China
+Located in Gansu Province, near Lanzhou in north-central China.
+
+==========================================
+
+PROBLEM 53: Basque Translation
+---------------------------------
+Question: What does "Lan berriaren bila nabil" mean in Basque?
+
+Answer: "I'm looking for a new job"
+Lan = work/job, berriaren = new, bila = looking for, nabil = I am
+
+==========================================
+
+PROBLEM 54: Afrikaans Translation
+---------------------------------
+Question: What does "Dit is 'n boodskap vir u" mean?
+
+Answer: "This is a message for you"
+Dit = this, is = is, 'n = a, boodskap = message, vir = for, u = you (formal)
+
+==========================================
+
+PROBLEM 55: Largest Territory
+---------------------------------
+Question: Which country has the largest territory?
+
+Answer: Algeria
+At ~2.38 million km², it's the largest in Africa and 10th largest globally.
+
+==========================================
+
+END OF SESSION
+==========================================

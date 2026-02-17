@@ -1,0 +1,28 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: postgres-composition.example.org
+spec:
+  compositeTypeRef:
+    apiVersion: database.example.org/v1alpha1
+    kind: CompositePostgresInstance
+  resources:
+    - name: rdsinstance
+      base:
+        apiVersion: database.aws.crossplane.io/v1alpha1
+        kind: RDSInstance
+        spec:
+          forProvider:
+            dbInstanceClass: db.t3.medium
+            allocatedStorage: 20
+            engine: postgres
+            engineVersion: "13"
+            publiclyAccessible: false
+          writeConnectionSecretToRef:
+            namespace: crossplane-system
+            name: db-connection
+      patches:
+        - fromFieldPath: "spec.parameters.storageGB"
+          toFieldPath: "spec.forProvider.allocatedStorage"
+        - fromFieldPath: "spec.parameters.engineVersion"
+          toFieldPath: "spec.forProvider.engineVersion"

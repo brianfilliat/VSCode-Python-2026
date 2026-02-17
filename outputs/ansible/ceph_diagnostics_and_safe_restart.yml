@@ -1,0 +1,65 @@
+---
+# Playbook: Ceph diagnostics and safe restart of MON/OSD services
+# Run with: ansible-playbook -i inventory ceph_diagnostics_and_safe_restart.yml -e "restart_services=false"
+
+- name: Collect Ceph diagnostics and optionally restart services
+  hosts: ceph_mons:ceph_osds
+  gather_facts: false
+  vars:
+    restart_services: false
+    service_map:
+      mon: ceph-mon@{{ inventory_hostname }}
+      osd: ceph-osd@{{ osd_id | default('') }}
+
+  tasks:
+    - name: Check ceph status
+      ansible.builtin.shell: ceph -s
+      register: ceph_status
+      changed_when: false
+
+    - name: Save ceph status to local file
+      ansible.builtin.copy:
+        content: "{{ ceph_status.stdout }}\n"
+        dest: "/tmp/ceph_status_{{ inventory_hostname }}.txt"
+
+    - name: Collect mon/osd service status (systemd)
+      ansible.builtin.shell: |
+        if systemctl list-units --type=service --all | grep -q ceph; then
+          systemctl status 'ceph*' --no-pager || true
+        else
+          echo "no systemd ceph services detected"
+        fi
+      register: svc_status
+      changed_when: false
+
+    - name: Save service status
+      ansible.builtin.copy:
+        content: "{{ svc_status.stdout }}\n"
+        dest: "/tmp/ceph_services_{{ inventory_hostname }}.txt"
+
+    - name: Fetch recent ceph logs (last 200 lines)
+      ansible.builtin.shell: |
+        if [ -f /var/log/ceph/ceph.log ]; then
+          tail -n 200 /var/log/ceph/ceph.log || true
+        else
+          journalctl -u ceph* -n 200 --no-pager || true
+        fi
+      register: ceph_logs
+      changed_when: false
+
+    - name: Save logs locally
+      ansible.builtin.copy:
+        content: "{{ ceph_logs.stdout }}\n"
+        dest: "/tmp/ceph_logs_{{ inventory_hostname }}.txt"
+
+    - name: Optionally restart ceph services (SAFETY: requires restart_services=true)
+      ansible.builtin.systemd:
+        name: "ceph-mon@*"
+        state: restarted
+      when: restart_services | default(false) | bool and ("mon" in group_names)
+
+    - name: Optionally restart osd service (if osd host)
+      ansible.builtin.systemd:
+        name: "ceph-osd@{{ osd_id }}"
+        state: restarted
+      when: restart_services | default(false) | bool and ("osd" in group_names)

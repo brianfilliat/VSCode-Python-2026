@@ -1,0 +1,58 @@
+name: Terraform Managed DB module CI
+
+on:
+  push:
+    paths:
+      - 'filliat-Assement-notes-2026/terraform/managed-db-module/**'
+  pull_request:
+    paths:
+      - 'filliat-Assement-notes-2026/terraform/managed-db-module/**'
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+
+      - name: Terraform fmt (check)
+        run: terraform -chdir=filliat-Assement-notes-2026/terraform/managed-db-module fmt -check
+
+      - name: Terraform init
+        run: terraform -chdir=filliat-Assement-notes-2026/terraform/managed-db-module init -input=false
+
+      - name: Terraform validate
+        run: terraform -chdir=filliat-Assement-notes-2026/terraform/managed-db-module validate
+
+      - name: Terraform plan
+        run: terraform -chdir=filliat-Assement-notes-2026/terraform/managed-db-module plan -out=tfplan -input=false
+
+      - name: Run tfsec
+        uses: aquasecurity/tfsec-action@v1
+        with:
+          directory: filliat-Assement-notes-2026/terraform/managed-db-module
+
+      - name: Run tflint
+        run: |
+          curl -sL https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+          tflint --init
+          tflint --config=filliat-Assement-notes-2026/terraform/managed-db-module/.tflint.hcl filliat-Assement-notes-2026/terraform/managed-db-module || true
+
+      - name: Upload plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: filliat-Assement-notes-2026/terraform/managed-db-module/tfplan

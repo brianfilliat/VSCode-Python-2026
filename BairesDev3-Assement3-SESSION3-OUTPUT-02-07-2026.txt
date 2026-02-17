@@ -1,0 +1,587 @@
+
+
+
+=================================================================
+BairesDev Assessment Session 3 - February 7, 2026
+Q&A Output - Algorithms and Data Structures
+=================================================================
+
+QUESTION 1: What's the temporary complexity of the Merge Sort algorithm in the worst case?
+Options:
+- O(n^2)
+- O(n)
+- O(n log n)
+
+ANSWER: O(n log n)
+Explanation: Merge Sort has a time complexity of O(n log n) in all cases (best, average, and worst case). 
+The algorithm always divides the array into two halves recursively (log n levels), and at each level, 
+it performs O(n) work to merge the subarrays. Total: O(n) × O(log n) = O(n log n).
+
+=================================================================
+
+QUESTION 2: What's the average temporary complexity of the QuickSort algorithm?
+Options:
+- O(n^2)
+- O(n)
+- O(n^n)
+- O(n log n)
+
+ANSWER: O(n log n)
+Explanation: QuickSort has an average time complexity of O(n log n) when pivots roughly divide 
+the array into balanced partitions. Best case: O(n log n), Worst case: O(n²).
+
+=================================================================
+
+QUESTION 3: What method would you use to search a number in an organized array of numbers?
+Options:
+- Lineal Search
+- Fill in a hash table and then search by that hash
+- Fill in a binary tree and then search in the tree
+- Binary Search
+
+ANSWER: Binary Search
+Explanation: Binary Search is the optimal method for searching in a sorted array because:
+- Time complexity: O(log n)
+- No preprocessing needed
+- No extra space required
+- Specifically designed for sorted data
+
+=================================================================
+
+QUESTION 4: Assume that the executing time of an algorithm has a quadratic growth rate. 
+For an input size of 1,000 it has an execution time of 20 ms. Which would be your 
+estimated time of execution for an input of size 10,000?
+Options:
+- 400 ms
+- 4000 ms
+- 200 ms
+- 2000 ms
+
+ANSWER: 2000 ms
+Explanation: For quadratic growth (O(n²)), when input size increases by a factor of k, 
+execution time increases by a factor of k².
+- Input size change: 1,000 → 10,000 (factor of 10)
+- Time complexity factor: 10² = 100
+- New execution time: 20 ms × 100 = 2000 ms
+
+=================================================================
+
+QUESTION 5: What data structure is needed to make a recursive procedure?
+Options:
+- Stack
+- Array
+- Priority list
+- Queue
+
+ANSWER: Stack
+Explanation: Recursive procedures rely on a call stack (or execution stack). Each recursive 
+call pushes a new stack frame containing return address, local variables, parameters, and 
+function state. Follows LIFO (Last In, First Out) order.
+
+=================================================================
+
+QUESTION 6: What's the best use for a tree?
+Options:
+- Recursion
+- Index records in a database
+- Print spooling
+- Image processing
+
+ANSWER: Index records in a database
+Explanation: Trees, particularly B-trees and B+ trees, are fundamental for database indexing 
+because they provide:
+- O(log n) search, insert, and delete operations
+- Efficient range queries
+- Self-balancing
+- Disk-friendly operations
+- Used in MySQL, PostgreSQL, MongoDB, and most relational databases
+
+=================================================================
+
+QUESTION 7: What's the temporary complexity of inserting an element in a balanced tree 
+in the worst case?
+Options:
+- O(n^2)
+- O(1)
+- O(log n)
+- O(n^n)
+
+ANSWER: O(log n)
+Explanation: In a balanced tree (AVL tree, Red-Black tree, or B-tree), insertion has a 
+worst-case time complexity of O(log n) because:
+1. Search for insertion position: O(log n)
+2. Insert the element: O(1)
+3. Rebalance the tree: O(log n)
+Balanced trees maintain a height of approximately log₂(n).
+
+=================================================================
+
+QUESTION 8: Given the following pseudo-code:
+print Tree(tree) {
+    if (tree.hasLeft) {
+        printTree(tree.left);
+    }
+    if (tree.hasRight) {
+        printTree(tree.right);
+    }
+    print(currentNode);
+}
+
+What would be the outcome for the following tree?
+Options:
+- 2-5-5-7-10-18-23-31
+- 10-5-23-2-7-18-31-5
+- 2-5-7-5-18-31-23-10
+- 5-2-7-18-31-5-23-10
+
+ANSWER: 2-5-7-5-18-31-23-10
+Explanation: This pseudo-code implements a post-order traversal (Left → Right → Root).
+Tree structure:
+        10
+       /  \
+      5    23
+     / \   / \
+    2   7 18  31
+       /
+      5
+
+Traversal order: Visit left subtree, then right subtree, then print current node.
+Result: 2-5-7-5-18-31-23-10
+
+=================================================================
+
+CODING CHALLENGE: Employee Salary Aggregations (MySQL)
+
+Problem Statement:
+Write a query to find the sum, minimum, and maximum of the salaries
+of the employees from the given table.
+
+Table: EmployeeDepartment
+Fields:
+- employee_id (Integer)
+- employee_name (Text)
+- job (Text)
+- manager_id (Integer)
+- salary (Integer)
+
+Sample Data:
+employee_id | employee_name | job      | manager_id | salary
+7369        | SMITH         | CLERK    | 7902       | 800
+7566        | JONES         | MANAGER  | 7839       | 3000
+7782        | CLARK         | MANAGER  | 7839       | 3000
+7788        | SCOTT         | ANALYST  | 7566       | 4000
+
+Expected Output:
+SUM   | MIN | MAX
+10800 | 800 | 4000
+
+SOLUTION:
+```sql
+SELECT 
+    SUM(salary) AS SUM,
+    MIN(salary) AS MIN,
+    MAX(salary) AS MAX
+FROM EmployeeDepartment;
+```
+
+Explanation:
+- SUM(salary): Calculates the total of all salary values (10800)
+- MIN(salary): Finds the lowest salary value (800)
+- MAX(salary): Finds the highest salary value (4000)
+- Column aliases ensure output matches required format
+- Uses aggregate functions to compute statistics in a single pass
+
+=================================================================
+
+SQL CHALLENGE 2: Travel Agency Trip Counter (MySQL)
+
+Problem Statement:
+Database for a travel agency with a table named 'travel'.
+Task: Write an SQL query that:
+- Counts the number of trips from Destination A to Destination B
+- Returns results alphabetically based on the pattern: {start_location} to {end_location}
+- Each output row includes the route description and number of trips
+
+Table: travel
+Booking_ID (Int) - Represents the Booking ID of the trip
+Start_Location (Varchar) - Represents the starting destination
+End_Location (Varchar) - Represents the end destination
+
+Sample Data:
+Booking_ID | Start_Location | End_location
+1          | Washington     | Ohio
+2          | Texas          | Ohio
+3          | Ohio           | California
+4          | Nebraska       | Dallas
+5          | Ohio           | California
+
+Expected Output:
+trip                  | count
+Nebraska to Dallas    | 1
+Ohio to California    | 2
+Texas to Ohio         | 1
+Washington to Ohio    | 1
+
+SOLUTION:
+```sql
+SELECT 
+    CONCAT(Start_Location, ' to ', End_Location) AS trip,
+    COUNT(*) AS count
+FROM travel
+GROUP BY Start_Location, End_Location
+ORDER BY trip;
+```
+
+Explanation:
+- CONCAT() creates the formatted route string (e.g., "Dallas to Nebraska")
+- COUNT(*) counts the number of trips for each unique route combination
+- GROUP BY groups trips by start and end locations to aggregate counts
+- ORDER BY trip sorts results alphabetically by the formatted trip string
+
+=================================================================
+
+SQL CHALLENGE 3: Customer Order Analysis (MySQL)
+
+Problem Statement:
+Write an SQL query to:
+- List customers with their full name (last name in uppercase)
+- Calculate the total amount spent by each customer across all orders
+- Sort by spent amount (descending), then by customer name (alphabetically)
+
+Table: orders
+order_id (Integer) - Unique order ID
+ordered_product (String) - Name of ordered item
+ordered_by (Integer) - Customer ID who made the order
+price (Integer) - Price in US Dollars
+
+Table: customers
+customer_id (Integer) - Unique customer ID
+first_name (String) - First name
+last_name (String) - Last name
+
+Sample Data:
+Orders include products like Cadbury celebrations ($8), Axe perfume ($14), etc.
+Customers: Ferauson Mark, David Willey, John Carter
+
+Expected Output:
+customer_name      | total_amt_spent
+Mark FERGUSON      | 31
+John CARTER        | 30
+David WILLEY       | 28
+
+SOLUTION:
+```sql
+SELECT 
+    CONCAT(c.first_name, ' ', UPPER(c.last_name)) AS customer_name,
+    SUM(o.price) AS total_amt_spent
+FROM customers c
+INNER JOIN orders o ON c.customer_id = o.ordered_by
+GROUP BY c.customer_id, c.first_name, c.last_name
+ORDER BY total_amt_spent DESC, customer_name ASC;
+```
+
+Explanation:
+- CONCAT() with UPPER() combines first name with uppercase last name
+- SUM(o.price) calculates total amount spent
+- INNER JOIN links customers to their orders
+- GROUP BY aggregates results by customer
+- Dual ORDER BY sorts by amount (descending) then name (ascending)
+
+=================================================================
+
+SQL CHALLENGE 4: Job Applicant Position Assignment (MySQL)
+
+Problem Statement:
+Given a table named 'applicant' containing job candidates and qualifications.
+Task: Assign each applicant the most suitable position level they qualify for.
+Position levels (in order of seniority): Senior > Intermediate > Junior
+Each applicant gets only their highest qualifying level.
+
+Level Requirements:
+SENIOR: 10+ years coding experience, Master's+ degree, open-source experience, Linux OS
+INTERMEDIATE: <10 years experience, Bachelor's+ degree, Linux OS
+JUNIOR: Student, <5 years experience, open-source experience
+
+Table: applicant
+id (Int) - Applicant ID
+opensource (Varchar) - Has open-source experience (yes/no)
+student (Varchar) - Is a student (yes/no)
+highest_education (Varchar) - Highest degree
+years_coding (Int) - Years of professional coding
+operating_system (Varchar) - Primary OS
+
+Sample Data:
+id | opensource | student | highest_education | years_coding | operating_system
+1  | no         | no      | Bachelors        | 6            | Linux
+2  | yes        | yes     | Bachelors        | 1            | Windows
+3  | yes        | no      | Masters          | 13           | Linux
+4  | no         | no      | Bachelors        | 5            | MacOS
+5  | yes        | yes     | No Degree        | 1            | Windows
+
+Expected Output:
+id | position_level
+1  | Intermediate
+3  | Senior
+5  | Junior
+
+SOLUTION:
+```sql
+SELECT 
+    id,
+    CASE
+        WHEN years_coding >= 10 
+             AND highest_education IN ('Masters', 'PhD', 'Doctorate')
+             AND opensource = 'yes'
+             AND operating_system = 'Linux'
+        THEN 'Senior'
+        
+        WHEN years_coding < 10
+             AND highest_education IN ('Bachelors', 'Masters', 'PhD', 'Doctorate')
+             AND operating_system = 'Linux'
+        THEN 'Intermediate'
+        
+        WHEN student = 'yes'
+             AND years_coding < 5
+             AND opensource = 'yes'
+        THEN 'Junior'
+        
+        ELSE NULL
+    END AS position_level
+FROM applicant
+HAVING position_level IS NOT NULL;
+```
+
+Explanation:
+- CASE statement evaluates conditions in order (Senior → Intermediate → Junior)
+- Each level has specific criteria checked with AND conditions
+- HAVING clause filters out applicants who don't qualify
+- Returns only applicants with assigned positions
+
+=================================================================
+
+ETL & DATA ENGINEERING KNOWLEDGE QUESTIONS
+
+QUESTION 9: Which are the main purposes of ETL testing?
+Options:
+- To verify the accuracy and completeness of the data in the target system
+- To validate the functionality and performance of the ETL tools and technologies
+- To check the quality and consistency of the data throughout the ETL process
+- All of the above
+
+ANSWER: All of the above
+
+Explanation: ETL testing encompasses all three purposes:
+1. Verify accuracy and completeness - Ensures data from source to target is correct
+2. Validate functionality and performance - Tests ETL tools perform efficiently
+3. Check quality and consistency - Validates data throughout entire pipeline
+
+ETL testing includes: data completeness checks, transformation validation, 
+data quality verification, performance testing, metadata validation, 
+data integrity checks, and error handling validation.
+
+=================================================================
+
+QUESTION 10: Which is NOT a common data source to feed an ETL?
+Options:
+- Flat files
+- Relational databases
+- Web pages
+- Data warehouses
+
+ANSWER: Data warehouses
+
+Explanation: Data warehouses are the TARGET/DESTINATION of ETL processes, not sources.
+ETL extracts from sources (files, databases, web pages) and loads INTO data warehouses.
+
+Common ETL Sources:
+✓ Flat files (CSV, TXT, Excel)
+✓ Relational databases (MySQL, PostgreSQL, Oracle, SQL Server)
+✓ Web pages (scraping, APIs, web services)
+✓ NoSQL databases, XML/JSON files, streaming data, legacy systems
+
+ETL Target:
+✗ Data warehouses ← This is the destination, not the source
+
+=================================================================
+
+QUESTION 11: Which of the following is an example of a transformation operation in ETL?
+Options:
+- Joining data from multiple sources
+- Filtering data based on certain criteria
+- Aggregating data to calculate summary statistics
+- None of the above
+
+ANSWER: All three are transformation operations
+
+Explanation: Common ETL transformations include:
+- Joining: Combining data from different tables/sources
+- Filtering: Removing unwanted records based on criteria
+- Aggregating: Performing calculations and summarization
+- Also: data cleansing, type conversions, deduplication, sorting, 
+  lookup operations, calculations, splitting/merging columns
+
+All three operations listed are fundamental transformation operations in ETL.
+
+=================================================================
+
+QUESTION 12: Which are benefits of using ETL tools over custom scripts?
+Select the correct answer(s):
+
+CORRECT ANSWERS:
+✓ ETL tools enable faster and easier development and maintenance of ETL pipelines
+✓ ETL tools support various data formats and sources and offer built-in data 
+  quality and error handling features
+✓ ETL tools provide graphical interfaces and pre-built components for building 
+  and managing
+
+INCORRECT ANSWERS:
+✗ ETL tools are always cheaper than custom solutions
+  (FALSE - ETL tools can be expensive with licensing costs)
+✗ ETL tools eliminate the need for any data transformation logic
+  (FALSE - Still need to define business rules and transformation requirements)
+
+Key Benefits:
+- Visual drag-and-drop interfaces
+- Pre-built connectors for various data sources
+- Built-in data quality checks and error handling
+- Metadata management
+- Faster development cycles and easier maintenance
+- Scheduling and monitoring capabilities
+
+=================================================================
+
+QUESTION 13: What are some of the common ETL tools in the market?
+Options:
+- Hadoop, Spark, and Airflow
+- Python, Java, and Scala
+- Talend, Informatica, and MuleSoft
+- Apache Kafka and RabbitMQ
+- Looker and Tableau
+
+ANSWER: Talend, Informatica, and MuleSoft
+
+Explanation:
+✓ Talend - Open-source and enterprise ETL tool
+✓ Informatica - Enterprise-grade ETL and data integration platform
+✓ MuleSoft - Integration platform with ETL capabilities
+
+Why others are incorrect:
+✗ Hadoop, Spark, Airflow - Data processing frameworks and orchestration tools
+✗ Python, Java, Scala - Programming languages (not tools)
+✗ Kafka, RabbitMQ - Message brokers for streaming data
+✗ Looker, Tableau - BI/visualization tools
+
+Other popular ETL tools: Microsoft SSIS, Oracle Data Integrator, 
+IBM DataStage, AWS Glue, Azure Data Factory, Pentaho
+
+=================================================================
+
+QUESTION 14: What's the difference between a data warehouse and a data lake?
+Select the correct answer(s):
+
+CORRECT ANSWERS:
+✓ A data warehouse follows a schema-on-write approach, while a data lake 
+  follows a schema-on-read approach
+✓ A data warehouse is optimized for analytical queries, while a data lake 
+  is optimized for exploratory queries
+
+INCORRECT ANSWERS:
+✗ A data lake cannot store structured data (FALSE - stores ALL data types)
+✗ A data warehouse is used only for real-time data (FALSE - primarily historical)
+
+Key Differences:
+| Feature      | Data Warehouse    | Data Lake        |
+|--------------|-------------------|------------------|
+| Data Type    | Structured        | All types        |
+| Schema       | Schema-on-write   | Schema-on-read   |
+| Users        | Business analysts | Data scientists  |
+| Processing   | ETL               | ELT              |
+| Cost         | Higher            | Lower            |
+| Purpose      | BI & reporting    | Exploration & ML |
+
+=================================================================
+
+QUESTION 15: Which is one of the challenges faced by ETL data engineers?
+Options:
+- Handling large volumes and varieties of data from diverse sources
+- Selecting the proper datasets for analysis
+- Choosing the right database engines for accuracy
+- Creating the right security policies
+
+ANSWER: Handling large volumes and varieties of data from diverse sources
+
+Explanation: This is a CORE challenge for ETL engineers because:
+
+Volume Challenges:
+- Processing terabytes or petabytes of data
+- Managing performance and scalability
+- Optimizing processing time
+- Resource management (memory, CPU, storage)
+
+Variety Challenges:
+- Different data formats (CSV, JSON, XML, Parquet, etc.)
+- Structured, semi-structured, and unstructured data
+- Various APIs and protocols
+- Legacy vs. modern systems
+
+Diverse Sources:
+- Multiple databases (SQL, NoSQL)
+- Cloud and on-premises systems
+- Real-time streams and batch data
+- Third-party APIs and web services
+
+Why others are NOT primary ETL challenges:
+✗ Selecting datasets - Data analyst responsibility
+✗ Choosing database engines - Architecture decision
+✗ Creating security policies - Security team responsibility
+
+Other ETL challenges: data quality/cleansing, error handling, 
+change data capture (CDC), performance optimization, data lineage
+
+=================================================================
+END OF SESSION - COMPLETE ASSESSMENT OUTPUT
+=================================================================
+
+ASSESSMENT SUMMARY:
+- 8 Algorithm & Data Structures Questions
+- 4 SQL Coding Challenges (MySQL)
+- 7 ETL & Data Engineering Knowledge Questions
+Total: 19 Questions/Challenges
+
+Topics Covered:
+✓ Algorithm Complexity Analysis (Big O notation)
+✓ Data Structures (Stack, Trees, Binary Search)
+✓ SQL Queries (Aggregations, Joins, CASE statements)
+✓ ETL Concepts and Best Practices
+✓ Data Warehousing Architecture
+✓ Data Engineering Tools and Challenges
+
+Date: February 7, 2026
+=================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

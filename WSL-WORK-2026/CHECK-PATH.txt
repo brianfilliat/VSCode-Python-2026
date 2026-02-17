@@ -1,0 +1,27 @@
+from pathlib import Path
+
+# Get the current working directory
+current_path = Path.cwd()
+print(f"Current directory: {current_path}")
+
+# Create a path object
+file_path = Path("D:/DOCU-2026/Python-vscode-2026/WSL-WORK-2026/example.txt")
+print(f"File path: {file_path}")
+
+# Check if path exists
+if file_path.exists():
+    print("Path exists")
+else:
+    print("Path does not exist")
+
+# Get parent directory
+parent_dir = file_path.parent
+print(f"Parent directory: {parent_dir}")
+
+# Get file name
+file_name = file_path.name
+print(f"File name: {file_name}")
+
+# Join paths
+new_path = current_path / "subfolder" / "file.txt"
+print(f"Joined path: {new_path}")

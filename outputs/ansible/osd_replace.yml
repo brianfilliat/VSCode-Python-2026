@@ -1,0 +1,134 @@
+---
+# Playbook: Ceph OSD Replacement (conservative, safety-first)
+# Description:
+# - Marks an OSD out, waits for recovery to finish, removes the OSD from CRUSH and the cluster,
+#   provisions a replacement OSD on a specified device (same or different host) using ceph-volume,
+#   and waits for rebalancing to complete.
+#
+# IMPORTANT SAFETY NOTES:
+# - This playbook defaults to dry-run mode. Set `dry_run=false` to perform changes.
+# - Set `confirm_replace=true` to acknowledge you understand the risks.
+# - Run from a host with Ceph CLI and appropriate privileges (group `ceph_admin` in inventory).
+
+- name: Ceph OSD replacement (safe)
+  hosts: ceph_admin
+  gather_facts: false
+  vars:
+    dry_run: true            # default: only show actions
+    confirm_replace: false   # must be set true to perform destructive actions
+    osd_id: ''               # ID of the OSD to replace (required)
+    osd_host: ''             # host where the OSD currently runs (optional)
+    replacement_host: ''     # host to provision replacement (defaults to osd_host)
+    replacement_device: ''   # block device path on replacement host (e.g. /dev/sdb) (required)
+    recovery_timeout: 3600   # seconds to wait for recovery/backfill
+
+  tasks:
+    - name: Validate required parameters
+      ansible.builtin.assert:
+        that:
+          - osd_id | length > 0
+          - replacement_device | length > 0
+        fail_msg: "You must provide 'osd_id' and 'replacement_device' variables."
+
+    - name: Safety check - confirm_replace must be true to proceed when dry_run=false
+      ansible.builtin.assert:
+        that:
+          - (dry_run | bool) or (confirm_replace | bool)
+        fail_msg: "Set confirm_replace=true to allow destructive actions when dry_run is false."
+
+    - name: Show intent (dry-run) - print planned actions
+      ansible.builtin.debug:
+        msg: |
+          Planned actions for OSD replacement:
+          - Mark osd.{{ osd_id }} out
+          - Wait for cluster recovery to complete (timeout {{ recovery_timeout }}s)
+          - Stop osd service on host
+          - Remove OSD from CRUSH and cluster
+          - Provision replacement OSD on {{ replacement_host | default(osd_host) }} using device {{ replacement_device }}
+      when: dry_run | bool
+
+    - name: Gather current cluster state
+      ansible.builtin.shell: ceph -s
+      register: ceph_status
+      changed_when: false
+
+    - name: Print cluster state
+      ansible.builtin.debug:
+        var: ceph_status.stdout_lines
+
+    - name: Find OSD details
+      ansible.builtin.shell: ceph osd find {{ osd_id }}
+      register: osd_find
+      failed_when: osd_find.rc != 0 and osd_find.rc is not none
+
+    - name: Show found OSD info
+      ansible.builtin.debug:
+        var: osd_find.stdout_lines
+
+    - name: Mark OSD out
+      ansible.builtin.shell: ceph osd out {{ osd_id }}
+      register: mark_out
+      when: not dry_run | bool
+
+    - name: Wait for PGs to reach active+clean
+      ansible.builtin.shell: |
+        end=$(( $(date +%s) + {{ recovery_timeout }} ));
+        while true; do
+          s=$(ceph -s | grep -E "(active+clean|HEALTH_OK)");
+          if [ -n "$s" ]; then exit 0; fi
+          if [ $(date +%s) -ge $end ]; then echo "timeout"; exit 2; fi
+          sleep 10
+        done
+      register: wait_recovery
+      retries: 1
+      delay: 0
+      when: not dry_run | bool
+
+    - name: Stop OSD service on host
+      ansible.builtin.delegate_to: "{{ osd_host }}"
+      ansible.builtin.systemd:
+        name: "ceph-osd@{{ osd_id }}"
+        state: stopped
+      when: not dry_run | bool and osd_host | length > 0
+
+    - name: Remove OSD from CRUSH
+      ansible.builtin.shell: |
+        ceph osd crush remove osd.{{ osd_id }} && ceph osd rm {{ osd_id }}
+      register: remove_osd
+      when: not dry_run | bool
+
+    - name: Provision replacement OSD with ceph-volume (LVM) on replacement host
+      ansible.builtin.delegate_to: "{{ replacement_host | default(osd_host) }}"
+      ansible.builtin.shell: |
+        ceph-volume lvm create --data {{ replacement_device }}
+      register: provision_osd
+      when: not dry_run | bool
+
+    - name: Start OSD services on replacement host (if applicable)
+      ansible.builtin.delegate_to: "{{ replacement_host | default(osd_host) }}"
+      ansible.builtin.shell: |
+        systemctl daemon-reload || true
+        systemctl enable --now 'ceph-osd@*' || true
+      register: start_services
+      when: not dry_run | bool
+
+    - name: Wait for cluster to rebalance to active+clean after replacement
+      ansible.builtin.shell: |
+        end=$(( $(date +%s) + {{ recovery_timeout }} ));
+        while true; do
+          s=$(ceph -s | grep -E "(active+clean|HEALTH_OK)");
+          if [ -n "$s" ]; then exit 0; fi
+          if [ $(date +%s) -ge $end ]; then echo "timeout"; exit 2; fi
+          sleep 10
+        done
+      register: final_recovery
+      when: not dry_run | bool
+
+    - name: Show results summary
+      ansible.builtin.debug:
+        msg: |
+          mark_out: {{ mark_out.stdout | default('skipped') }}
+          remove_osd: {{ remove_osd.stdout | default('skipped') }}
+          provision_osd: {{ provision_osd.stdout | default('skipped') }}
+          start_services: {{ start_services.stdout | default('skipped') }}
+          final_recovery: {{ final_recovery.stdout | default('skipped') }}

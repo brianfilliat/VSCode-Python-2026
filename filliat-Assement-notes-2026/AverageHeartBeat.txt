@@ -1,0 +1,169 @@
+Given the name of a marathon and a gender, 
+identify the fastest runner of that gender in the 
+marathon. Use HTTP GET requests to query a 
+marathon runner database at the URL 
+https:Øsonmock.hackerrank.com/api/marathon. 
+The results are paginated and can be accessed 
+by appending &page={num} to the query string, 
+where {num} is the page number. 
+To filter the query by specific fields, append 
+{fieldname}={value} to the URL. For example, 
+https:Øsonmock.hackerrank.com/api/marathon ? 
+sex=female&page=2 returns the second page of 
+the filtered list of female runners. 
+The query response from the API includes these 
+fields: 
+page: the current page 
+• per_page: the maximum results per page 
+• total: the total number of records 
+• total_pages: the total number of pages for 
+the query 
+
+• data: an array of JSON objects containing 
+runner information 
+Each object in the data field includes the 
+following: 
+• name: the name of the runner 
+• marathon_name: the name of the marathon 
+• sex: the sex of the marathon runner 
+avgheartbeat: the average heart rate of the 
+runner during the marathon 
+• other details not relevant to this question 
+For example, the record from 
+https://jsonmock.hackerrank.com/api/marathon 
+includes the following: 
+
+
+"name": "Gene Zboncak-Hansen" 
+"sex": "female" 
+"id": " 
+867bed8c-2b23-4e7e-aabc- 
+5747f67969f1" , 
+"age": 99, 
+"top_speed": 13.42, 
+"bottom_speed": 4 75 
+"average_speed 
+7.e1, 
+"avgheartbeat": 114 
+"distance run 
+18.e66, 
+" • Sunset Serenity 
+"marathon name . " 
+Marathon " 
+"country 
+": "Falkland Islands 
+(Malvinas)" , 
+"number_of_participants": 48, 
+"personal_best_time": 2914, 
+"stops _ taken": 5, 
+"position" : 4e 
+
+
+Return the average heart rate of the runners 
+meeting the criteria, rounded down to the 
+nearest integer. 
+Function Description 
+Complete the function averageHeartBeat in the 
+editor with the following parameter(s): 
+string marathon: the marathon name 
+string sex: the sex to filter the runners by 
+Returns 
+int: the average heart rate of the runners of 
+the given sex in the specified marathon 
+Note: Please review the header in the code stub 
+to see available libraries for API requests in the 
+selected language. Required libraries can be 
+imported to solve the question. Check our full 
+list of supported libraries at 
+https://www.hackerrank.com/environment. 
+
+
+v Input Format For Custom Testing 
+The first line contains a string, marathon. 
+The second line contains a string, sex. 
+v Sample Case O 
+Sample Input For Custom Testing 
+Cityscape Marathon 
+female 
+Sample Output 
+120 
+Explanation 
+The average heart rate of 25 female participants 
+in the Cityscape Marathon comes out to be 
+120.4, which, when rounded down, is 120. 
+v Sample Case 1 
+Sample Input For Custom Testing 
+Cityscape Marathon 
+male 
+
+Sample Case 1 
+Sample Input For Custom Testing 
+Cityscape Marathon 
+male 
+Sample Output 
+121 
+Explanation 
+The average heart rate of the 15 male 
+participants in the Cityscape Marathon is 121.73, 
+which when rounded down is 121. 
+
+
+
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+import requests
+import json
+import urllib.parse
+
+
+#
+#Complete the 'averageHeartBeat' function below.
+#The function is expected to return an INTEGER.
+#The function accepts following parameters:
+#1. STRING marathon
+#2. STRING sex
+#API URL: https://jsonmock.hackerrank.com/api/marathon?sex=<sex>
+# 
+
+def averageHeartBeat(marathon, sex):
+    # Write your code here
+    base_url = "https://jsonmock.hackerrank.com/api/marathon?marathon_name={urllib.parse.quote(marathon)}&sex={sex}"
+    response = requests.get(base_url)
+    data = response.json()
+    total_pages = data['total_pages']
+    heartbeats = []
+    for runner in data['data']:
+        heartbeats.append(runner['avgheartbeat'])
+    for page in range(2, total_pages + 1):
+        response = requests.get(f"{base_url}&page={page}")
+        data = response.json()
+        for runner in data['data']:
+            heartbeats.append(runner['avgheartbeat'])
+    if heartbeats:
+        avg = sum(heartbeats) / len(heartbeats)
+        return math.floor(avg)
+    else:
+        return 0
+
+if __name__ == '__main__':
+    data = sys.stdin.read().strip().split('\n')
+    marathon = data[0]
+    sex = data[1]
+    result = averageHeartBeat(marathon, sex)
+    print(result)
+
+
+
+
+
+
+
+
+
+
