@@ -2,7 +2,7 @@
 #
 #   Name: glacierRestoreObjects-rootOnly.ps1
 #   Author: Brian Filliat
-#   Company: CBTS
+#   Company: Microland
 #   Date: 4/17/2023
 #   Purpose: To allow the user to restore the contents of a folder in S3 and not restore any subfolders or their contents
 #

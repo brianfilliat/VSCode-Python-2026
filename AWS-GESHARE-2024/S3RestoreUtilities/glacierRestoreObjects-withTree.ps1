@@ -2,7 +2,7 @@
 #
 #   Name: glacierRestoreObjects-Folder.ps1
 #   Author: Brian Filliat
-#   Company: CBTS
+#   Company: Microland
 #   Date: 4/17/2023
 #   Purpose: To allow users to restore an entire folder from Glacier including all subfolders and files
 #
