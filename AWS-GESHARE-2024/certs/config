@@ -1,0 +1,17 @@
+[default]
+region = us-east-1
+output = json
+
+[profile saml]
+region = us-east-1
+output = json
+
+
+
+
+
+[profile gov-mfa]
+region = us-east-1
+output = json
+
+use_fips_endpoint = true

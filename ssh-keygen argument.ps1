@@ -37,3 +37,22 @@ ssh -T git@github.com -o StrictHostKeyChecking=no
 git remote remove ssh-origin 2>$null
 git remote add ssh-origin git@github.com:brianfilliat/VSCode-Python-2026.git 2>$null
 git push -f ssh-origin main
+
+
+
+
+# 1) Backup your current local main
+# backup
+git branch local-main-backup
+
+# fetch & merge allowing unrelated histories
+git fetch origin
+git merge origin/main --allow-unrelated-histories --no-edit
+
+# 3) If merge reports conflicts, resolve by preferring origin (remote) for all conflicted files:
+git diff --name-only --diff-filter=U
+git diff --name-only --diff-filter=U | ForEach-Object { git checkout --theirs -- $_; git add -- $_ }
+git commit -m "Resolve merge conflicts preferring origin/main"
+
+# 4) Push merged result with larger buffer
+git -c http.postBuffer=524288000 push -u origin main

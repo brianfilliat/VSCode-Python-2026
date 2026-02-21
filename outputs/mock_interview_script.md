@@ -1,3 +1,22 @@
+BairesDev®
+
+BairesDev
+Start with the basics, then build real skills step by step.
+
+• Programming and scripting, Python, Bash, PowerShell
+• Git and version control fundamentals
+• CI/CD pipelines, Jenkins, GitLab, CircleCI
+• Infrastructure as Code, Terraform and CloudFormation
+• Containers and orchestration, Docker and Kubernetes
+• Cloud platforms, AWS, Azure, GCP
+• Monitoring and logging, Prometheus, Grafana, ELK
+• Security and DevSecOps mindset
+• Networking, release strategies, incident management
+• Certifications and continuous learning
+
+
+
+
 # Mock Interview Script — Principal Storage/Kubernetes Engineer
 
 Interviewer: Quick intro (1 minute) — "Tell me about your most recent storage platform role and primary responsibilities."
