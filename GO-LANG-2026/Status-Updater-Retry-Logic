@@ -1,0 +1,84 @@
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/util/retry"
+)
+
+func main() {
+	// 1. Setup (Standard boilerplate)
+	kubeconfig := os.Getenv("HOME") + "/.kube/config"
+	config, _ := clientcmd.BuildConfigFromFlags("", kubeconfig)
+	clientset, _ := kubernetes.NewForConfig(config)
+
+	ctx := context.Background()
+	namespace := "default"
+	podName := "example-pod"
+
+	// 2. Use retry.RetryOnConflict to handle Optimistic Concurrency
+	// This function will re-run the closure if a 409 Conflict occurs.
+	err := retry.RetryOnConflict(retry.DefaultRetry, func() error {
+		// a) Always fetch the LATEST version of the object inside the retry loop
+		pod, err := clientset.CoreV1().Pods(namespace).Get(ctx, podName, metav1.GetOptions{})
+		if err != nil {
+			return err
+		}
+
+		// b) Modify the Status (Note: This assumes the status subresource is enabled)
+		pod.Status.Message = "Backup in progress"
+		pod.Status.Reason = "AutomationUpdate"
+
+		// c) Update the Status subresource
+		_, updateErr := clientset.CoreV1().Pods(namespace).UpdateStatus(ctx, pod, metav1.UpdateOptions{})
+		return updateErr
+	})
+
+	if err != nil {
+		fmt.Printf("Update failed after retries: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Println("Successfully updated Pod status with concurrency handling!")
+}
+
+/*
+Technical Deep Dive for the Interview
+
+1) Why UpdateStatus instead of Update?
+In Kubernetes, Update modifies the full object (including Spec).
+If a controller only reports observations, UpdateStatus is safer because it
+avoids accidentally overwriting user-defined Spec fields.
+It also enables tighter RBAC boundaries by granting status-only write access.
+
+2) The resourceVersion Mechanism
+Kubernetes uses an atomic compare-and-swap model.
+If your local copy is resourceVersion 100 and etcd is already at 101, the write
+is rejected with a conflict.
+With retry.RetryOnConflict, you re-fetch version 101, re-apply business logic,
+and submit again as a newer version (for example, 102).
+
+3) Conditions vs. Phases
+In enterprise platforms (for example CSI Storage and Longhorn integrations),
+teams avoid relying on a single status string.
+Instead they model Conditions, which include:
+- Type (for example Ready)
+- Status (True/False)
+- LastTransitionTime
+This gives a useful audit trail for why a resource is in its current state.
+
+Summary of the "Golang for K8s" Toolkit
+- Discovery and Cleanup: Find/delete resources based on metadata (time/status).
+- Observation: Use Watch APIs to react to real-time changes.
+- Reconciliation: Update state safely with optimistic concurrency + retries.
+
+Final Prep Step
+For Rancher (RKE) and CSI/Longhorn-focused roles, prepare examples for:
+- A Custom Resource Definition (CRD) you would build a controller around.
+- Terraform snippets used to provision and bootstrap an RKE cluster.
+*/
