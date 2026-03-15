@@ -175,14 +175,15 @@ kubectl get pods
 # List pods in all namespaces
 kubectl get pods -A
 
-# Get detailed pod information
-kubectl describe pod <pod-name>
-
+# Get detailed pod information   Kubernetes Cluster Component Explanations
+kubectl describe pod kube-apiserver-test-cluster-control-plane -n kube-system
+kubectl describe pod coredns-5d78c9869d-8jwz2 -n kube-system
 # View pod logs
-kubectl logs <pod-name>
+kubectl logs coredns-5d78c9869d-8jwz2 -n kube-system
 
 # Execute command in a pod
-kubectl exec -it <pod-name> -- /bin/bash
+kubectl exec -it  kube-apiserver-test-cluster-control-plane -- /bin/bash
+kubectl logs kube-apiserver-test-cluster-control-plane -n kube-system
 ```
 
 ### Services
@@ -249,12 +250,14 @@ Create the cluster:
 
 ```powershell
 # Build a Docker image
+docker info
 docker build -t my-app:latest .
-
+#View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/mc42adsyq4v36jwmpgmixa644
 # Load the image into Kind cluster
 .\kind.exe load docker-image my-app:latest --name test-cluster
+.\kind.exe load docker-image my-app:latest --name multi-node
 ```
-
+##   generate a minimal deployment YAML that uses my-app:latest with   ##  imagePullPolicy: Never for Kind local-image usage.
 ## Useful Resources
 
 - **Kind Documentation**: https://kind.sigs.k8s.io/
