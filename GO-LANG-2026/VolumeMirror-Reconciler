@@ -1,0 +1,89 @@
+/*
+
+Critical Interview Talking Points
+Idempotency: Notice how the function checks if the status is already Completed. If the Reconcile loop runs again (due to a cluster restart or unrelated update), it won't trigger the mirror operation twice. This is the most important rule of controllers.
+
+The Status Subresource: We use r.Status().Update(...) instead of r.Update(...). This ensures we are only writing to the status field and not accidentally modifying the user's desired Spec.
+
+Requeue vs. Exit: If an operation is still in progress (e.g., waiting for Longhorn to finish a snapshot), we would return ctrl.Result{RequeueAfter: time.Minute, nil} to tell Kubernetes to check back later.
+
+Error Handling: If we return an error, the controller-runtime will automatically perform an Exponential Backoff and try again later.
+
+Final Interview Checklist
+Since you are interviewing for a role that includes Infrastructure as Code (IaC) and Cloud Engineering (AWS/Azure/GCP):
+
+
+*/
+
+package controllers
+
+import (
+	"context"
+	"time"
+
+	"k8s.io/apimachinery/pkg/api/errors"
+	"k8s.io/apimachinery/pkg/runtime"
+	ctrl "sigs.k8s.io/controller-runtime"
+	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/controller-runtime/pkg/log"
+
+	storagev1alpha1 "github.com/example/api/v1alpha1"
+)
+
+// VolumeMirrorReconciler reconciles a VolumeMirror object
+type VolumeMirrorReconciler struct {
+	client.Client
+	Scheme *runtime.Scheme
+}
+
+func (r *VolumeMirrorReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+	logger := log.FromContext(ctx)
+
+	// 1. Fetch the VolumeMirror instance
+	var vMirror storagev1alpha1.VolumeMirror
+	if err := r.Get(ctx, req.NamespacedName, &vMirror); err != nil {
+		if errors.IsNotFound(err) {
+			// Object deleted; ignore (Finalizers handle cleanup if needed)
+			return ctrl.Result{}, nil
+		}
+		return ctrl.Result{}, err
+	}
+
+	// 2. Business Logic: Check if work is already done
+	if vMirror.Status.Phase == "Completed" {
+		logger.Info("Mirroring already completed", "name", vMirror.Name)
+		return ctrl.Result{}, nil
+	}
+
+	// 3. Simulate the Mirroring Operation
+	// In a real CSI/Longhorn scenario, this would call a Storage API
+	logger.Info("Starting volume mirror", "source", vMirror.Spec.SourceVolumeId, "target", vMirror.Spec.DestinationZone)
+
+	vMirror.Status.Phase = "Syncing"
+	if err := r.Status().Update(ctx, &vMirror); err != nil {
+		return ctrl.Result{}, err
+	}
+
+	// Simulating a delay for the storage operation
+	time.Sleep(2 * time.Second)
+
+	// 4. Update Status to reflect success
+	vMirror.Status.Phase = "Completed"
+	now := metav1.Now()
+	vMirror.Status.LastSyncedTime = &now
+
+	if err := r.Status().Update(ctx, &vMirror); err != nil {
+		logger.Error(err, "Failed to update VolumeMirror status")
+		return ctrl.Result{}, err
+	}
+
+	logger.Info("Successfully mirrored volume", "name", vMirror.Name)
+	return ctrl.Result{}, nil
+}
+
+// SetupWithManager sets up the controller with the Manager.
+func (r *VolumeMirrorReconciler) SetupWithManager(mgr ctrl.Manager) error {
+	return ctrl.NewControllerManagedBy(mgr).
+		For(&storagev1alpha1.VolumeMirror{}).
+		Complete(r)
+}

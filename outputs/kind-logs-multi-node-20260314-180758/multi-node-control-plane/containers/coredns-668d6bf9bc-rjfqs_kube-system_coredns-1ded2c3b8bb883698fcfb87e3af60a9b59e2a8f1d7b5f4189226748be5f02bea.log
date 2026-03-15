@@ -1,0 +1,14 @@
+2026-03-15T00:06:48.123978605Z stdout F .:53
+2026-03-15T00:06:48.126980254Z stdout F [INFO] plugin/reload: Running configuration SHA512 = 1b226df79860026c6a52e67daa10d7f0d57ec5b023288ec00c5e05f93523c894564e15b91770d3a07ae1cfbe861d15b37d4a0027e69c546ab112970993a3b03b
+2026-03-15T00:06:48.12716588Z stdout F CoreDNS-1.11.3
+2026-03-15T00:06:48.127404092Z stdout F linux/amd64, go1.21.11, a6338e9
+2026-03-15T00:07:02.715394839Z stdout F [WARNING] plugin/health: Local health request to "http://:8080/health" took more than 1s: 1.775331153s
+2026-03-15T00:07:08.611920164Z stdout F [WARNING] plugin/health: Local health request to "http://:8080/health" took more than 1s: 1.076982657s
+2026-03-15T00:07:14.432465063Z stdout F [WARNING] plugin/health: Local health request to "http://:8080/health" took more than 1s: 1.0547645s
+2026-03-15T00:07:25.696256684Z stdout F [WARNING] plugin/health: Local health request to "http://:8080/health" failed: Get "http://:8080/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+2026-03-15T00:07:26.292440289Z stdout F [WARNING] plugin/health: Local health request to "http://:8080/health" took more than 1s: 1.24303587s
+2026-03-15T00:07:39.06406015Z stdout F [WARNING] plugin/health: Local health request to "http://:8080/health" took more than 1s: 1.05426835s
+2026-03-15T00:07:42.697852689Z stdout F [WARNING] plugin/health: Local health request to "http://:8080/health" took more than 1s: 1.783216062s
+2026-03-15T00:08:08.782037778Z stdout F [WARNING] plugin/health: Local health request to "http://:8080/health" took more than 1s: 2.742686005s
+2026-03-15T00:08:12.966923374Z stdout F [WARNING] plugin/health: Local health request to "http://:8080/health" took more than 1s: 2.842265596s
+2026-03-15T00:08:18.192724014Z stdout F [WARNING] plugin/health: Local health request to "http://:8080/health" took more than 1s: 1.792421989s

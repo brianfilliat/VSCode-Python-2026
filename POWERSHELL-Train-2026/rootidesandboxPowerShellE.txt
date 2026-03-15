@@ -1,0 +1,217 @@
+D:\DOCU-2026\Python-vscode-2026\EmployeeManagement.psd1
+
+
+
+
+##PATH    /root/ide/sandbox/PowerShellEmployee/backend/Tests/sample_test_employee.ps1
+# sample_test_employee.ps1
+# Simple employee records manager for a small business
+# Stores records in a script-scoped array and provides CRUD + utilities
+
+# Initialization
+if (-not (Test-Path -Path Variable:script:employeeRecords)) {
+    $script:employeeRecords = @()
+}
+
+function New-EmployeeRecord {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true)] [string] $Name,
+        [Parameter(Mandatory=$true)] [string] $Position,
+        [Parameter(Mandatory=$true)] [string] $Department,
+        [Parameter(Mandatory=$true)] [decimal] $Salary
+    )
+
+    $employee = [PSCustomObject]@{
+        Name       = $Name
+        Position   = $Position
+        Department = $Department
+        Salary     = [decimal]$Salary
+    }
+
+    return $employee
+}
+
+function Add-EmployeeRecord {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true)] [string] $Name,
+        [Parameter(Mandatory=$true)] [string] $Position,
+        [Parameter(Mandatory=$true)] [string] $Department,
+        [Parameter(Mandatory=$true)] [decimal] $Salary
+    )
+
+    if (-not (Test-Path -Path Variable:script:employeeRecords)) { $script:employeeRecords = @() }
+
+    $newRecord = New-EmployeeRecord -Name $Name -Position $Position -Department $Department -Salary $Salary
+    $script:employeeRecords += $newRecord
+    return $newRecord
+}
+
+function Remove-EmployeeRecord {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true)] [string] $Name
+    )
+
+    if (-not (Test-Path -Path Variable:script:employeeRecords) -or $script:employeeRecords.Count -eq 0) {
+        Write-Verbose "No employee records to remove from."
+        return $null
+    }
+
+    $matches = $script:employeeRecords | Where-Object { $_.Name -ieq $Name }
+    if (-not $matches) {
+        return $null
+    }
+
+    foreach ($m in $matches) {
+        $script:employeeRecords = $script:employeeRecords | Where-Object { $_ -ne $m }
+    }
+
+    return $matches
+}
+
+function Edit-EmployeeRecord {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true, Position=0)] [string] $Name,
+        [Parameter(Mandatory=$false)] [string] $NewName,
+        [Parameter(Mandatory=$false)] [string] $NewPosition,
+        [Parameter(Mandatory=$false)] [string] $NewDepartment,
+        [Parameter(Mandatory=$false)] [decimal] $NewSalary
+    )
+
+    if (-not (Test-Path -Path Variable:script:employeeRecords) -or $script:employeeRecords.Count -eq 0) {
+        Write-Verbose "No employee records to edit."
+        return $null
+    }
+
+    $found = $script:employeeRecords | Where-Object { $_.Name -ieq $Name }
+    if (-not $found) { return $null }
+
+    $updated = @()
+    foreach ($record in $found) {
+        if ($PSBoundParameters.ContainsKey('NewName') -and $NewName) {
+            $record.Name = $NewName
+        }
+        if ($PSBoundParameters.ContainsKey('NewPosition') -and $NewPosition) {
+            $record.Position = $NewPosition
+        }
+        if ($PSBoundParameters.ContainsKey('NewDepartment') -and $NewDepartment) {
+            $record.Department = $NewDepartment
+        }
+        if ($PSBoundParameters.ContainsKey('NewSalary')) {
+            $record.Salary = [decimal]$NewSalary
+        }
+        $updated += $record
+    }
+
+    return $updated
+}
+
+function List-EmployeeRecords {
+    [CmdletBinding()]
+    param()
+
+    if (-not (Test-Path -Path Variable:script:employeeRecords)) { $script:employeeRecords = @() }
+
+    foreach ($e in $script:employeeRecords) {
+        [PSCustomObject]@{
+            Name       = $e.Name
+            Position   = $e.Position
+            Department = $e.Department
+            Salary     = $e.Salary
+        }
+    }
+}
+
+function Find-EmployeeRecord {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true)] [string] $Name
+    )
+
+    if (-not (Test-Path -Path Variable:script:employeeRecords) -or $script:employeeRecords.Count -eq 0) {
+        Write-Output "No employee records available."
+        return $null
+    }
+
+    $matches = $script:employeeRecords | Where-Object { $_.Name -like "*${Name}*" -or $_.Name -ieq $Name }
+    if ($matches) {
+        return $matches
+    }
+
+    Write-Output "Employee '$Name' not found."
+    return $null
+}
+
+function Clear-EmployeeRecords {
+    [CmdletBinding()]
+    param()
+
+    $script:employeeRecords = @()
+    return $true
+}
+
+function Get-AverageSalary {
+    [CmdletBinding()]
+    param()
+
+    if (-not (Test-Path -Path Variable:script:employeeRecords) -or $script:employeeRecords.Count -eq 0) {
+        return 0
+    }
+
+    $total = ($script:employeeRecords | Measure-Object -Property Salary -Sum).Sum
+    $count = $script:employeeRecords.Count
+    if ($count -eq 0) { return 0 }
+    return [decimal]($total / $count)
+}
+
+# End of sample_test_employee.ps1
+
+
+
+Cloud & Infrastructure as Code (IaC)
+Cloud Platforms: Amazon Web Services (AWS), Microsoft Azure, OpenStack
+AWS Core: EC2, VPC, IAM, S3, RDS, CloudWatch, Landing Zones
+IaC & Provisioning: Terraform, AWS CloudFormation, AWS CDK
+Configuration & Version Control: GitHub, Git, Software-Defined Storage (ViPR)
+
+Containers: AWS EKS (Kubernetes), ECS, Docker
+Virtualization: VMware ESX/vSphere, VPLEX, Solaris Zones/LDOMs
+Automation/Scripting: Python, PowerShell, Shell Programming (Bash)
+
+Primary Storage: Dell EMC PowerMax 8050, VMAX (AFA/2/3), DMX Series, Unity, CLARiiON, Symmetrix
+Data Protection: Data Domain VTL, IBM TS7650 ProtecTIER (Dedupe), IBM Tape Libraries (TS3500, TS4500)
+Replication & DR: EMC SRDF/A, TimeFinder, RecoverPoint, SnapView, MirrorView, SAN Copy, Open Replicator
+Path Management: EMC PowerPath, Veritas DMP, MPIO
+Storage Networking & Continuity
+Protocols: Fibre-Channel (FC), iSCSI, NFS, CIFS, MPFS
+Networking: SAN Security, Service Continuity Management, Storage Networking Optimization
+Management: EMC Unisphere, Solutions Enabler (SYMCLI), EMC Control Center
+
+Operating Systems: Red Hat & SUSE Linux, AIX, HP-UX, SUN Solaris, Windows Server
+Volume & File Systems: VxVM, LVM, VxFS, JFS, UFS
+Enterprise Platforms: Oracle eBusiness Suite (11i/R12), SAP, SQL Server, UDB/DB2, MS Exchange, SharePoint
+
+
+
+
+
+
+
+
+Strategic DevOps Alignment
+SDLC & Continuous Improvement: Use your "Analysis, Modeling, and Design" background to demonstrate a deep understanding of the Software Development Life Cycle (SDLC). Frame this as the foundation for modern CI/CD (Continuous Integration/Continuous Deployment) pipelines.
+Infrastructure & Networking: Leverage "Network Design and Analysis" to show your competency in underlying infrastructure. In DevOps, this translates to Infrastructure as Code (IaC) and managing cloud-native network configurations.
+Database Reliability: Your training in "Database Management Systems" provides the essential knowledge for Database Reliability Engineering, focusing on performance tuning, data integrity, and automated backups within a DevOps environment.
+Collaboration & IT Governance: The CU Denver program's emphasis on "IT Governance and Service Management" aligns with the cultural aspect of DevOps—bridging the gap between development and operations teams to streamline delivery. 
+
+Key Technical Skills (Legacy to Modern)
+MSIS Coursework (1998-2001) 	Relevant DevOps Capability
+System Strategy & Architecture	Designing scalable, resilient microservices architectures.
+Programming Fundamentals	Foundational logic for Python scripting used in automation and orchestration.
+Information Systems Security	Applying DevSecOps principles by integrating security into every stage of the pipeline.
+IT Project Management	Utilizing Agile/Scrum methodologies to manage sprint cycles and release schedules.
+Professional Summary Example
+"Master of Science in Information Systems graduate from the AACSB-accredited CU Denver Business School. Expert in bridging the gap between technical architecture and business strategy, with a core focus on optimizing the SDLC, managing complex database environments, and implementing secure, scalable network infrastructures in a DevOps-driven environment."

@@ -1,0 +1,78 @@
+2026-03-15T00:06:24.164127773Z stderr F I0315 00:06:24.160592       1 main.go:390] probe TCP address multi-node-control-plane:6443
+2026-03-15T00:06:24.281752658Z stderr F I0315 00:06:24.281448       1 main.go:109] connected to apiserver: https://multi-node-control-plane:6443
+2026-03-15T00:06:24.300265871Z stderr F I0315 00:06:24.289155       1 main.go:139] hostIP = 172.18.0.2
+2026-03-15T00:06:24.300300474Z stderr F podIP = 172.18.0.2
+2026-03-15T00:06:24.300308485Z stderr F I0315 00:06:24.290025       1 main.go:148] setting mtu 1500 for CNI 
+2026-03-15T00:06:24.300310632Z stderr F I0315 00:06:24.290064       1 main.go:178] kindnetd IP family: "ipv4"
+2026-03-15T00:06:24.300312399Z stderr F I0315 00:06:24.290146       1 main.go:182] noMask IPv4 subnets: [10.244.0.0/16]
+2026-03-15T00:06:28.730191009Z stderr F I0315 00:06:28.729299       1 controller.go:361] Starting controller kube-network-policies
+2026-03-15T00:06:28.730260842Z stderr F I0315 00:06:28.729428       1 controller.go:365] Waiting for informer caches to sync
+2026-03-15T00:06:28.730265342Z stderr F I0315 00:06:28.729584       1 shared_informer.go:313] Waiting for caches to sync for kube-network-policies
+2026-03-15T00:06:29.730681617Z stderr F I0315 00:06:29.730204       1 shared_informer.go:320] Caches are synced for kube-network-policies
+2026-03-15T00:06:29.730902765Z stderr F I0315 00:06:29.730288       1 metrics.go:61] Registering metrics
+2026-03-15T00:06:29.732276334Z stderr F I0315 00:06:29.731592       1 controller.go:401] Syncing nftables rules
+2026-03-15T00:06:29.733865062Z stderr F I0315 00:06:29.732110       1 controller.go:386] error reading nfqueue stats: open /proc/net/netfilter/nfnetlink_queue: no such file or directory
+2026-03-15T00:06:38.730499158Z stderr F I0315 00:06:38.729425       1 main.go:297] Handling node with IPs: map[172.18.0.2:{}]
+2026-03-15T00:06:38.730535374Z stderr F I0315 00:06:38.729662       1 main.go:301] handling current node
+2026-03-15T00:06:38.744246011Z stderr F I0315 00:06:38.740241       1 main.go:297] Handling node with IPs: map[172.18.0.4:{}]
+2026-03-15T00:06:38.744281707Z stderr F I0315 00:06:38.740276       1 main.go:324] Node multi-node-worker has CIDR [10.244.2.0/24] 
+2026-03-15T00:06:38.74428518Z stderr F I0315 00:06:38.741827       1 routes.go:62] Adding route {Ifindex: 0 Dst: 10.244.2.0/24 Src: <nil> Gw: 172.18.0.4 Flags: [] Table: 0 Realm: 0} 
+2026-03-15T00:06:38.744286899Z stderr F I0315 00:06:38.743027       1 main.go:297] Handling node with IPs: map[172.18.0.3:{}]
+2026-03-15T00:06:38.744288357Z stderr F I0315 00:06:38.743065       1 main.go:324] Node multi-node-worker2 has CIDR [10.244.1.0/24] 
+2026-03-15T00:06:38.744289829Z stderr F I0315 00:06:38.743284       1 routes.go:62] Adding route {Ifindex: 0 Dst: 10.244.1.0/24 Src: <nil> Gw: 172.18.0.3 Flags: [] Table: 0 Realm: 0} 
+2026-03-15T00:06:48.730667854Z stderr F I0315 00:06:48.729936       1 main.go:297] Handling node with IPs: map[172.18.0.2:{}]
+2026-03-15T00:06:48.733419189Z stderr F I0315 00:06:48.732329       1 main.go:301] handling current node
+2026-03-15T00:06:48.733526434Z stderr F I0315 00:06:48.732529       1 main.go:297] Handling node with IPs: map[172.18.0.4:{}]
+2026-03-15T00:06:48.733536169Z stderr F I0315 00:06:48.732736       1 main.go:324] Node multi-node-worker has CIDR [10.244.2.0/24] 
+2026-03-15T00:06:48.73393259Z stderr F I0315 00:06:48.733705       1 main.go:297] Handling node with IPs: map[172.18.0.3:{}]
+2026-03-15T00:06:48.733961394Z stderr F I0315 00:06:48.733915       1 main.go:324] Node multi-node-worker2 has CIDR [10.244.1.0/24] 
+2026-03-15T00:07:02.786699371Z stderr F I0315 00:07:02.730997       1 main.go:297] Handling node with IPs: map[172.18.0.2:{}]
+2026-03-15T00:07:02.849974326Z stderr F I0315 00:07:02.802095       1 main.go:301] handling current node
+2026-03-15T00:07:02.850101912Z stderr F I0315 00:07:02.803604       1 main.go:297] Handling node with IPs: map[172.18.0.4:{}]
+2026-03-15T00:07:02.850121612Z stderr F I0315 00:07:02.803731       1 main.go:324] Node multi-node-worker has CIDR [10.244.2.0/24] 
+2026-03-15T00:07:02.968566668Z stderr F I0315 00:07:02.965104       1 main.go:297] Handling node with IPs: map[172.18.0.3:{}]
+2026-03-15T00:07:03.058511512Z stderr F I0315 00:07:03.055005       1 main.go:324] Node multi-node-worker2 has CIDR [10.244.1.0/24] 
+2026-03-15T00:07:09.014676052Z stderr F I0315 00:07:08.967611       1 main.go:297] Handling node with IPs: map[172.18.0.2:{}]
+2026-03-15T00:07:09.028651738Z stderr F I0315 00:07:09.028222       1 main.go:301] handling current node
+2026-03-15T00:07:09.030744197Z stderr F I0315 00:07:09.030427       1 main.go:297] Handling node with IPs: map[172.18.0.4:{}]
+2026-03-15T00:07:09.037903229Z stderr F I0315 00:07:09.035356       1 main.go:324] Node multi-node-worker has CIDR [10.244.2.0/24] 
+2026-03-15T00:07:11.013828496Z stderr F I0315 00:07:10.655228       1 main.go:297] Handling node with IPs: map[172.18.0.3:{}]
+2026-03-15T00:07:11.020998584Z stderr F I0315 00:07:10.896146       1 main.go:324] Node multi-node-worker2 has CIDR [10.244.1.0/24] 
+2026-03-15T00:07:23.8592741Z stderr F I0315 00:07:22.339576       1 main.go:297] Handling node with IPs: map[172.18.0.2:{}]
+2026-03-15T00:07:24.042010341Z stderr F I0315 00:07:23.882848       1 main.go:301] handling current node
+2026-03-15T00:07:24.176068121Z stderr F I0315 00:07:24.101237       1 main.go:297] Handling node with IPs: map[172.18.0.4:{}]
+2026-03-15T00:07:24.176111876Z stderr F I0315 00:07:24.101864       1 main.go:324] Node multi-node-worker has CIDR [10.244.2.0/24] 
+2026-03-15T00:07:26.753982602Z stderr F I0315 00:07:26.382362       1 main.go:297] Handling node with IPs: map[172.18.0.3:{}]
+2026-03-15T00:07:26.754861733Z stderr F I0315 00:07:26.576615       1 main.go:324] Node multi-node-worker2 has CIDR [10.244.1.0/24] 
+2026-03-15T00:07:29.285339648Z stderr F I0315 00:07:28.630974       1 main.go:297] Handling node with IPs: map[172.18.0.2:{}]
+2026-03-15T00:07:29.286782337Z stderr F I0315 00:07:29.271339       1 main.go:301] handling current node
+2026-03-15T00:07:29.287496985Z stderr F I0315 00:07:29.276667       1 main.go:297] Handling node with IPs: map[172.18.0.4:{}]
+2026-03-15T00:07:29.287559424Z stderr F I0315 00:07:29.281979       1 main.go:324] Node multi-node-worker has CIDR [10.244.2.0/24] 
+2026-03-15T00:07:30.26416232Z stderr F I0315 00:07:30.252345       1 main.go:297] Handling node with IPs: map[172.18.0.3:{}]
+2026-03-15T00:07:30.264556248Z stderr F I0315 00:07:30.252479       1 main.go:324] Node multi-node-worker2 has CIDR [10.244.1.0/24] 
+2026-03-15T00:07:39.576385534Z stderr F I0315 00:07:39.560700       1 main.go:297] Handling node with IPs: map[172.18.0.2:{}]
+2026-03-15T00:07:39.588418872Z stderr F I0315 00:07:39.587742       1 main.go:301] handling current node
+2026-03-15T00:07:39.71144142Z stderr F I0315 00:07:39.711170       1 main.go:297] Handling node with IPs: map[172.18.0.4:{}]
+2026-03-15T00:07:39.723788412Z stderr F I0315 00:07:39.723491       1 main.go:324] Node multi-node-worker has CIDR [10.244.2.0/24] 
+2026-03-15T00:07:43.948100712Z stderr F I0315 00:07:43.944656       1 main.go:297] Handling node with IPs: map[172.18.0.3:{}]
+2026-03-15T00:07:44.132002489Z stderr F I0315 00:07:44.121969       1 main.go:324] Node multi-node-worker2 has CIDR [10.244.1.0/24] 
+2026-03-15T00:07:48.563143869Z stderr F I0315 00:07:48.557348       1 main.go:297] Handling node with IPs: map[172.18.0.2:{}]
+2026-03-15T00:07:48.56319284Z stderr F I0315 00:07:48.561590       1 main.go:301] handling current node
+2026-03-15T00:07:48.568700565Z stderr F I0315 00:07:48.563508       1 main.go:297] Handling node with IPs: map[172.18.0.4:{}]
+2026-03-15T00:07:48.568853082Z stderr F I0315 00:07:48.564343       1 main.go:324] Node multi-node-worker has CIDR [10.244.2.0/24] 
+2026-03-15T00:07:48.693646156Z stderr F I0315 00:07:48.688985       1 main.go:297] Handling node with IPs: map[172.18.0.3:{}]
+2026-03-15T00:07:48.707446046Z stderr F I0315 00:07:48.691043       1 main.go:324] Node multi-node-worker2 has CIDR [10.244.1.0/24] 
+2026-03-15T00:07:58.508710876Z stderr F I0315 00:07:58.493553       1 main.go:297] Handling node with IPs: map[172.18.0.3:{}]
+2026-03-15T00:07:58.511683411Z stderr F I0315 00:07:58.508559       1 main.go:324] Node multi-node-worker2 has CIDR [10.244.1.0/24] 
+2026-03-15T00:07:58.517436473Z stderr F I0315 00:07:58.515839       1 main.go:297] Handling node with IPs: map[172.18.0.2:{}]
+2026-03-15T00:07:58.517513382Z stderr F I0315 00:07:58.516050       1 main.go:301] handling current node
+2026-03-15T00:07:58.517517302Z stderr F I0315 00:07:58.516117       1 main.go:297] Handling node with IPs: map[172.18.0.4:{}]
+2026-03-15T00:07:58.517519815Z stderr F I0315 00:07:58.516154       1 main.go:324] Node multi-node-worker has CIDR [10.244.2.0/24] 
+2026-03-15T00:08:11.894783557Z stderr F I0315 00:08:09.728671       1 main.go:297] Handling node with IPs: map[172.18.0.2:{}]
+2026-03-15T00:08:11.895386324Z stderr F I0315 00:08:11.814211       1 main.go:301] handling current node
+2026-03-15T00:08:12.329698611Z stderr F I0315 00:08:12.276511       1 main.go:297] Handling node with IPs: map[172.18.0.4:{}]
+2026-03-15T00:08:12.993638056Z stderr F I0315 00:08:12.276861       1 main.go:324] Node multi-node-worker has CIDR [10.244.2.0/24] 
+2026-03-15T00:08:15.267127205Z stderr F I0315 00:08:14.606873       1 main.go:297] Handling node with IPs: map[172.18.0.3:{}]
+2026-03-15T00:08:15.267268165Z stderr F I0315 00:08:14.607152       1 main.go:324] Node multi-node-worker2 has CIDR [10.244.1.0/24] 
+2026-03-15T00:08:19.148866284Z stderr F I0315 00:08:18.492331       1 main.go:297] Handling node with IPs: map[172.18.0.2:{}]
+2026-03-15T00:08:20.869676423Z stderr F I0315 00:08:20.654068       1 main.go:301] handling current node

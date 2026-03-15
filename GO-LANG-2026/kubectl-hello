@@ -1,0 +1,18 @@
+# create a simple plugin in any language and name the resulting executable file
+# so that it begins with the prefix "kubectl-"
+cat ./kubectl-hello
+#!/bin/sh
+
+# this plugin prints the words "hello world"
+echo "hello world"
+With a plugin written, let's make it executable:
+
+chmod a+x ./kubectl-hello
+
+# and move it to a location in our PATH
+sudo mv ./kubectl-hello /usr/local/bin
+sudo chown root:root /usr/local/bin
+
+# You have now created and "installed" a kubectl plugin.
+# You can begin using this plugin by invoking it from kubectl as if it were a regular command
+kubectl hello

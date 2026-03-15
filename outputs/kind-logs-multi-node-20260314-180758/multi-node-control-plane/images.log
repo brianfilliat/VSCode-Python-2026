@@ -1,0 +1,1 @@
+time="2026-03-15T00:09:13Z" level=fatal msg="validate service connection: validate CRI v1 image API for endpoint \"unix:///run/containerd/containerd.sock\": rpc error: code = DeadlineExceeded desc = received context error while waiting for new LB policy update: context deadline exceeded"

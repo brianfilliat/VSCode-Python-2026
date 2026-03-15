@@ -1,0 +1,280 @@
+2026-03-15T00:05:06.835825383Z stderr F I0315 00:05:06.832732       1 serving.go:386] Generated self-signed cert in-memory
+2026-03-15T00:05:07.563469074Z stderr F I0315 00:05:07.562181       1 controllermanager.go:185] "Starting" version="v1.32.2"
+2026-03-15T00:05:07.563524365Z stderr F I0315 00:05:07.562247       1 controllermanager.go:187] "Golang settings" GOGC="" GOMAXPROCS="" GOTRACEBACK=""
+2026-03-15T00:05:07.615739247Z stderr F I0315 00:05:07.601818       1 dynamic_cafile_content.go:161] "Starting controller" name="request-header::/etc/kubernetes/pki/front-proxy-ca.crt"
+2026-03-15T00:05:07.623667837Z stderr F I0315 00:05:07.620501       1 secure_serving.go:213] Serving securely on 127.0.0.1:10257
+2026-03-15T00:05:07.623694923Z stderr F I0315 00:05:07.622116       1 tlsconfig.go:243] "Starting DynamicServingCertificateController"
+2026-03-15T00:05:07.62489152Z stderr F I0315 00:05:07.624468       1 leaderelection.go:257] attempting to acquire leader lease kube-system/kube-controller-manager...
+2026-03-15T00:05:07.627194642Z stderr F I0315 00:05:07.627006       1 dynamic_cafile_content.go:161] "Starting controller" name="client-ca-bundle::/etc/kubernetes/pki/ca.crt"
+2026-03-15T00:05:12.634015453Z stderr F E0315 00:05:12.627732       1 leaderelection.go:436] error retrieving resource lock kube-system/kube-controller-manager: Get "https://172.18.0.2:6443/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-controller-manager?timeout=5s": net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+2026-03-15T00:05:18.235652775Z stderr F E0315 00:05:18.229059       1 leaderelection.go:436] error retrieving resource lock kube-system/kube-controller-manager: leases.coordination.k8s.io "kube-controller-manager" is forbidden: User "system:kube-controller-manager" cannot get resource "leases" in API group "coordination.k8s.io" in the namespace "kube-system"
+2026-03-15T00:05:21.45936668Z stderr F I0315 00:05:21.458966       1 event.go:389] "Event occurred" object="kube-system/kube-controller-manager" fieldPath="" kind="Lease" apiVersion="coordination.k8s.io/v1" type="Normal" reason="LeaderElection" message="multi-node-control-plane_9f791ebe-dfa6-4d0c-91d9-f620ccaf9c7b became leader"
+2026-03-15T00:05:21.461697952Z stderr F I0315 00:05:21.460923       1 leaderelection.go:271] successfully acquired lease kube-system/kube-controller-manager
+2026-03-15T00:05:23.548035179Z stderr F I0315 00:05:23.547435       1 controllermanager.go:765] "Started controller" controller="serviceaccount-token-controller"
+2026-03-15T00:05:23.555974573Z stderr F I0315 00:05:23.553380       1 shared_informer.go:313] Waiting for caches to sync for tokens
+2026-03-15T00:05:23.657460141Z stderr F I0315 00:05:23.656016       1 shared_informer.go:320] Caches are synced for tokens
+2026-03-15T00:05:23.675787693Z stderr F I0315 00:05:23.668347       1 controllermanager.go:765] "Started controller" controller="ephemeral-volume-controller"
+2026-03-15T00:05:23.675862478Z stderr F I0315 00:05:23.672014       1 controller.go:173] "Starting ephemeral volume controller" logger="ephemeral-volume-controller"
+2026-03-15T00:05:23.675867509Z stderr F I0315 00:05:23.672081       1 shared_informer.go:313] Waiting for caches to sync for ephemeral
+2026-03-15T00:05:24.308790122Z stderr F I0315 00:05:24.308303       1 shared_informer.go:313] Waiting for caches to sync for validatingadmissionpolicy-status
+2026-03-15T00:05:24.308868829Z stderr F I0315 00:05:24.308397       1 controllermanager.go:765] "Started controller" controller="validatingadmissionpolicy-status-controller"
+2026-03-15T00:05:24.401692246Z stderr F I0315 00:05:24.401117       1 controllermanager.go:765] "Started controller" controller="garbage-collector-controller"
+2026-03-15T00:05:24.403131616Z stderr F I0315 00:05:24.401189       1 controllermanager.go:717] "Controller is disabled by a feature gate" controller="kube-apiserver-serving-clustertrustbundle-publisher-controller" requiredFeatureGates=["ClusterTrustBundle"]
+2026-03-15T00:05:24.406247602Z stderr F I0315 00:05:24.405838       1 garbagecollector.go:144] "Starting controller" logger="garbage-collector-controller" controller="garbagecollector"
+2026-03-15T00:05:24.40635204Z stderr F I0315 00:05:24.406133       1 shared_informer.go:313] Waiting for caches to sync for garbage collector
+2026-03-15T00:05:24.406434411Z stderr F I0315 00:05:24.406246       1 graph_builder.go:351] "Running" logger="garbage-collector-controller" component="GraphBuilder"
+2026-03-15T00:05:24.54815208Z stderr F W0315 00:05:24.547772       1 type.go:183] The watchlist request for nodes ended with an error, falling back to the standard LIST semantics, err = nodes is forbidden: User "system:serviceaccount:kube-system:node-controller" cannot watch resource "nodes" in API group "" at the cluster scope
+2026-03-15T00:05:24.578977213Z stderr F I0315 00:05:24.578060       1 range_allocator.go:112] "No Secondary Service CIDR provided. Skipping filtering out secondary service addresses" logger="node-ipam-controller"
+2026-03-15T00:05:24.579432808Z stderr F I0315 00:05:24.578441       1 controllermanager.go:765] "Started controller" controller="node-ipam-controller"
+2026-03-15T00:05:24.583541475Z stderr F I0315 00:05:24.582446       1 node_ipam_controller.go:141] "Starting ipam controller" logger="node-ipam-controller"
+2026-03-15T00:05:24.583589431Z stderr F I0315 00:05:24.582862       1 shared_informer.go:313] Waiting for caches to sync for node
+2026-03-15T00:05:24.671191359Z stderr F I0315 00:05:24.670786       1 controllermanager.go:765] "Started controller" controller="persistentvolume-protection-controller"
+2026-03-15T00:05:24.671385399Z stderr F I0315 00:05:24.670876       1 controllermanager.go:717] "Controller is disabled by a feature gate" controller="resourceclaim-controller" requiredFeatureGates=["DynamicResourceAllocation"]
+2026-03-15T00:05:24.675593842Z stderr F I0315 00:05:24.674280       1 pv_protection_controller.go:81] "Starting PV protection controller" logger="persistentvolume-protection-controller"
+2026-03-15T00:05:24.675649186Z stderr F I0315 00:05:24.674493       1 shared_informer.go:313] Waiting for caches to sync for PV protection
+2026-03-15T00:05:24.814109627Z stderr F I0315 00:05:24.813696       1 controllermanager.go:765] "Started controller" controller="disruption-controller"
+2026-03-15T00:05:24.822512429Z stderr F I0315 00:05:24.820899       1 disruption.go:452] "Sending events to api server." logger="disruption-controller"
+2026-03-15T00:05:24.824059329Z stderr F I0315 00:05:24.823280       1 disruption.go:463] "Starting disruption controller" logger="disruption-controller"
+2026-03-15T00:05:24.824110861Z stderr F I0315 00:05:24.823341       1 shared_informer.go:313] Waiting for caches to sync for disruption
+2026-03-15T00:05:24.899852979Z stderr F I0315 00:05:24.896487       1 controllermanager.go:765] "Started controller" controller="cronjob-controller"
+2026-03-15T00:05:24.906895678Z stderr F I0315 00:05:24.906248       1 cronjob_controllerv2.go:145] "Starting cronjob controller v2" logger="cronjob-controller"
+2026-03-15T00:05:24.906938836Z stderr F I0315 00:05:24.906656       1 shared_informer.go:313] Waiting for caches to sync for cronjob
+2026-03-15T00:05:24.950748316Z stderr F I0315 00:05:24.949154       1 controllermanager.go:765] "Started controller" controller="ttl-controller"
+2026-03-15T00:05:24.950840289Z stderr F I0315 00:05:24.949458       1 ttl_controller.go:127] "Starting TTL controller" logger="ttl-controller"
+2026-03-15T00:05:24.95084707Z stderr F I0315 00:05:24.949496       1 shared_informer.go:313] Waiting for caches to sync for TTL
+2026-03-15T00:05:25.008731063Z stderr F I0315 00:05:25.008355       1 controllermanager.go:765] "Started controller" controller="token-cleaner-controller"
+2026-03-15T00:05:25.008787507Z stderr F I0315 00:05:25.008408       1 controllermanager.go:723] "Skipping a cloud provider controller" controller="node-route-controller"
+2026-03-15T00:05:25.00958858Z stderr F I0315 00:05:25.009189       1 tokencleaner.go:117] "Starting token cleaner controller" logger="token-cleaner-controller"
+2026-03-15T00:05:25.009612522Z stderr F I0315 00:05:25.009268       1 shared_informer.go:313] Waiting for caches to sync for token_cleaner
+2026-03-15T00:05:25.009740507Z stderr F I0315 00:05:25.009292       1 shared_informer.go:320] Caches are synced for token_cleaner
+2026-03-15T00:05:25.050949639Z stderr F I0315 00:05:25.050453       1 controllermanager.go:765] "Started controller" controller="persistentvolume-attach-detach-controller"
+2026-03-15T00:05:25.056669632Z stderr F I0315 00:05:25.056119       1 attach_detach_controller.go:338] "Starting attach detach controller" logger="persistentvolume-attach-detach-controller"
+2026-03-15T00:05:25.056859097Z stderr F I0315 00:05:25.056544       1 shared_informer.go:313] Waiting for caches to sync for attach detach
+2026-03-15T00:05:25.084879482Z stderr F I0315 00:05:25.084518       1 controllermanager.go:765] "Started controller" controller="legacy-serviceaccount-token-cleaner-controller"
+2026-03-15T00:05:25.08563107Z stderr F I0315 00:05:25.085109       1 legacy_serviceaccount_token_cleaner.go:103] "Starting legacy service account token cleaner controller" logger="legacy-serviceaccount-token-cleaner-controller"
+2026-03-15T00:05:25.085675216Z stderr F I0315 00:05:25.085538       1 shared_informer.go:313] Waiting for caches to sync for legacy-service-account-token-cleaner
+2026-03-15T00:05:25.116703746Z stderr F I0315 00:05:25.116352       1 controllermanager.go:765] "Started controller" controller="endpointslice-mirroring-controller"
+2026-03-15T00:05:25.119808709Z stderr F I0315 00:05:25.119634       1 endpointslicemirroring_controller.go:227] "Starting EndpointSliceMirroring controller" logger="endpointslice-mirroring-controller"
+2026-03-15T00:05:25.120145945Z stderr F I0315 00:05:25.119980       1 shared_informer.go:313] Waiting for caches to sync for endpoint_slice_mirroring
+2026-03-15T00:05:25.152961776Z stderr F I0315 00:05:25.152548       1 controllermanager.go:765] "Started controller" controller="daemonset-controller"
+2026-03-15T00:05:25.157966107Z stderr F I0315 00:05:25.157648       1 daemon_controller.go:294] "Starting daemon sets controller" logger="daemonset-controller"
+2026-03-15T00:05:25.15834101Z stderr F I0315 00:05:25.158094       1 shared_informer.go:313] Waiting for caches to sync for daemon sets
+2026-03-15T00:05:25.164840392Z stderr F I0315 00:05:25.164598       1 controllermanager.go:765] "Started controller" controller="taint-eviction-controller"
+2026-03-15T00:05:25.165461843Z stderr F I0315 00:05:25.165148       1 taint_eviction.go:281] "Starting" logger="taint-eviction-controller" controller="taint-eviction-controller"
+2026-03-15T00:05:25.167356047Z stderr F I0315 00:05:25.166980       1 taint_eviction.go:287] "Sending events to api server" logger="taint-eviction-controller"
+2026-03-15T00:05:25.170420384Z stderr F I0315 00:05:25.170055       1 shared_informer.go:313] Waiting for caches to sync for taint-eviction-controller
+2026-03-15T00:05:25.178516097Z stderr F I0315 00:05:25.178205       1 node_lifecycle_controller.go:432] "Controller will reconcile labels" logger="node-lifecycle-controller"
+2026-03-15T00:05:25.180371296Z stderr F I0315 00:05:25.179224       1 controllermanager.go:765] "Started controller" controller="node-lifecycle-controller"
+2026-03-15T00:05:25.180415006Z stderr F I0315 00:05:25.179265       1 controllermanager.go:723] "Skipping a cloud provider controller" controller="service-lb-controller"
+2026-03-15T00:05:25.180418653Z stderr F I0315 00:05:25.179273       1 controllermanager.go:723] "Skipping a cloud provider controller" controller="cloud-node-lifecycle-controller"
+2026-03-15T00:05:25.180685213Z stderr F I0315 00:05:25.180564       1 node_lifecycle_controller.go:466] "Sending events to api server" logger="node-lifecycle-controller"
+2026-03-15T00:05:25.181350918Z stderr F I0315 00:05:25.181165       1 node_lifecycle_controller.go:477] "Starting node controller" logger="node-lifecycle-controller"
+2026-03-15T00:05:25.181403883Z stderr F I0315 00:05:25.181278       1 shared_informer.go:313] Waiting for caches to sync for taint
+2026-03-15T00:05:25.214406949Z stderr F I0315 00:05:25.214137       1 controllermanager.go:765] "Started controller" controller="root-ca-certificate-publisher-controller"
+2026-03-15T00:05:25.215246228Z stderr F I0315 00:05:25.214801       1 controllermanager.go:717] "Controller is disabled by a feature gate" controller="service-cidr-controller" requiredFeatureGates=["MultiCIDRServiceAllocator"]
+2026-03-15T00:05:25.215266512Z stderr F I0315 00:05:25.214682       1 publisher.go:107] "Starting root CA cert publisher controller" logger="root-ca-certificate-publisher-controller"
+2026-03-15T00:05:25.215269997Z stderr F I0315 00:05:25.214946       1 shared_informer.go:313] Waiting for caches to sync for crt configmap
+2026-03-15T00:05:25.303040477Z stderr F I0315 00:05:25.302613       1 controllermanager.go:765] "Started controller" controller="serviceaccount-controller"
+2026-03-15T00:05:25.303358231Z stderr F I0315 00:05:25.302947       1 serviceaccounts_controller.go:114] "Starting service account controller" logger="serviceaccount-controller"
+2026-03-15T00:05:25.303690094Z stderr F I0315 00:05:25.303286       1 shared_informer.go:313] Waiting for caches to sync for service account
+2026-03-15T00:05:25.514536846Z stderr F I0315 00:05:25.511328       1 cleaner.go:83] "Starting CSR cleaner controller" logger="certificatesigningrequest-cleaner-controller"
+2026-03-15T00:05:25.517006661Z stderr F I0315 00:05:25.516632       1 controllermanager.go:765] "Started controller" controller="certificatesigningrequest-cleaner-controller"
+2026-03-15T00:05:25.93188592Z stderr F I0315 00:05:25.928764       1 shared_informer.go:313] Waiting for caches to sync for bootstrap_signer
+2026-03-15T00:05:25.93191807Z stderr F I0315 00:05:25.925734       1 controllermanager.go:765] "Started controller" controller="bootstrap-signer-controller"
+2026-03-15T00:05:26.024933265Z stderr F I0315 00:05:26.024609       1 controllermanager.go:765] "Started controller" controller="persistentvolume-binder-controller"
+2026-03-15T00:05:26.030730977Z stderr F I0315 00:05:26.030267       1 pv_controller_base.go:308] "Starting persistent volume controller" logger="persistentvolume-binder-controller"
+2026-03-15T00:05:26.030785672Z stderr F I0315 00:05:26.030643       1 shared_informer.go:313] Waiting for caches to sync for persistent volume
+2026-03-15T00:05:26.078517857Z stderr F I0315 00:05:26.078246       1 controllermanager.go:765] "Started controller" controller="ttl-after-finished-controller"
+2026-03-15T00:05:26.079650123Z stderr F I0315 00:05:26.079320       1 ttlafterfinished_controller.go:112] "Starting TTL after finished controller" logger="ttl-after-finished-controller"
+2026-03-15T00:05:26.079777112Z stderr F I0315 00:05:26.079653       1 shared_informer.go:313] Waiting for caches to sync for TTL after finished
+2026-03-15T00:05:26.100087002Z stderr F I0315 00:05:26.099456       1 controllermanager.go:765] "Started controller" controller="pod-garbage-collector-controller"
+2026-03-15T00:05:26.106439323Z stderr F I0315 00:05:26.106215       1 certificate_controller.go:120] "Starting certificate controller" logger="certificatesigningrequest-signing-controller" name="csrsigning-kubelet-serving"
+2026-03-15T00:05:26.107036163Z stderr F I0315 00:05:26.106928       1 shared_informer.go:313] Waiting for caches to sync for certificate-csrsigning-kubelet-serving
+2026-03-15T00:05:26.107146598Z stderr F I0315 00:05:26.106774       1 dynamic_serving_content.go:135] "Starting controller" name="csr-controller::/etc/kubernetes/pki/ca.crt::/etc/kubernetes/pki/ca.key"
+2026-03-15T00:05:26.108674474Z stderr F I0315 00:05:26.108081       1 gc_controller.go:99] "Starting GC controller" logger="pod-garbage-collector-controller"
+2026-03-15T00:05:26.108704588Z stderr F I0315 00:05:26.108183       1 shared_informer.go:313] Waiting for caches to sync for GC
+2026-03-15T00:05:26.108708322Z stderr F I0315 00:05:26.108275       1 certificate_controller.go:120] "Starting certificate controller" logger="certificatesigningrequest-signing-controller" name="csrsigning-kubelet-client"
+2026-03-15T00:05:26.108710935Z stderr F I0315 00:05:26.108292       1 shared_informer.go:313] Waiting for caches to sync for certificate-csrsigning-kubelet-client
+2026-03-15T00:05:26.10873305Z stderr F I0315 00:05:26.108313       1 dynamic_serving_content.go:135] "Starting controller" name="csr-controller::/etc/kubernetes/pki/ca.crt::/etc/kubernetes/pki/ca.key"
+2026-03-15T00:05:26.108904872Z stderr F I0315 00:05:26.108819       1 certificate_controller.go:120] "Starting certificate controller" logger="certificatesigningrequest-signing-controller" name="csrsigning-kube-apiserver-client"
+2026-03-15T00:05:26.108983612Z stderr F I0315 00:05:26.108939       1 shared_informer.go:313] Waiting for caches to sync for certificate-csrsigning-kube-apiserver-client
+2026-03-15T00:05:26.109256861Z stderr F I0315 00:05:26.109116       1 dynamic_serving_content.go:135] "Starting controller" name="csr-controller::/etc/kubernetes/pki/ca.crt::/etc/kubernetes/pki/ca.key"
+2026-03-15T00:05:26.109268626Z stderr F I0315 00:05:26.109203       1 controllermanager.go:765] "Started controller" controller="certificatesigningrequest-signing-controller"
+2026-03-15T00:05:26.109450596Z stderr F I0315 00:05:26.109288       1 certificate_controller.go:120] "Starting certificate controller" logger="certificatesigningrequest-signing-controller" name="csrsigning-legacy-unknown"
+2026-03-15T00:05:26.109459427Z stderr F I0315 00:05:26.109383       1 shared_informer.go:313] Waiting for caches to sync for certificate-csrsigning-legacy-unknown
+2026-03-15T00:05:26.109461803Z stderr F I0315 00:05:26.109343       1 dynamic_serving_content.go:135] "Starting controller" name="csr-controller::/etc/kubernetes/pki/ca.crt::/etc/kubernetes/pki/ca.key"
+2026-03-15T00:05:26.359212404Z stderr F I0315 00:05:26.358944       1 controllermanager.go:765] "Started controller" controller="namespace-controller"
+2026-03-15T00:05:26.359731319Z stderr F I0315 00:05:26.359371       1 namespace_controller.go:202] "Starting namespace controller" logger="namespace-controller"
+2026-03-15T00:05:26.361949341Z stderr F I0315 00:05:26.361660       1 shared_informer.go:313] Waiting for caches to sync for namespace
+2026-03-15T00:05:26.485622526Z stderr F I0315 00:05:26.485425       1 controllermanager.go:765] "Started controller" controller="deployment-controller"
+2026-03-15T00:05:26.487012712Z stderr F I0315 00:05:26.486775       1 deployment_controller.go:173] "Starting controller" logger="deployment-controller" controller="deployment"
+2026-03-15T00:05:26.487035657Z stderr F I0315 00:05:26.486842       1 shared_informer.go:313] Waiting for caches to sync for deployment
+2026-03-15T00:05:26.783417294Z stderr F I0315 00:05:26.782905       1 controllermanager.go:765] "Started controller" controller="horizontal-pod-autoscaler-controller"
+2026-03-15T00:05:26.783869761Z stderr F I0315 00:05:26.783321       1 horizontal.go:201] "Starting HPA controller" logger="horizontal-pod-autoscaler-controller"
+2026-03-15T00:05:26.783968678Z stderr F I0315 00:05:26.783379       1 shared_informer.go:313] Waiting for caches to sync for HPA
+2026-03-15T00:05:26.95520294Z stderr F I0315 00:05:26.954387       1 controllermanager.go:765] "Started controller" controller="statefulset-controller"
+2026-03-15T00:05:27.013038869Z stderr F I0315 00:05:27.012711       1 stateful_set.go:166] "Starting stateful set controller" logger="statefulset-controller"
+2026-03-15T00:05:27.013089398Z stderr F I0315 00:05:27.012842       1 shared_informer.go:313] Waiting for caches to sync for stateful set
+2026-03-15T00:05:27.119358472Z stderr F I0315 00:05:27.118694       1 controllermanager.go:765] "Started controller" controller="persistentvolume-expander-controller"
+2026-03-15T00:05:27.12438328Z stderr F I0315 00:05:27.123984       1 controllermanager.go:717] "Controller is disabled by a feature gate" controller="volumeattributesclass-protection-controller" requiredFeatureGates=["VolumeAttributesClass"]
+2026-03-15T00:05:27.126663821Z stderr F I0315 00:05:27.125968       1 expand_controller.go:329] "Starting expand controller" logger="persistentvolume-expander-controller"
+2026-03-15T00:05:27.12671253Z stderr F I0315 00:05:27.126134       1 shared_informer.go:313] Waiting for caches to sync for expand
+2026-03-15T00:05:27.265257028Z stderr F I0315 00:05:27.260796       1 endpointslice_controller.go:281] "Starting endpoint slice controller" logger="endpointslice-controller"
+2026-03-15T00:05:27.265308821Z stderr F I0315 00:05:27.260984       1 shared_informer.go:313] Waiting for caches to sync for endpoint_slice
+2026-03-15T00:05:27.265331859Z stderr F I0315 00:05:27.261232       1 controllermanager.go:765] "Started controller" controller="endpointslice-controller"
+2026-03-15T00:05:28.020631259Z stderr F I0315 00:05:28.019827       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="endpointslices.discovery.k8s.io"
+2026-03-15T00:05:28.02091787Z stderr F I0315 00:05:28.020696       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="controllerrevisions.apps"
+2026-03-15T00:05:28.022392943Z stderr F I0315 00:05:28.020831       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="deployments.apps"
+2026-03-15T00:05:28.025866421Z stderr F I0315 00:05:28.025504       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="roles.rbac.authorization.k8s.io"
+2026-03-15T00:05:28.027179782Z stderr F I0315 00:05:28.026760       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="podtemplates"
+2026-03-15T00:05:28.027822543Z stderr F I0315 00:05:28.027437       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="limitranges"
+2026-03-15T00:05:28.028819108Z stderr F I0315 00:05:28.028356       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="rolebindings.rbac.authorization.k8s.io"
+2026-03-15T00:05:28.030711574Z stderr F I0315 00:05:28.030075       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="horizontalpodautoscalers.autoscaling"
+2026-03-15T00:05:28.034716998Z stderr F I0315 00:05:28.034120       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="cronjobs.batch"
+2026-03-15T00:05:28.037268819Z stderr F I0315 00:05:28.035962       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="jobs.batch"
+2026-03-15T00:05:28.038866131Z stderr F I0315 00:05:28.038547       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="ingresses.networking.k8s.io"
+2026-03-15T00:05:28.039443414Z stderr F I0315 00:05:28.039209       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="replicasets.apps"
+2026-03-15T00:05:28.043851361Z stderr F I0315 00:05:28.040108       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="serviceaccounts"
+2026-03-15T00:05:28.044511454Z stderr F I0315 00:05:28.044242       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="csistoragecapacities.storage.k8s.io"
+2026-03-15T00:05:28.045333232Z stderr F I0315 00:05:28.044992       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="endpoints"
+2026-03-15T00:05:28.057817784Z stderr F I0315 00:05:28.045657       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="daemonsets.apps"
+2026-03-15T00:05:28.067073845Z stderr F I0315 00:05:28.066735       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="networkpolicies.networking.k8s.io"
+2026-03-15T00:05:28.079890676Z stderr F I0315 00:05:28.067974       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="leases.coordination.k8s.io"
+2026-03-15T00:05:28.086659594Z stderr F I0315 00:05:28.081092       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="statefulsets.apps"
+2026-03-15T00:05:28.091268269Z stderr F I0315 00:05:28.085815       1 resource_quota_monitor.go:227] "QuotaMonitor created object count evaluator" logger="resourcequota-controller" resource="poddisruptionbudgets.policy"
+2026-03-15T00:05:28.099766639Z stderr F I0315 00:05:28.091871       1 resource_quota_controller.go:300] "Starting resource quota controller" logger="resourcequota-controller"
+2026-03-15T00:05:28.099839588Z stderr F I0315 00:05:28.092022       1 shared_informer.go:313] Waiting for caches to sync for resource quota
+2026-03-15T00:05:28.099847202Z stderr F I0315 00:05:28.092677       1 resource_quota_monitor.go:308] "QuotaMonitor running" logger="resourcequota-controller"
+2026-03-15T00:05:28.117102537Z stderr F I0315 00:05:28.108136       1 controllermanager.go:765] "Started controller" controller="resourcequota-controller"
+2026-03-15T00:05:28.406287442Z stderr F I0315 00:05:28.404924       1 controllermanager.go:765] "Started controller" controller="job-controller"
+2026-03-15T00:05:28.415440231Z stderr F I0315 00:05:28.415115       1 job_controller.go:243] "Starting job controller" logger="job-controller"
+2026-03-15T00:05:28.416429827Z stderr F I0315 00:05:28.415978       1 shared_informer.go:313] Waiting for caches to sync for job
+2026-03-15T00:05:28.572824436Z stderr F I0315 00:05:28.572483       1 controllermanager.go:765] "Started controller" controller="replicaset-controller"
+2026-03-15T00:05:28.573934792Z stderr F I0315 00:05:28.573528       1 replica_set.go:217] "Starting controller" logger="replicaset-controller" name="replicaset"
+2026-03-15T00:05:28.580256663Z stderr F I0315 00:05:28.579953       1 shared_informer.go:313] Waiting for caches to sync for ReplicaSet
+2026-03-15T00:05:28.622920721Z stderr F I0315 00:05:28.622146       1 controllermanager.go:765] "Started controller" controller="certificatesigningrequest-approving-controller"
+2026-03-15T00:05:28.625956522Z stderr F I0315 00:05:28.625242       1 certificate_controller.go:120] "Starting certificate controller" logger="certificatesigningrequest-approving-controller" name="csrapproving"
+2026-03-15T00:05:28.62600979Z stderr F I0315 00:05:28.625383       1 shared_informer.go:313] Waiting for caches to sync for certificate-csrapproving
+2026-03-15T00:05:28.743374026Z stderr F I0315 00:05:28.732751       1 clusterroleaggregation_controller.go:194] "Starting ClusterRoleAggregator controller" logger="clusterrole-aggregation-controller"
+2026-03-15T00:05:28.743562576Z stderr F I0315 00:05:28.732254       1 controllermanager.go:765] "Started controller" controller="clusterrole-aggregation-controller"
+2026-03-15T00:05:28.744388937Z stderr F I0315 00:05:28.737596       1 shared_informer.go:313] Waiting for caches to sync for ClusterRoleAggregator
+2026-03-15T00:05:28.77998656Z stderr F I0315 00:05:28.779754       1 controllermanager.go:765] "Started controller" controller="persistentvolumeclaim-protection-controller"
+2026-03-15T00:05:28.780941385Z stderr F I0315 00:05:28.780543       1 controllermanager.go:717] "Controller is disabled by a feature gate" controller="storageversion-garbage-collector-controller" requiredFeatureGates=["APIServerIdentity","StorageVersionAPI"]
+2026-03-15T00:05:28.781390531Z stderr F I0315 00:05:28.780433       1 pvc_protection_controller.go:168] "Starting PVC protection controller" logger="persistentvolumeclaim-protection-controller"
+2026-03-15T00:05:28.781813546Z stderr F I0315 00:05:28.781524       1 shared_informer.go:313] Waiting for caches to sync for PVC protection
+2026-03-15T00:05:28.81300959Z stderr F I0315 00:05:28.812668       1 controllermanager.go:765] "Started controller" controller="endpoints-controller"
+2026-03-15T00:05:28.81425343Z stderr F I0315 00:05:28.813740       1 endpoints_controller.go:182] "Starting endpoint controller" logger="endpoints-controller"
+2026-03-15T00:05:28.814335571Z stderr F I0315 00:05:28.814026       1 shared_informer.go:313] Waiting for caches to sync for endpoint
+2026-03-15T00:05:28.843740037Z stderr F I0315 00:05:28.839155       1 controllermanager.go:765] "Started controller" controller="replicationcontroller-controller"
+2026-03-15T00:05:28.843791008Z stderr F I0315 00:05:28.839259       1 controllermanager.go:743] "Warning: skipping controller" controller="storage-version-migrator-controller"
+2026-03-15T00:05:28.843796081Z stderr F I0315 00:05:28.839332       1 controllermanager.go:717] "Controller is disabled by a feature gate" controller="selinux-warning-controller" requiredFeatureGates=["SELinuxChangePolicy"]
+2026-03-15T00:05:28.843798042Z stderr F I0315 00:05:28.840866       1 replica_set.go:217] "Starting controller" logger="replicationcontroller-controller" name="replicationcontroller"
+2026-03-15T00:05:28.843800599Z stderr F I0315 00:05:28.840916       1 shared_informer.go:313] Waiting for caches to sync for ReplicationController
+2026-03-15T00:05:28.890332511Z stderr F I0315 00:05:28.890035       1 shared_informer.go:313] Waiting for caches to sync for resource quota
+2026-03-15T00:05:29.019150332Z stderr F I0315 00:05:29.018217       1 shared_informer.go:320] Caches are synced for crt configmap
+2026-03-15T00:05:29.030593887Z stderr F I0315 00:05:29.029344       1 shared_informer.go:320] Caches are synced for bootstrap_signer
+2026-03-15T00:05:29.120641757Z stderr F I0315 00:05:29.120305       1 shared_informer.go:313] Waiting for caches to sync for garbage collector
+2026-03-15T00:05:29.128622764Z stderr F I0315 00:05:29.127732       1 shared_informer.go:320] Caches are synced for cronjob
+2026-03-15T00:05:29.13395722Z stderr F I0315 00:05:29.133651       1 shared_informer.go:320] Caches are synced for expand
+2026-03-15T00:05:29.175565774Z stderr F I0315 00:05:29.175216       1 shared_informer.go:320] Caches are synced for PV protection
+2026-03-15T00:05:29.182944451Z stderr F I0315 00:05:29.180484       1 shared_informer.go:320] Caches are synced for TTL after finished
+2026-03-15T00:05:29.211975939Z stderr F I0315 00:05:29.211021       1 shared_informer.go:320] Caches are synced for certificate-csrsigning-legacy-unknown
+2026-03-15T00:05:29.252421037Z stderr F I0315 00:05:29.223965       1 shared_informer.go:320] Caches are synced for certificate-csrsigning-kube-apiserver-client
+2026-03-15T00:05:29.2526231Z stderr F I0315 00:05:29.224248       1 shared_informer.go:320] Caches are synced for certificate-csrsigning-kubelet-serving
+2026-03-15T00:05:29.25267899Z stderr F I0315 00:05:29.224320       1 shared_informer.go:320] Caches are synced for certificate-csrsigning-kubelet-client
+2026-03-15T00:05:29.252687336Z stderr F I0315 00:05:29.236319       1 shared_informer.go:320] Caches are synced for certificate-csrapproving
+2026-03-15T00:05:29.611885399Z stderr F I0315 00:05:29.611002       1 shared_informer.go:320] Caches are synced for validatingadmissionpolicy-status
+2026-03-15T00:05:29.631034116Z stderr F I0315 00:05:29.629158       1 shared_informer.go:320] Caches are synced for service account
+2026-03-15T00:05:29.849873878Z stderr F I0315 00:05:29.849230       1 shared_informer.go:320] Caches are synced for namespace
+2026-03-15T00:05:29.924451903Z stderr F I0315 00:05:29.920356       1 shared_informer.go:320] Caches are synced for GC
+2026-03-15T00:05:29.924522275Z stderr F I0315 00:05:29.921919       1 shared_informer.go:320] Caches are synced for stateful set
+2026-03-15T00:05:29.934799242Z stderr F I0315 00:05:29.934066       1 shared_informer.go:320] Caches are synced for TTL
+2026-03-15T00:05:29.946814718Z stderr F I0315 00:05:29.945604       1 shared_informer.go:320] Caches are synced for taint-eviction-controller
+2026-03-15T00:05:29.957183545Z stderr F I0315 00:05:29.956885       1 shared_informer.go:320] Caches are synced for persistent volume
+2026-03-15T00:05:29.970535707Z stderr F I0315 00:05:29.969950       1 shared_informer.go:320] Caches are synced for endpoint_slice
+2026-03-15T00:05:29.976684337Z stderr F I0315 00:05:29.973551       1 shared_informer.go:320] Caches are synced for node
+2026-03-15T00:05:30.046234557Z stderr F I0315 00:05:30.045688       1 shared_informer.go:320] Caches are synced for PVC protection
+2026-03-15T00:05:30.046622425Z stderr F I0315 00:05:30.045909       1 shared_informer.go:320] Caches are synced for ReplicationController
+2026-03-15T00:05:30.148554626Z stderr F I0315 00:05:30.148147       1 shared_informer.go:320] Caches are synced for taint
+2026-03-15T00:05:30.238320248Z stderr F I0315 00:05:30.237863       1 node_lifecycle_controller.go:1234] "Initializing eviction metric for zone" logger="node-lifecycle-controller" zone=""
+2026-03-15T00:05:30.251786353Z stderr F I0315 00:05:30.238201       1 shared_informer.go:320] Caches are synced for resource quota
+2026-03-15T00:05:30.253225396Z stderr F I0315 00:05:30.252921       1 shared_informer.go:320] Caches are synced for endpoint
+2026-03-15T00:05:30.266044151Z stderr F I0315 00:05:30.256010       1 shared_informer.go:320] Caches are synced for ReplicaSet
+2026-03-15T00:05:30.26617099Z stderr F I0315 00:05:30.257272       1 node_lifecycle_controller.go:886] "Missing timestamp for Node. Assuming now as a timestamp" logger="node-lifecycle-controller" node="multi-node-control-plane"
+2026-03-15T00:05:30.267271271Z stderr F I0315 00:05:30.265772       1 node_lifecycle_controller.go:1038] "Controller detected that all Nodes are not-Ready. Entering master disruption mode" logger="node-lifecycle-controller"
+2026-03-15T00:05:30.307897579Z stderr F I0315 00:05:30.306391       1 range_allocator.go:177] "Sending events to api server" logger="node-ipam-controller"
+2026-03-15T00:05:30.312095798Z stderr F I0315 00:05:30.310479       1 shared_informer.go:320] Caches are synced for ephemeral
+2026-03-15T00:05:30.315048064Z stderr F I0315 00:05:30.312698       1 shared_informer.go:320] Caches are synced for HPA
+2026-03-15T00:05:30.390680836Z stderr F I0315 00:05:30.390112       1 range_allocator.go:183] "Starting range CIDR allocator" logger="node-ipam-controller"
+2026-03-15T00:05:30.391563252Z stderr F I0315 00:05:30.391151       1 shared_informer.go:313] Waiting for caches to sync for cidrallocator
+2026-03-15T00:05:30.391946075Z stderr F I0315 00:05:30.391751       1 shared_informer.go:320] Caches are synced for cidrallocator
+2026-03-15T00:05:30.40230009Z stderr F I0315 00:05:30.369822       1 actual_state_of_world.go:541] "Failed to update statusUpdateNeeded field in actual state of world" logger="persistentvolume-attach-detach-controller" err="Failed to set statusUpdateNeeded to needed true, because nodeName=\"multi-node-control-plane\" does not exist"
+2026-03-15T00:05:30.410000367Z stderr F I0315 00:05:30.371835       1 shared_informer.go:320] Caches are synced for legacy-service-account-token-cleaner
+2026-03-15T00:05:30.458576131Z stderr F I0315 00:05:30.372589       1 shared_informer.go:320] Caches are synced for deployment
+2026-03-15T00:05:30.590334799Z stderr F I0315 00:05:30.374680       1 shared_informer.go:320] Caches are synced for resource quota
+2026-03-15T00:05:30.815140263Z stderr F I0315 00:05:30.374750       1 shared_informer.go:320] Caches are synced for job
+2026-03-15T00:05:31.050114743Z stderr F I0315 00:05:30.374764       1 shared_informer.go:320] Caches are synced for endpoint_slice_mirroring
+2026-03-15T00:05:31.280579117Z stderr F I0315 00:05:30.374781       1 shared_informer.go:320] Caches are synced for disruption
+2026-03-15T00:05:31.280694055Z stderr F I0315 00:05:30.375249       1 shared_informer.go:320] Caches are synced for attach detach
+2026-03-15T00:05:31.301963777Z stderr F I0315 00:05:30.375280       1 shared_informer.go:320] Caches are synced for daemon sets
+2026-03-15T00:05:31.877016225Z stderr F I0315 00:05:31.875425       1 shared_informer.go:320] Caches are synced for ClusterRoleAggregator
+2026-03-15T00:05:31.891359165Z stderr F I0315 00:05:31.885024       1 shared_informer.go:320] Caches are synced for garbage collector
+2026-03-15T00:05:31.935897541Z stderr F I0315 00:05:31.933345       1 shared_informer.go:320] Caches are synced for garbage collector
+2026-03-15T00:05:32.0608449Z stderr F I0315 00:05:31.936088       1 garbagecollector.go:154] "Garbage collector: all resource monitors have synced" logger="garbage-collector-controller"
+2026-03-15T00:05:32.106755657Z stderr F I0315 00:05:32.088046       1 garbagecollector.go:157] "Proceeding to collect garbage" logger="garbage-collector-controller"
+2026-03-15T00:05:35.809989963Z stderr F I0315 00:05:35.809511       1 range_allocator.go:428] "Set node PodCIDR" logger="node-ipam-controller" node="multi-node-control-plane" podCIDRs=["10.244.0.0/24"]
+2026-03-15T00:05:35.829599528Z stderr F I0315 00:05:35.828661       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-control-plane"
+2026-03-15T00:05:35.829746213Z stderr F I0315 00:05:35.829304       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-control-plane"
+2026-03-15T00:05:36.766667867Z stderr F I0315 00:05:36.765437       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-control-plane"
+2026-03-15T00:05:37.930122633Z stderr F I0315 00:05:37.928791       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-control-plane"
+2026-03-15T00:05:39.449245541Z stderr F I0315 00:05:39.446781       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="1.658940808s"
+2026-03-15T00:05:40.208856786Z stderr F I0315 00:05:40.201325       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="753.522817ms"
+2026-03-15T00:05:41.615214111Z stderr F I0315 00:05:41.614737       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="1.413254591s"
+2026-03-15T00:05:41.620795181Z stderr F I0315 00:05:41.617857       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="497.709µs"
+2026-03-15T00:05:50.879750506Z stderr F I0315 00:05:50.878756       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="local-path-storage/local-path-provisioner-7dc846544d" duration="379.207306ms"
+2026-03-15T00:05:51.052878252Z stderr F I0315 00:05:51.052200       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="local-path-storage/local-path-provisioner-7dc846544d" duration="173.147323ms"
+2026-03-15T00:05:51.070287233Z stderr F I0315 00:05:51.053565       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="local-path-storage/local-path-provisioner-7dc846544d" duration="807.501µs"
+2026-03-15T00:06:06.432873279Z stderr F I0315 00:06:06.386578       1 actual_state_of_world.go:541] "Failed to update statusUpdateNeeded field in actual state of world" logger="persistentvolume-attach-detach-controller" err="Failed to set statusUpdateNeeded to needed true, because nodeName=\"multi-node-worker2\" does not exist"
+2026-03-15T00:06:06.478761032Z stderr F I0315 00:06:06.476032       1 actual_state_of_world.go:541] "Failed to update statusUpdateNeeded field in actual state of world" logger="persistentvolume-attach-detach-controller" err="Failed to set statusUpdateNeeded to needed true, because nodeName=\"multi-node-worker\" does not exist"
+2026-03-15T00:06:06.552040341Z stderr F I0315 00:06:06.551637       1 range_allocator.go:428] "Set node PodCIDR" logger="node-ipam-controller" node="multi-node-worker" podCIDRs=["10.244.2.0/24"]
+2026-03-15T00:06:06.554617844Z stderr F I0315 00:06:06.554428       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker"
+2026-03-15T00:06:06.555377863Z stderr F I0315 00:06:06.555026       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker"
+2026-03-15T00:06:06.629742323Z stderr F I0315 00:06:06.628985       1 range_allocator.go:428] "Set node PodCIDR" logger="node-ipam-controller" node="multi-node-worker2" podCIDRs=["10.244.1.0/24"]
+2026-03-15T00:06:06.629790469Z stderr F I0315 00:06:06.629151       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker2"
+2026-03-15T00:06:06.629794822Z stderr F I0315 00:06:06.629280       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker2"
+2026-03-15T00:06:06.84302025Z stderr F I0315 00:06:06.840332       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker"
+2026-03-15T00:06:07.279855185Z stderr F I0315 00:06:07.279211       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker2"
+2026-03-15T00:06:07.463347027Z stderr F I0315 00:06:07.460338       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker2"
+2026-03-15T00:06:07.487420242Z stderr F I0315 00:06:07.481735       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker"
+2026-03-15T00:06:10.850185083Z stderr F I0315 00:06:10.846418       1 node_lifecycle_controller.go:886] "Missing timestamp for Node. Assuming now as a timestamp" logger="node-lifecycle-controller" node="multi-node-worker2"
+2026-03-15T00:06:10.91395683Z stderr F I0315 00:06:10.768612       1 node_lifecycle_controller.go:886] "Missing timestamp for Node. Assuming now as a timestamp" logger="node-lifecycle-controller" node="multi-node-worker"
+2026-03-15T00:06:17.211624447Z stderr F I0315 00:06:17.210861       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker2"
+2026-03-15T00:06:17.869737826Z stderr F I0315 00:06:17.860410       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker"
+2026-03-15T00:06:38.813194085Z stderr F I0315 00:06:38.812861       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-control-plane"
+2026-03-15T00:06:38.854711795Z stderr F I0315 00:06:38.854148       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-control-plane"
+2026-03-15T00:06:38.919066839Z stderr F I0315 00:06:38.918428       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="3.299447ms"
+2026-03-15T00:06:38.919436051Z stderr F I0315 00:06:38.918799       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="local-path-storage/local-path-provisioner-7dc846544d" duration="4.285594ms"
+2026-03-15T00:06:38.919462219Z stderr F I0315 00:06:38.919148       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="293.853µs"
+2026-03-15T00:06:38.965691954Z stderr F I0315 00:06:38.965341       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="110.201µs"
+2026-03-15T00:06:38.997364282Z stderr F I0315 00:06:38.997056       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="local-path-storage/local-path-provisioner-7dc846544d" duration="295.208µs"
+2026-03-15T00:06:39.035705416Z stderr F I0315 00:06:39.033311       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="93.547µs"
+2026-03-15T00:06:40.929109708Z stderr F I0315 00:06:40.927703       1 node_lifecycle_controller.go:1057] "Controller detected that some Nodes are Ready. Exiting master disruption mode" logger="node-lifecycle-controller"
+2026-03-15T00:06:45.56997041Z stderr F I0315 00:06:45.568185       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker"
+2026-03-15T00:06:45.60348367Z stderr F I0315 00:06:45.542751       1 topologycache.go:237] "Can't get CPU or zone information for node" logger="endpointslice-controller" node="multi-node-worker"
+2026-03-15T00:06:45.822239534Z stderr F I0315 00:06:45.814270       1 topologycache.go:237] "Can't get CPU or zone information for node" logger="endpointslice-controller" node="multi-node-worker2"
+2026-03-15T00:06:45.838342946Z stderr F I0315 00:06:45.835421       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker2"
+2026-03-15T00:06:45.940296214Z stderr F I0315 00:06:45.928263       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker"
+2026-03-15T00:06:46.123188535Z stderr F I0315 00:06:46.121599       1 range_allocator.go:247] "Successfully synced" logger="node-ipam-controller" key="multi-node-worker2"
+2026-03-15T00:06:48.367184594Z stderr F I0315 00:06:48.366486       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="281.578µs"
+2026-03-15T00:06:48.778927138Z stderr F I0315 00:06:48.778307       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="318.862487ms"
+2026-03-15T00:06:48.805015622Z stderr F I0315 00:06:48.801699       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="348.206µs"
+2026-03-15T00:06:49.479761251Z stderr F I0315 00:06:49.479370       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="local-path-storage/local-path-provisioner-7dc846544d" duration="107.448014ms"
+2026-03-15T00:06:49.492873487Z stderr F I0315 00:06:49.491344       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="local-path-storage/local-path-provisioner-7dc846544d" duration="2.096299ms"
+2026-03-15T00:06:50.707899508Z stderr F I0315 00:06:50.707706       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="957.939231ms"
+2026-03-15T00:06:50.723404088Z stderr F I0315 00:06:50.721124       1 replica_set.go:679] "Finished syncing" logger="replicaset-controller" kind="ReplicaSet" key="kube-system/coredns-668d6bf9bc" duration="11.241137ms"
+2026-03-15T00:07:03.58412945Z stderr F E0315 00:07:03.550191       1 leaderelection.go:429] Failed to update lock optimistically: Put "https://172.18.0.2:6443/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-controller-manager?timeout=5s": context deadline exceeded, falling back to slow path
+2026-03-15T00:07:12.487044443Z stderr F E0315 00:07:12.414517       1 leaderelection.go:429] Failed to update lock optimistically: Put "https://172.18.0.2:6443/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-controller-manager?timeout=5s": context deadline exceeded, falling back to slow path
+2026-03-15T00:07:27.231380833Z stderr F E0315 00:07:27.198590       1 leaderelection.go:429] Failed to update lock optimistically: Put "https://172.18.0.2:6443/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-controller-manager?timeout=5s": context deadline exceeded, falling back to slow path
+2026-03-15T00:07:28.528606836Z stderr F E0315 00:07:28.491312       1 leaderelection.go:436] error retrieving resource lock kube-system/kube-controller-manager: Get "https://172.18.0.2:6443/apis/coordination.k8s.io/v1/namespaces/kube-system/leases/kube-controller-manager?timeout=5s": context deadline exceeded
+2026-03-15T00:07:28.637090895Z stderr F I0315 00:07:28.636509       1 leaderelection.go:297] failed to renew lease kube-system/kube-controller-manager: context deadline exceeded
+2026-03-15T00:07:29.468773555Z stderr F E0315 00:07:29.467387       1 controllermanager.go:328] "leaderelection lost"
