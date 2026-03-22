@@ -1,0 +1,94 @@
+WSL Ubuntu 24 + GNOME + xRDP (VNC Backend) - Complete Start-to-Finish SOP
+
+PURPOSE
+This is the final repeatable procedure for Ubuntu 24.04 on WSL with xRDP + GNOME, using a direct TigerVNC backend and persistent systemd startup.
+
+ARCHITECTURE
+- Windows mstsc -> xrdp:3390
+- xrdp libvnc.so -> Xtigervnc:5901
+- GNOME desktop via gnome-session
+- Persistent service: xtigervnc-direct.service
+
+STEP 1 - VERIFY WSL
+PowerShell:
+wsl --list --verbose
+wsl -d Ubuntu-24.04 -- systemctl is-system-running
+
+STEP 2 - INSTALL PACKAGES
+Ubuntu:
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y xrdp xorgxrdp tigervnc-standalone-server ubuntu-desktop-minimal gnome-session dbus-x11 x11-xkb-utils
+
+STEP 3 - PREP USER SESSION
+echo 'gnome-session --session=ubuntu' > ~/.xsession
+chmod +x ~/.xsession
+[ -f ~/.xinitrc ] && mv ~/.xinitrc ~/.xinitrc.bak
+vncpasswd
+
+STEP 4 - CREATE STARTUP WRAPPER
+Create /usr/local/bin/start-vnc-gnome.sh using the script content from XRDP-QUICK-REFERENCE.md.
+chmod 755 /usr/local/bin/start-vnc-gnome.sh
+
+STEP 5 - CREATE PERSISTENT SERVICE
+Create /etc/systemd/system/xtigervnc-direct.service using the service content from XRDP-QUICK-REFERENCE.md.
+
+STEP 6 - CONFIGURE XRDP
+Use the sample from xrdp.ini.sample and apply it to /etc/xrdp/xrdp.ini.
+Keep only VNC backend entries and keep username/password fields as ask.
+
+STEP 7 - ENABLE/RESTART SERVICES
+sudo systemctl daemon-reload
+sudo systemctl enable xtigervnc-direct.service
+sudo systemctl enable xrdp xrdp-sesman
+sudo systemctl restart xtigervnc-direct.service
+sudo systemctl restart xrdp-sesman
+sudo systemctl restart xrdp
+
+STEP 8 - APPLY INPUT/UNLOCK FIX
+export XDG_RUNTIME_DIR=/run/user/1000
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+gsettings set org.gnome.desktop.screensaver lock-enabled false
+gsettings set org.gnome.desktop.lockdown disable-lock-screen true
+gsettings set org.gnome.desktop.session idle-delay 0
+
+STEP 9 - VALIDATE
+systemctl is-active xtigervnc-direct.service
+systemctl is-active xrdp
+systemctl is-active xrdp-sesman
+ss -ltnp | grep -E '3390|5901'
+pgrep -af 'start-vnc-gnome|Xtigervnc|gnome-session|gnome-shell'
+
+STEP 10 - CONNECT
+PowerShell:
+wsl -d Ubuntu-24.04 -- hostname -I
+mstsc.exe /v:<WSL_IP>:3390
+
+At xrdp login:
+- Session: VNC
+- Username: Ubuntu username
+- Password: Ubuntu account password
+
+KNOWN ISSUES AND FIXES
+1) Black screen after login:
+   Restart xtigervnc-direct, xrdp-sesman, xrdp and verify gnome-shell process.
+
+2) Password box appears but input/auth fails:
+   This is GNOME reauthentication channel failure, not xkbcomp keyboard compile failure.
+   Re-apply lock-disable gsettings in Step 8 and reconnect.
+
+3) vncserver wrapper errors with _XSERVTransSocketCreateListener:
+   Do not use vncserver wrapper; use xtigervnc-direct.service only.
+
+FULL RESET
+PowerShell:
+wsl --shutdown
+
+Ubuntu:
+sudo systemctl daemon-reload
+sudo systemctl restart xtigervnc-direct.service
+sudo systemctl restart xrdp-sesman
+sudo systemctl restart xrdp
+
+END STATE
+A working GNOME desktop through xrdp on WSL Ubuntu 24 with persistent startup and stable remote input behavior.
