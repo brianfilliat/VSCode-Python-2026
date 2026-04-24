@@ -2,6 +2,12 @@
 
 #### ACCESSING WSL FROM WINDOWS
 
+
+WSL Ubuntu 24 WSL
+xrdp.ini
+download  lib=libxrdp-vnc.so from https://www.xrdp.org/
+copy lib=libxrdp-vnc.so into /usr/lib64/xrdp/ ubuntu 24
+
 **Method 1: Default WSL Distribution**
 ```powershell
 PS D:\DOCU-2026\Python-vscode-2026\WSL-WORK-2026> WSL

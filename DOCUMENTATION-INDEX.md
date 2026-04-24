@@ -11,6 +11,7 @@
 |--------------|-----------|
 | **Project Overview** | [README.md](README.md) |
 | **Complete Documentation** | [ASSESSMENT-COMPLETE-DOCUMENTATION.md](ASSESSMENT-COMPLETE-DOCUMENTATION.md) |
+| **Terraform Install & Config** | [TERRAFORM-INSTALLATION-AND-CONFIGURATION.md](TERRAFORM-INSTALLATION-AND-CONFIGURATION.md) |
 | **SQL Solutions** | [MYSQL-DATA-2026/Data Engineer Coding Challenge.md](MYSQL-DATA-2026/Data%20Engineer%20Coding%20Challenge.md) |
 | **Python Challenge** | [outlier_detection_sales_revenue.ipynb](outlier_detection_sales_revenue.ipynb) |
 | **Latest Q&A Session (26 items)** | BairesDev4-Assessment4-SESSION4-OUTPUT-02-07-2026.txt |
@@ -25,6 +26,7 @@
 |------|---------|------|
 | **README.md** | Project overview, setup, getting started | Comprehensive |
 | **ASSESSMENT-COMPLETE-DOCUMENTATION.md** | Complete assessment documentation | Full Details |
+| **TERRAFORM-INSTALLATION-AND-CONFIGURATION.md** | Terraform install and configuration guide | Reference |
 | **DOCUMENTATION-INDEX.md** | This file - Quick reference | Quick Access |
 | **CodeCitations.md** | Code references and citations | Reference |
 

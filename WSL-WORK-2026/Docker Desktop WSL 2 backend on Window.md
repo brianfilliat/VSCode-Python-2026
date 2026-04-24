@@ -101,6 +101,59 @@ WSL is designed to facilitate interoperability between Windows and Linux environ
 
 For organizations concerned about security risks related to WSL and want stricter isolation and security controls, run Docker Desktop in Hyper-V mode instead of WSL 2. Alternatively, run your container workloads with [Enhanced Container Isolation](/enterprise/security/hardened-desktop/enhanced-container-isolation/) enabled.
 
+## Troubleshooting — WSL Integration Unexpectedly Stopped
+
+### Symptom
+
+Docker Desktop shows a recurring dialog:
+
+> WSL integration with distro 'Ubuntu-24.04' unexpectedly stopped. Do you want to restart it?
+
+Host log (`%LOCALAPPDATA%\Docker\log\host\monitor.log`) contains:
+
+```
+execvpe(/mnt/wsl/docker-desktop/docker-desktop-user-distro) failed: Permission denied
+```
+
+or
+
+```
+failed to read component versions: open /opt/docker-desktop/componentsVersion.json: no such file or directory
+getting settings from backend: dial unix /mnt/wsl/docker-desktop/shared-sockets/host-services/backend.sock: connect: no such file or directory
+```
+
+### Root cause
+
+The file `/mnt/wsl/docker-desktop/docker-desktop-user-distro` inside the distro is a zero-byte placeholder instead of the valid ELF binary. This happens when Docker Desktop restarts while the WSL distro is already running and the `docker-desktop` internal distro has not yet fully mounted the `tmpfs` at `/mnt/wsl`.
+
+### Recovery
+
+1. Quit Docker Desktop completely from the system tray.
+2. Wait for all Docker processes to exit:
+   ```powershell
+   Get-Process -Name 'com.docker.backend','Docker Desktop' -ErrorAction SilentlyContinue
+   ```
+3. Restart Docker Desktop from the Start menu and wait for the engine to finish starting (whale icon stops animating).
+4. Verify the helper binary was repopulated and the integration proxy is running:
+   ```powershell
+   wsl.exe -d Ubuntu-24.04 -u root -- bash -lc "file /mnt/wsl/docker-desktop/docker-desktop-user-distro"
+   # Expected: ELF 64-bit LSB pie executable
+   wsl.exe -d Ubuntu-24.04 -- docker version
+   ```
+
+### If recovery does not work after a restart
+
+Go to **Settings → Resources → WSL Integration**, toggle the `Ubuntu-24.04` integration off, apply, toggle it back on, and apply again. This forces Docker Desktop to re-register the distro agent cleanly.
+
+If the problem persists after a toggle, open an elevated PowerShell and run:
+
+```powershell
+wsl.exe --shutdown
+# Then restart Docker Desktop from the Start menu
+```
+
+Shutting down all WSL distros first ensures Docker Desktop can mount `/mnt/wsl/docker-desktop` before the user distro starts.
+
 ## Additional resources
 
 - [Explore best practices](/desktop/features/wsl/best-practices/)

@@ -1,0 +1,150 @@
+{
+  "runbooks": [
+    {
+      "id": "example-1",
+      "name": "Running Containers",
+      "description": "Show all running containers with key details. Uses Go template formatting.",
+      "commands": [
+        "docker ps --format table\\t{{.Names}}\\t{{.Image}}\\t{{.Status}}\\t{{.Ports}}"
+      ],
+      "tags": [
+        "monitoring"
+      ],
+      "categoryId": "cat-operations",
+      "createdAt": "2026-01-01T00:00:00Z",
+      "updatedAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "example-2",
+      "name": "Container Logs",
+      "description": "View recent logs for a container. Demonstrates variable options dropdown and container autocomplete.",
+      "commands": [
+        "docker logs --tail {{lines=100|50,100,500,1000}} {{container}}"
+      ],
+      "tags": [
+        "monitoring"
+      ],
+      "categoryId": "cat-operations",
+      "createdAt": "2026-01-01T00:00:00Z",
+      "updatedAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "example-3",
+      "name": "Container Shell",
+      "description": "Open an interactive shell in a running container. Uses option dropdown and container autocomplete.",
+      "commands": [
+        "docker exec -it {{container}} {{shell=/bin/sh|/bin/sh,/bin/bash,/bin/zsh}}"
+      ],
+      "tags": [
+        "debug"
+      ],
+      "categoryId": "cat-development",
+      "createdAt": "2026-01-01T00:00:00Z",
+      "updatedAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "example-4",
+      "name": "Image Inspector",
+      "description": "Inspect an image's metadata and layer history. Uses image autocomplete and multi-command.",
+      "commands": [
+        "docker inspect {{image}} --format {{.Id}}\\n{{.RepoTags}}\\nSize:\\t{{.Size}}",
+        "docker history {{image}}"
+      ],
+      "tags": [
+        "debug"
+      ],
+      "categoryId": "cat-development",
+      "createdAt": "2026-01-01T00:00:00Z",
+      "updatedAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "example-5",
+      "name": "Disk Usage Report",
+      "description": "Full breakdown of Docker disk usage across images, containers, and volumes.",
+      "commands": [
+        "docker system df",
+        "docker image ls",
+        "docker volume ls"
+      ],
+      "tags": [
+        "maintenance"
+      ],
+      "categoryId": "cat-maintenance",
+      "createdAt": "2026-01-01T00:00:00Z",
+      "updatedAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "example-6",
+      "name": "Quick Cleanup",
+      "description": "Remove stopped containers and dangling images to free disk space.",
+      "commands": [
+        "docker container prune -f",
+        "docker image prune -f"
+      ],
+      "tags": [
+        "maintenance",
+        "destructive"
+      ],
+      "categoryId": "cat-maintenance",
+      "createdAt": "2026-01-01T00:00:00Z",
+      "updatedAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "example-7",
+      "name": "Full Reset",
+      "description": "Remove ALL unused containers, networks, images, and volumes. Use with caution!",
+      "commands": [
+        "docker system prune -af --volumes"
+      ],
+      "tags": [
+        "maintenance",
+        "destructive"
+      ],
+      "categoryId": "cat-maintenance",
+      "createdAt": "2026-01-01T00:00:00Z",
+      "updatedAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "example-8",
+      "name": "Network Diagnostics",
+      "description": "Inspect a Docker network and its connected containers. Uses network autocomplete.",
+      "commands": [
+        "docker network ls",
+        "docker network inspect {{network}}"
+      ],
+      "tags": [
+        "monitoring"
+      ],
+      "categoryId": "cat-operations",
+      "createdAt": "2026-01-01T00:00:00Z",
+      "updatedAt": "2026-01-01T00:00:00Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat-operations",
+      "name": "Operations",
+      "color": "#1976d2",
+      "icon": "terminal",
+      "parentId": null,
+      "order": 0
+    },
+    {
+      "id": "cat-development",
+      "name": "Development",
+      "color": "#2e7d32",
+      "icon": "rocket",
+      "parentId": null,
+      "order": 1
+    },
+    {
+      "id": "cat-maintenance",
+      "name": "Maintenance",
+      "color": "#ed6c02",
+      "icon": "wrench",
+      "parentId": null,
+      "order": 2
+    }
+  ],
+  "globals": []
+}

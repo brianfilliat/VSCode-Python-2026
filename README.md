@@ -96,6 +96,8 @@ Working with sales data from an FMCG company to detect and replace outliers in t
 
 **See:** [PYTHON-SCRIPTS-GUIDE.md](PYTHON-SCRIPTS-GUIDE.md) for detailed usage instructions
 
+**Terraform Guide:** [TERRAFORM-INSTALLATION-AND-CONFIGURATION.md](TERRAFORM-INSTALLATION-AND-CONFIGURATION.md)
+
 ## 🛠️ Technical Stack
 
 **Programming Languages:**
