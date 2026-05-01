@@ -3,7 +3,7 @@ param(
     [ValidateSet("dev", "stage", "prod")]
     [string]$Environment = "dev",
 
-    [switch]$AutoApprove
+    [string]$OutFile = "tfplan"
 )
 
 Set-StrictMode -Version Latest
@@ -15,9 +15,4 @@ $varFile = Join-Path $environmentPath "terraform.tfvars"
 
 Set-Location $environmentPath
 
-if ($AutoApprove) {
-    terraform apply -var-file="$varFile" -auto-approve
-}
-else {
-    terraform apply -var-file="$varFile"
-}
+terraform plan -var-file="$varFile" -out="$OutFile"

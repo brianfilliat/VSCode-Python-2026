@@ -19,6 +19,8 @@ tools/
 bin/
 appx/
 policies/
+!terraform-project/policies/
+!terraform-project/policies/**
 *.pak
 *.exe
 *.dll
@@ -51,6 +53,20 @@ unins000.*
 # OS files
 .DS_Store
 Thumbs.db
+
+# Terraform generated files
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+terraform-project/outputs/
 
 # MySQL installer
 MySQLInstaller.yaml

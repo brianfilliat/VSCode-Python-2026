@@ -1,0 +1,16 @@
+import "tfplan/v2" as tfplan
+
+required_tags = ["environment", "managed_by"]
+
+all_resources = filter tfplan.resource_changes as _, rc {
+  rc.mode is "managed" and
+  rc.change.actions contains "create"
+}
+
+main = rule {
+  all all_resources as _, rc {
+    all required_tags as tag {
+      rc.change.after.tags contains tag
+    }
+  }
+}

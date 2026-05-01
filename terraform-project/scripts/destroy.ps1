@@ -16,8 +16,8 @@ $varFile = Join-Path $environmentPath "terraform.tfvars"
 Set-Location $environmentPath
 
 if ($AutoApprove) {
-    terraform apply -var-file="$varFile" -auto-approve
+    terraform destroy -var-file="$varFile" -auto-approve
 }
 else {
-    terraform apply -var-file="$varFile"
+    terraform destroy -var-file="$varFile"
 }

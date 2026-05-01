@@ -1,31 +1,72 @@
-# Terraform Project
+# Terraform Training Project
 
-Basic Terraform project configured with the HashiCorp `local` provider.
+This project is a layered Terraform training repo. It starts with a safe local-provider sample, then shows the same structure teams use for real cloud infrastructure:
 
-## Files
+- `environments/` contains deployable root modules for `dev`, `stage`, and `prod`.
+- `modules/` contains reusable building blocks called by environments.
+- `providers/` documents provider and backend ownership.
+- `policies/` contains policy-as-code examples for guardrails.
+- `scripts/` contains repeatable PowerShell workflows.
+- `docs/` contains training notes, best practices, and architecture guidance.
 
-- `main.tf` configures Terraform and the local provider.
-- `basic-sample.tf` defines variables, local values, Terraform resources, and outputs for the sample project.
-- `basic-sample-output.txt` is created by `local_file.basic_sample`.
-- `project-metadata.json` is created by `local_file.project_metadata` after `terraform apply`.
-- `modules/` is for reusable Terraform modules.
-- `providers/` is for provider-specific notes or future provider configuration.
-- `scripts/` contains helper scripts for common Terraform commands.
+The environment examples use the HashiCorp `local` provider so students can run Terraform without creating cloud resources or spending money.
 
-## Common Commands
+## Project Structure
+
+```text
+terraform-project/
+  environments/
+    dev/
+    stage/
+    prod/
+  modules/
+    local-project/
+  policies/
+    opa/
+    sentinel/
+  providers/
+  scripts/
+  docs/
+  outputs/
+```
+
+## Quick Start
+
+Run a complete training workflow from the project root:
 
 ```powershell
+.\scripts\init.ps1 -Environment dev
+.\scripts\validate.ps1 -Environment dev
+.\scripts\plan.ps1 -Environment dev
+.\scripts\apply.ps1 -Environment dev
+```
+
+To clean up generated local files:
+
+```powershell
+.\scripts\destroy.ps1 -Environment dev
+```
+
+## Manual Workflow
+
+```powershell
+cd .\environments\dev
 terraform init
 terraform fmt -recursive
 terraform validate
-terraform plan
-terraform apply
+terraform plan -var-file="terraform.tfvars"
+terraform apply -var-file="terraform.tfvars"
 ```
 
-You can also run the helper scripts:
+## Training Path
 
-```powershell
-.\scripts\init.ps1
-.\scripts\validate.ps1
-.\scripts\apply.ps1
-```
+1. Read [docs/architecture.md](docs/architecture.md) to understand the layers.
+2. Run `dev` with the scripts.
+3. Compare `dev`, `stage`, and `prod` variable files.
+4. Open [modules/local-project](modules/local-project) and trace inputs to outputs.
+5. Review [docs/best-practices.md](docs/best-practices.md).
+6. Review [policies/README.md](policies/README.md) to understand policy guardrails.
+
+## Existing Root Sample
+
+The root-level `main.tf` and `basic-sample.tf` are kept as a beginner-friendly single-folder example. The layered environment folders are the recommended structure for team training and future projects.
