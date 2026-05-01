@@ -1,68 +1,45 @@
-import torch
-print(torch.__file__)
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'hourglassSum' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts 2D_INTEGER_ARRAY arr as parameter.
+#
+
+def hourglassSum(arr):
+    # Write your code here
+    max_sum = -63
+
+    for row in range(4):
+        for col in range(4):
+            current_sum = (
+                arr[row][col] + arr[row][col + 1] + arr[row][col + 2]
+                + arr[row + 1][col + 1]
+                + arr[row + 2][col] + arr[row + 2][col + 1] + arr[row + 2][col + 2]
+            )
+
+            max_sum = max(max_sum, current_sum)
+
+    return max_sum
 
 
+if __name__ == '__main__':
+    fptr = open(os.environ['D:\DOCU-2026\Python-vscode-2026'], 'w')
 
-person_info = {
-    "name": "Bob",
-    "age": 25,
-    "city": "London"
-}
+    arr = []
 
-print(f"Person's name: {person_info["name"]}")
-# Adding a new key-value pair
-person_info["email"] = "bob@example.com"
-print(f"Person info after adding email: {person_info}")
+    for _ in range(6):
+        arr.append(list(map(int, input().rstrip().split())))
 
-# Modifying a value
-person_info["age"] = 26
-print(f"Person info after updating age: {person_info}")
+    result = hourglassSum(arr)
 
-# Deleting a key-value pair
-del person_info["city"]
-print(f"Person info after deleting city: {person_info}")
+    fptr.write(str(result) + '\n')
 
-# mypy: allow-untyped-defs
-import torch
-
-class StaticForLoop(torch.nn.Module):
-    """
-    A for loop with constant number of iterations should be unrolled in the exported graph.
-    """
-
-    def forward(self, x):
-        # constant
-        ret = [i + x for i in range(10)]
-        return ret
-
-example_args = (torch.randn(3, 2),)
-tags = {"python.control-flow"}
-model = StaticForLoop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    fptr.close()
