@@ -3,5 +3,10 @@
         {
             "path": "."
         }
-    ]
+    ],
+    "settings": {
+        "kiroAgent.trustedCommands": [
+            "D:\\DOCU-2026\\Python-vscode-2026"
+        ]
+    }
 }
