@@ -1,0 +1,65 @@
+# Installing cephadm on EL9 Systems (RHEL 9, CentOS Stream 9, AlmaLinux 9, Rocky Linux 9)
+
+This guide outlines the steps to install `cephadm` on an Enterprise Linux 9 (EL9) based system. `cephadm` is the recommended tool for deploying and managing Ceph clusters.
+
+**Note:** The current environment is Ubuntu, so direct execution of these commands is not possible. These instructions are provided for an EL9 system.
+
+## Prerequisites
+
+Before proceeding, ensure your EL9 system meets the following requirements:
+
+*   **Root or sudo access:** You will need administrative privileges to install packages and configure system settings.
+*   **Internet connectivity:** The system must be able to access the Ceph repositories to download necessary packages.
+*   **SSH access:** `cephadm` uses SSH to communicate with cluster nodes. Ensure SSH is configured and passwordless SSH is set up between the bootstrap node and all other nodes in your Ceph cluster.
+*   **Firewall configuration:** Appropriate firewall rules must be in place to allow Ceph components to communicate.
+
+## Installation Steps
+
+Follow these steps on your designated bootstrap node to install `cephadm`:
+
+1.  **Download the `cephadm` script:**
+
+    The `cephadm` script can be downloaded directly from the official Ceph download server. It is recommended to download the script for the specific Ceph release you intend to use (e.g., `reef`, `quincy`, etc.). For this example, we will use the `reef` release, which is a stable and widely used version.
+
+    ```bash
+    curl --silent --remote-name --location https://download.ceph.com/rpm-reef/el9/noarch/cephadm
+    ```
+
+    *Explanation:* This command uses `curl` to download the `cephadm` script. 
+    *   `--silent`: Suppresses the progress meter and error messages.
+    *   `--remote-name`: Uses the remote file name for the local file name.
+    *   `--location`: Follows HTTP redirects.
+
+2.  **Make the `cephadm` script executable:**
+
+    After downloading, the script needs executable permissions.
+
+    ```bash
+    chmod +x cephadm
+    ```
+
+    *Explanation:* The `chmod +x` command grants execute permissions to the `cephadm` script, allowing it to be run as a program.
+
+3.  **Install `cephadm` dependencies and bootstrap the cluster:**
+
+    Once the script is executable, you can use it to install necessary dependencies and bootstrap your Ceph cluster. The bootstrap process will set up a minimal Ceph cluster on the current host, including a monitor and manager daemon.
+
+    ```bash
+    sudo ./cephadm install
+    sudo ./cephadm bootstrap --mon-ip <your_mon_ip>
+    ```
+
+    *Explanation:*
+    *   `sudo ./cephadm install`: This command installs the required packages and dependencies for `cephadm` on your system.
+    *   `sudo ./cephadm bootstrap --mon-ip <your_mon_ip>`: This command bootstraps a new Ceph cluster. Replace `<your_mon_ip>` with the IP address of the host where you are running the bootstrap command. This IP address will be used by other Ceph daemons to connect to the monitor.
+
+    After successful bootstrapping, `cephadm` will provide instructions on how to access the Ceph cluster, including the location of the Ceph configuration file (`ceph.conf`) and keyring (`ceph.client.admin.keyring`).
+
+## Next Steps
+
+After bootstrapping, you can proceed with adding more hosts, OSDs (Object Storage Daemons), and other Ceph services to expand your cluster using `cephadm` commands.
+
+## References
+
+1.  [Ceph Documentation: Using Cephadm to Deploy a New Ceph Cluster](https://docs.ceph.com/en/latest/cephadm/install/)
+2.  [Ceph Documentation: Get Packages](https://docs.ceph.com/en/reef/install/get-packages/)
