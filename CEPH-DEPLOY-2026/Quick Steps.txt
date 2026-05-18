@@ -1,0 +1,39 @@
+# Quick Steps
+**Date:** May 18, 2026   steps for deploying and configuring your Ceph storage cluster and provide a simplified guide for you.
+
+1. Install cephadm repo and bootstrap first node
+2. Copy SSH public key to all nodes
+Add nodes to the cluster
+List available devices on all nodes
+Add all available disks as OSDs
+Create rack buckets (Rack-01, Rack-02)
+Move racks under root default
+Assign hosts to racks
+Export and edit CRUSH map (change type host → type rack)
+Recompile and inject new CRUSH map
+Create a pool
+Initialize pool for RBD
+Set replication size and min_size
+Create RBD image on pool
+Create auth keyring for client
+Copy keyring and ceph.conf to client machine
+Install ceph-common on client
+Map the RBD image
+Create filesystem on mapped device
+Mount and write data
+---
+
+## 1. Bootstrap First Node
+
+The file covers all 10 steps:
+
+Bootstrap first node
+Add nodes to cluster
+Add OSDs (disks)
+Configure rack failure domain
+Update CRUSH map for rack-level replication
+Create a pool
+Create an RBD image
+Create client auth keyring
+Mount RBD image on client
+Verify cluster health

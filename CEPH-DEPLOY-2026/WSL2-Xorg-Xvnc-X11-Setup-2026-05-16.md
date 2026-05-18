@@ -1,4 +1,13 @@
-# WSL2 — Xorg / Xvnc / X11 Remote Desktop Setup Guide
+# # In WSL terminal
+pkill -f Xvnc
+pkill -f xfce4-session
+rm -f /tmp/.X10-lock
+rm -f /run/xrdp/xrdp_display_10
+sudo systemctl restart xrdp xrdp-sesman
+
+
+
+## WSL2 — Xorg / Xvnc / X11 Remote Desktop Setup Guide
 **Date:** May 16, 2026  
 **Host:** ASUSVIVO2026 | RHEL 9 WSL2  
 **Kernel:** Linux 6.6.114.1-microsoft-standard-WSL2  
@@ -258,6 +267,13 @@ Xlib: extension "DPMS" missing on display ":10.0"
 ## Troubleshooting Commands
 
 ```bash
+# In WSL terminal
+pkill -f Xvnc
+pkill -f xfce4-session
+rm -f /tmp/.X10-lock
+rm -f /run/xrdp/xrdp_display_10
+sudo systemctl restart xrdp xrdp-sesman
+
 # Check xrdp service status
 sudo systemctl status xrdp xrdp-sesman
 
@@ -278,6 +294,14 @@ ps aux | grep -E 'xfce|xrdp|Xvnc' | grep -v grep
 
 # Restart xrdp
 sudo systemctl restart xrdp xrdp-sesman
+wsl -d RHEL9 -e bash -c "sudo pkill -f Xvnc; sudo pkill -f xfce4-session; sudo systemctl restart xrdp xrdp-sesman; echo 'Done'"
+wsl -d RHEL9 -e bash -c "sudo systemctl restart xrdp xrdp-sesman 2>&1; echo done"
+172.21.204.100:3389
+
+#
+## Type 172.21.204.100:3389 — do not use mstsc /admin or mstsc /console.
+
+
 ```
 
 ---
@@ -343,3 +367,11 @@ And sesman log shows:
 ---
 
 *Date: May 16, 2026 | Host: ASUSVIVO2026 | RHEL 9 WSL2 | xrdp + Xvnc + XFCE4*
+
+
+# In WSL terminal
+pkill -f Xvnc
+pkill -f xfce4-session
+rm -f /tmp/.X10-lock
+rm -f /run/xrdp/xrdp_display_10
+sudo systemctl restart xrdp xrdp-sesman
