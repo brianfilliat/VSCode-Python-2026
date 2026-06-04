@@ -26,7 +26,6 @@ policies/
 *.wasm
 *.node
 *.asar
-*.html
 *.json.sig
 Code.VisualElementsManifest.xml
 chrome_*.pak
