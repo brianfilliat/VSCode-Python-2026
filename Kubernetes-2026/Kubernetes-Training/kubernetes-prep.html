@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kubernetes Prep - Complete Reference Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+            border-bottom: 2px solid rgba(34, 211, 238, 0.2);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #22d3ee 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            margin-bottom: 10px;
+        }
+
+        .meta {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-top: 15px;
+        }
+
+        .toc {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .toc h2 {
+            color: #22d3ee;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .toc-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .toc-item {
+            padding: 12px 16px;
+            background: rgba(15, 23, 42, 0.6);
+            border-left: 3px solid #22d3ee;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .toc-item:hover {
+            background: rgba(34, 211, 238, 0.1);
+            border-left-color: #ec4899;
+            transform: translateX(5px);
+        }
+
+        .toc-item a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc-item a:hover {
+            color: #22d3ee;
+        }
+
+        section {
+            margin-bottom: 80px;
+            scroll-margin-top: 100px;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: #22d3ee;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(34, 211, 238, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        section h3 {
+            font-size: 1.5rem;
+            color: #ec4899;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        section h4 {
+            font-size: 1.2rem;
+            color: #a78bfa;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+        }
+
+        code {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: #22d3ee;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #e2e8f0;
+        }
+
+        .highlight {
+            background: rgba(236, 72, 153, 0.1);
+            padding: 20px;
+            border-left: 4px solid #ec4899;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .highlight strong {
+            color: #ec4899;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: rgba(34, 211, 238, 0.15);
+            color: #22d3ee;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(34, 211, 238, 0.3);
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(34, 211, 238, 0.1);
+            color: #cbd5e1;
+        }
+
+        tr:hover {
+            background: rgba(34, 211, 238, 0.05);
+        }
+
+        .diagram {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .diagram-title {
+            color: #22d3ee;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .flow-chart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .flow-item {
+            background: rgba(34, 211, 238, 0.1);
+            border: 2px solid rgba(34, 211, 238, 0.3);
+            padding: 15px 20px;
+            border-radius: 6px;
+            color: #22d3ee;
+            font-weight: 500;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .flow-arrow {
+            color: #ec4899;
+            font-size: 1.5rem;
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .comparison-item {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .comparison-item h4 {
+            color: #22d3ee;
+            margin-bottom: 15px;
+        }
+
+        .key-point {
+            background: rgba(236, 72, 153, 0.1);
+            border-left: 4px solid #ec4899;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .key-point strong {
+            color: #ec4899;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 2px solid rgba(34, 211, 238, 0.2);
+            color: #94a3b8;
+            margin-top: 80px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #22d3ee 0%, #ec4899 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+
+            .toc-list {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-chart {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Kubernetes Prep</h1>
+            <p class="subtitle">Complete Reference Guide for Kubernetes Concepts, Architecture, and Best Practices</p>
+            <p class="meta">Last Updated: June 4, 2026 | Based on Kubernetes OneNotes 2026</p>
+        </header>
+
+        <div class="toc">
+            <h2>📑 Table of Contents</h2>
+            <div class="toc-list">
+                <div class="toc-item"><a href="#kubectl-apply">⚙️ kubectl apply: A Visual Walkthrough</a></div>
+                <div class="toc-item"><a href="#dns">🌐 Kubernetes DNS</a></div>
+                <div class="toc-item"><a href="#architecture">🏗️ Kubernetes Architecture</a></div>
+                <div class="toc-item"><a href="#ingress">🌍 Kubernetes Ingress</a></div>
+                <div class="toc-item"><a href="#probes">🔍 Kubernetes Probes</a></div>
+                <div class="toc-item"><a href="#how-it-works">⚡ How Kubernetes Works (End-to-End)</a></div>
+                <div class="toc-item"><a href="#six-swipes">📱 Kubernetes in 6 Swipes</a></div>
+                <div class="toc-item"><a href="#first-pod">📦 Your First Kubernetes Object: Pod</a></div>
+            </div>
+        </div>
+
+        <!-- Section 1: kubectl apply -->
+        <section id="kubectl-apply">
+            <h2><span class="section-icon">⚙️</span> kubectl apply: A Visual Walkthrough</h2>
+
+            <h3>Overview</h3>
+            <p><code>kubectl apply</code> is the primary command for deploying and updating Kubernetes resources. It follows a declarative approach where you define the desired state in YAML files, and Kubernetes ensures the cluster matches that state.</p>
+
+            <h3>The kubectl apply Process Flow</h3>
+            <div class="diagram">
+                <div class="diagram-title">Step-by-Step Process</div>
+                <div class="flow-chart">
+                    <div class="flow-item">Local Workstation</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">API Server</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">etcd Storage</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">Scheduler</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-item">Worker Node</div>
+                </div>
+            </div>
+
+            <h4>Step 1: Local Workstation</h4>
+            <ul>
+                <li>Create or modify <code>Pod.yaml</code> file with desired configuration</li>
+                <li>Run <code>kubectl apply -f Pod.yaml</code> command</li>
+                <li>YAML is sent to the Kubernetes cluster</li>
+            </ul>
+
+            <h4>Step 2: Cluster Communication</h4>
+            <ul>
+                <li>YAML is transmitted to the Kubernetes API Server</li>
+                <li>API Server is located in the Control Plane</li>
+                <li>Request includes authentication credentials</li>
+            </ul>
+
+            <h4>Step 3: API Server Processing</h4>
+            <ul>
+                <li>Validates the YAML syntax and schema</li>
+                <li>Checks authorization and RBAC policies</li>
+                <li>Stores the configuration in etcd (distributed key-value store)</li>
+                <li>Watches for any changes to the resource</li>
+            </ul>
+
+            <h4>Step 4: Scheduler Assignment</h4>
+            <ul>
+                <li>Scheduler picks up unscheduled pods from the API Server</li>
+                <li>Evaluates node resources (CPU, memory, disk)</li>
+                <li>Assigns pods to appropriate worker nodes based on requirements</li>
+                <li>Updates the pod's node assignment in etcd</li>
+            </ul>
+
+            <h4>Step 5: Worker Node Execution</h4>
+            <ul>
+                <li>Kubelet (node agent) receives the pod assignment</li>
+                <li>Pulls the container image from the registry</li>
+                <li>Starts the container on the node</li>
+                <li>Kube-proxy handles networking and service routing</li>
+                <li>Running app pod is deployed and ready to serve traffic</li>
+            </ul>
+
+            <h3>Key Components Involved</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Role</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>API Server</strong></td>
+                        <td>Entry point for all requests, RESTful interface</td>
+                        <td>Control Plane</td>
+                    </tr>
+                    <tr>
+                        <td><strong>etcd</strong></td>
+                        <td>Persistent storage for cluster state</td>
+                        <td>Control Plane</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scheduler</strong></td>
+                        <td>Assigns pods to nodes</td>
+                        <td>Control Plane</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kubelet</strong></td>
+                        <td>Runs containers on nodes</td>
+                        <td>Worker Node</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kube-proxy</strong></td>
+                        <td>Manages network rules and service routing</td>
+                        <td>Worker Node</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Example YAML Configuration</h3>
+            <pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app-pod
+  labels:
+    app: my-app
+spec:
+  containers:
+  - name: app-container
+    image: my-app:latest
+    ports:
+    - containerPort: 8080
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"</code></pre>
+
+            <div class="highlight">
+                <strong>💡 Key Insight:</strong> kubectl apply is idempotent, meaning you can run it multiple times with the same YAML and get the same result. This makes it safe for automation and CI/CD pipelines.
+            </div>
+        </section>
+
+        <!-- Section 2: Kubernetes DNS -->
+        <section id="dns">
+            <h2><span class="section-icon">🌐</span> Kubernetes DNS</h2>
+
+            <h3>What is Kubernetes DNS?</h3>
+            <p>Kubernetes uses DNS to provide service discovery. Because Pods are dynamic—they restart, scale, and their IPs keep changing—DNS is essential for reliable communication between services.</p>
+
+            <div class="highlight">
+                <strong>🎯 Core Concept:</strong> That's where CoreDNS comes in. It acts as the internal DNS server of your cluster, automatically discovering services and resolving their names to IP addresses.
+            </div>
+
+            <h3>CoreDNS: The Internal DNS Server</h3>
+            <p>CoreDNS is a flexible, extensible DNS server that serves as Kubernetes' cluster DNS. It automatically discovers services and resolves their names to IP addresses.</p>
+
+            <h3>How Kubernetes DNS Works</h3>
+            <div class="flow-chart">
+                <div class="flow-item">Pod sends DNS query</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">CoreDNS receives</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">API lookup</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">Returns Cluster IP</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">Traffic routed</div>
+            </div>
+
+            <ol>
+                <li><strong>Pod sends a DNS query</strong> (e.g., <code>my-service.default.svc.cluster.local</code>)</li>
+                <li><strong>Request goes to CoreDNS</strong> - The CoreDNS service intercepts the query</li>
+                <li><strong>CoreDNS checks Kubernetes API</strong> - Looks up the Service IP</li>
+                <li><strong>Returns the Cluster IP</strong> - CoreDNS returns the Service's Cluster IP</li>
+                <li><strong>Traffic is routed to the correct Pod</strong> - Kube-proxy handles the routing</li>
+            </ol>
+
+            <h3>DNS Format</h3>
+            <pre><code>&lt;service-name&gt;.&lt;namespace&gt;.svc.cluster.local</code></pre>
+
+            <h4>Example DNS Names</h4>
+            <ul>
+                <li><code>backend.default.svc.cluster.local</code> - Service in default namespace</li>
+                <li><code>database.production.svc.cluster.local</code> - Service in production namespace</li>
+                <li><code>cache.monitoring.svc.cluster.local</code> - Service in monitoring namespace</li>
+            </ul>
+
+            <h3>Why This Matters</h3>
+            <ul>
+                <li><strong>Dynamic Discovery:</strong> Pods are dynamic and their IPs keep changing</li>
+                <li><strong>Service Discovery:</strong> Applications can reference services by name instead of IP</li>
+                <li><strong>Load Balancing:</strong> Requests are automatically distributed across all pod replicas</li>
+                <li><strong>Namespace Isolation:</strong> Services can be scoped to specific namespaces</li>
+                <li><strong>Reliability:</strong> Service names remain constant even if pods restart</li>
+            </ul>
+
+            <h3>CoreDNS Configuration</h3>
+            <p>CoreDNS runs as a Deployment in the <code>kube-system</code> namespace and is configured via a ConfigMap. You can view the current configuration with:</p>
+            <pre><code>kubectl get configmap coredns -n kube-system -o yaml</code></pre>
+
+            <div class="key-point">
+                <strong>🔑 Remember:</strong> DNS is fundamental to Kubernetes. Without it, services couldn't discover each other, and the entire cluster would be unable to route traffic properly.
+            </div>
+        </section>
+
+        <!-- Section 3: Kubernetes Architecture -->
+        <section id="architecture">
+            <h2><span class="section-icon">🏗️</span> Kubernetes Architecture</h2>
+
+            <h3>High-Level Overview</h3>
+            <p>Kubernetes is a containerization platform that provides automated deployment, scaling, and management of containerized applications. It abstracts away the underlying infrastructure and provides a unified interface for managing containers across a cluster of machines.</p>
+
+            <h3>The Two-Layer Architecture</h3>
+            <p>Kubernetes follows a master-worker (or control plane-worker node) architecture:</p>
+
+            <div class="comparison-table">
+                <div class="comparison-item">
+                    <h4>🧠 Control Plane (Brain)</h4>
+                    <p>The management layer that maintains the desired state of the cluster.</p>
+                    <ul>
+                        <li>Makes global decisions</li>
+                        <li>Detects and responds to cluster events</li>
+                        <li>Manages cluster state</li>
+                    </ul>
+                </div>
+                <div class="comparison-item">
+                    <h4>💪 Worker Nodes (Execution)</h4>
+                    <p>Run the actual application containers.</p>
+                    <ul>
+                        <li>Execute workloads</li>
+                        <li>Report status to control plane</li>
+                        <li>Manage container lifecycle</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Control Plane Components</h3>
+            <p>The Control Plane is the brain of Kubernetes and consists of several critical components:</p>
+
+            <h4>1. API Server</h4>
+            <ul>
+                <li>Entry point for all requests (REST API)</li>
+                <li>Validates and processes all requests</li>
+                <li>Communicates with etcd for state management</li>
+                <li>Enforces authorization and authentication</li>
+            </ul>
+
+            <h4>2. etcd</h4>
+            <ul>
+                <li>Distributed key-value store</li>
+                <li>Stores all cluster state and configuration</li>
+                <li>Single source of truth for cluster data</li>
+                <li>Highly available and consistent</li>
+            </ul>
+
+            <h4>3. Scheduler</h4>
+            <ul>
+                <li>Watches for unscheduled pods</li>
+                <li>Assigns pods to appropriate worker nodes</li>
+                <li>Considers resource requirements and constraints</li>
+                <li>Makes intelligent placement decisions</li>
+            </ul>
+
+            <h4>4. Controller Manager</h4>
+            <ul>
+                <li>Runs multiple controllers in a single process</li>
+                <li>Maintains desired state of resources</li>
+                <li>Handles node failures and pod replicas</li>
+                <li>Examples: ReplicaSet Controller, Deployment Controller, Service Controller</li>
+            </ul>
+
+            <h3>Worker Node Components</h3>
+            <p>Worker Nodes run the actual application containers and consist of:</p>
+
+            <h4>1. Kubelet</h4>
+            <ul>
+                <li>Node agent that ensures containers run in pods</li>
+                <li>Communicates with the API Server</li>
+                <li>Manages pod lifecycle</li>
+                <li>Reports node and pod status</li>
+            </ul>
+
+            <h4>2. Kube-proxy</h4>
+            <ul>
+                <li>Handles networking and service routing</li>
+                <li>Maintains network rules on nodes</li>
+                <li>Enables service discovery</li>
+                <li>Implements load balancing</li>
+            </ul>
+
+            <h4>3. Container Runtime</h4>
+            <ul>
+                <li>Runs the containers (Docker, containerd, CRI-O)</li>
+                <li>Manages container lifecycle</li>
+                <li>Pulls images and starts containers</li>
+            </ul>
+
+            <h3>Architecture Flow</h3>
+            <pre><code>kubectl → API Server → etcd → Scheduler → Node → Pod runs</code></pre>
+
+            <h3>Why This Architecture Matters</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Benefit</th>
+                        <th>Explanation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Separation of Concerns</strong></td>
+                        <td>Control Plane manages, Worker Nodes execute</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scalability</strong></td>
+                        <td>Add more nodes without changing control plane logic</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resilience</strong></td>
+                        <td>Control Plane can be replicated for high availability</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Flexibility</strong></td>
+                        <td>Different workload types can run on different nodes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Declarative Management</strong></td>
+                        <td>Define desired state, Kubernetes ensures it</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight">
+                <strong>💡 Key Insight:</strong> Understanding Kubernetes architecture is crucial for debugging issues, optimizing performance, and designing resilient systems. The separation between control plane and worker nodes allows Kubernetes to scale horizontally.
+            </div>
+        </section>
+
+        <!-- Section 4: Kubernetes Ingress -->
+        <section id="ingress">
+            <h2><span class="section-icon">🌍</span> Kubernetes Ingress</h2>
+
+            <h3>What is Ingress?</h3>
+            <p>Ingress is a Kubernetes API object that manages external access to services within a cluster. It provides HTTP and HTTPS routing to services based on hostnames and URL paths.</p>
+
+            <h3>Why Do We Need Ingress?</h3>
+            <p>Without Ingress, you would need to:</p>
+            <ul>
+                <li>Use NodePort services (expose ports on every node)</li>
+                <li>Use LoadBalancer services (expensive, one per service)</li>
+                <li>Manually manage external load balancers</li>
+            </ul>
+
+            <p>Ingress solves this by providing a single entry point with intelligent routing.</p>
+
+            <h3>How Ingress Works</h3>
+            <div class="flow-chart">
+                <div class="flow-item">External Request</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">Ingress Controller</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">Route Rules</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">Service</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">Pod</div>
+            </div>
+
+            <h3>Ingress Components</h3>
+
+            <h4>1. Ingress Resource</h4>
+            <p>Defines routing rules (YAML configuration)</p>
+            <pre><code>apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+      - path: /web
+        pathType: Prefix
+        backend:
+          service:
+            name: web-service
+            port:
+              number: 3000</code></pre>
+
+            <h4>2. Ingress Controller</h4>
+            <p>Implements the Ingress rules (e.g., NGINX, HAProxy, Istio)</p>
+            <ul>
+                <li>Watches Ingress resources</li>
+                <li>Configures the load balancer</li>
+                <li>Routes traffic based on rules</li>
+            </ul>
+
+            <h3>Routing Patterns</h3>
+
+            <h4>Host-Based Routing</h4>
+            <pre><code>api.example.com → api-service
+web.example.com → web-service
+admin.example.com → admin-service</code></pre>
+
+            <h4>Path-Based Routing</h4>
+            <pre><code>example.com/api → api-service
+example.com/web → web-service
+example.com/admin → admin-service</code></pre>
+
+            <h4>Combination Routing</h4>
+            <pre><code>api.example.com/v1 → api-v1-service
+api.example.com/v2 → api-v2-service</code></pre>
+
+            <h3>Common Ingress Controllers</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Controller</th>
+                        <th>Features</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>NGINX</strong></td>
+                        <td>Lightweight, fast, widely used</td>
+                        <td>General purpose routing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>HAProxy</strong></td>
+                        <td>High performance, advanced features</td>
+                        <td>Enterprise deployments</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Istio</strong></td>
+                        <td>Service mesh, advanced traffic management</td>
+                        <td>Complex microservices</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Traefik</strong></td>
+                        <td>Cloud-native, dynamic configuration</td>
+                        <td>Modern cloud deployments</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="key-point">
+                <strong>🔑 Remember:</strong> Ingress is not a service type; it's a separate resource that works with services. You still need a Service to expose your pods internally.
+            </div>
+        </section>
+
+        <!-- Section 5: Kubernetes Probes -->
+        <section id="probes">
+            <h2><span class="section-icon">🔍</span> Kubernetes Probes</h2>
+
+            <h3>What Are Probes?</h3>
+            <p>Probes are diagnostic checks that Kubernetes uses to determine the health and readiness of containers. They help Kubernetes make intelligent decisions about pod lifecycle management.</p>
+
+            <h3>Types of Probes</h3>
+
+            <h4>1. Liveness Probe</h4>
+            <div class="key-point">
+                <strong>Purpose:</strong> Determines if a container is alive. If the liveness probe fails, Kubernetes will restart the container.
+            </div>
+
+            <p><strong>Use Cases:</strong></p>
+            <ul>
+                <li>Detect deadlocks</li>
+                <li>Recover from hung processes</li>
+                <li>Restart unhealthy containers</li>
+            </ul>
+
+            <p><strong>Example:</strong></p>
+            <pre><code>livenessProbe:
+  httpGet:
+    path: /health
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10</code></pre>
+
+            <h4>2. Readiness Probe</h4>
+            <div class="key-point">
+                <strong>Purpose:</strong> Determines if a container is ready to receive traffic. If the readiness probe fails, the pod is removed from service endpoints.
+            </div>
+
+            <p><strong>Use Cases:</strong></p>
+            <ul>
+                <li>Wait for dependencies to be ready</li>
+                <li>Prevent traffic during startup</li>
+                <li>Graceful shutdown</li>
+            </ul>
+
+            <p><strong>Example:</strong></p>
+            <pre><code>readinessProbe:
+  httpGet:
+    path: /ready
+    port: 8080
+  initialDelaySeconds: 10
+  periodSeconds: 5</code></pre>
+
+            <h4>3. Startup Probe</h4>
+            <div class="key-point">
+                <strong>Purpose:</strong> Determines if a container has started successfully. Useful for slow-starting applications.
+            </div>
+
+            <p><strong>Example:</strong></p>
+            <pre><code>startupProbe:
+  httpGet:
+    path: /startup
+    port: 8080
+  failureThreshold: 30
+  periodSeconds: 10</code></pre>
+
+            <h3>Liveness vs Readiness Comparison</h3>
+
+            <div class="comparison-table">
+                <div class="comparison-item">
+                    <h4>Liveness Probe</h4>
+                    <ul>
+                        <li><strong>Question:</strong> Is the container alive?</li>
+                        <li><strong>Failure Action:</strong> Restart container</li>
+                        <li><strong>When to Use:</strong> Detect stuck processes</li>
+                        <li><strong>Typical Interval:</strong> 10-30 seconds</li>
+                    </ul>
+                </div>
+                <div class="comparison-item">
+                    <h4>Readiness Probe</h4>
+                    <ul>
+                        <li><strong>Question:</strong> Is the container ready for traffic?</li>
+                        <li><strong>Failure Action:</strong> Remove from load balancer</li>
+                        <li><strong>When to Use:</strong> Wait for dependencies</li>
+                        <li><strong>Typical Interval:</strong> 5-10 seconds</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Probe Types</h3>
+
+            <h4>HTTP Probe</h4>
+            <pre><code>httpGet:
+  path: /health
+  port: 8080
+  scheme: HTTP
+  httpHeaders:
+  - name: Custom-Header
+    value: Awesome</code></pre>
+
+            <h4>TCP Probe</h4>
+            <pre><code>tcpSocket:
+  port: 8080</code></pre>
+
+            <h4>Exec Probe</h4>
+            <pre><code>exec:
+  command:
+  - /bin/sh
+  - -c
+  - curl localhost:8080/health</code></pre>
+
+            <h3>Probe Configuration Parameters</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>initialDelaySeconds</code></td>
+                        <td>Delay before first probe</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td><code>periodSeconds</code></td>
+                        <td>Interval between probes</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td><code>timeoutSeconds</code></td>
+                        <td>Probe timeout</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td><code>failureThreshold</code></td>
+                        <td>Failures before marking unhealthy</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td><code>successThreshold</code></td>
+                        <td>Successes before marking healthy</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight">
+                <strong>💡 Best Practice:</strong> Always implement both liveness and readiness probes for production workloads. They are essential for maintaining application health and reliability.
+            </div>
+        </section>
+
+        <!-- Section 6: How Kubernetes Works -->
+        <section id="how-it-works">
+            <h2><span class="section-icon">⚡</span> How Kubernetes Works (End-to-End)</h2>
+
+            <h3>The Complete Journey: From kubectl to Running Pod</h3>
+
+            <h3>Step 1: User Issues kubectl Command</h3>
+            <pre><code>$ kubectl apply -f deployment.yaml</code></pre>
+
+            <h3>Step 2: kubectl Communicates with API Server</h3>
+            <ul>
+                <li>kubectl reads the YAML file</li>
+                <li>Sends HTTP POST request to API Server</li>
+                <li>Includes authentication credentials</li>
+            </ul>
+
+            <h3>Step 3: API Server Validates Request</h3>
+            <ul>
+                <li>Authenticates the user</li>
+                <li>Authorizes the action (RBAC)</li>
+                <li>Validates YAML schema</li>
+                <li>Performs admission control checks</li>
+            </ul>
+
+            <h3>Step 4: API Server Stores in etcd</h3>
+            <ul>
+                <li>Creates the resource object</li>
+                <li>Stores it in etcd</li>
+                <li>Returns success response to kubectl</li>
+            </ul>
+
+            <h3>Step 5: Controllers Watch for Changes</h3>
+            <ul>
+                <li>Deployment Controller detects new Deployment</li>
+                <li>Creates ReplicaSet</li>
+                <li>ReplicaSet Controller creates Pods</li>
+            </ul>
+
+            <h3>Step 6: Scheduler Assigns Pods to Nodes</h3>
+            <ul>
+                <li>Scheduler watches for unscheduled pods</li>
+                <li>Evaluates node resources and constraints</li>
+                <li>Assigns pod to best-fit node</li>
+                <li>Updates pod's nodeName field in etcd</li>
+            </ul>
+
+            <h3>Step 7: Kubelet Receives Pod Assignment</h3>
+            <ul>
+                <li>Kubelet on assigned node watches API Server</li>
+                <li>Detects pod assignment</li>
+                <li>Begins pod startup process</li>
+            </ul>
+
+            <h3>Step 8: Container Runtime Creates Container</h3>
+            <ul>
+                <li>Kubelet instructs container runtime</li>
+                <li>Container runtime pulls image</li>
+                <li>Creates and starts container</li>
+                <li>Sets up networking</li>
+            </ul>
+
+            <h3>Step 9: Pod Becomes Ready</h3>
+            <ul>
+                <li>Container starts successfully</li>
+                <li>Readiness probe passes</li>
+                <li>Pod is added to Service endpoints</li>
+                <li>Traffic can now be routed to pod</li>
+            </ul>
+
+            <h3>Step 10: Application Serves Traffic</h3>
+            <ul>
+                <li>Pod is fully operational</li>
+                <li>Receives requests through Service</li>
+                <li>Processes requests and returns responses</li>
+            </ul>
+
+            <h3>Complete Flow Diagram</h3>
+            <pre><code>User (kubectl apply)
+    ↓
+API Server (validate & store)
+    ↓
+etcd (persistent storage)
+    ↓
+Controllers (create resources)
+    ↓
+Scheduler (assign to node)
+    ↓
+Kubelet (create container)
+    ↓
+Container Runtime (run container)
+    ↓
+Running Pod (serving traffic)</code></pre>
+
+            <div class="highlight">
+                <strong>💡 Key Insight:</strong> Every step in this process is observable and debuggable. You can use <code>kubectl describe</code>, <code>kubectl logs</code>, and <code>kubectl get events</code> to see what's happening at each stage.
+            </div>
+        </section>
+
+        <!-- Section 7: Kubernetes in 6 Swipes -->
+        <section id="six-swipes">
+            <h2><span class="section-icon">📱</span> Kubernetes in 6 Swipes</h2>
+
+            <h3>A Quick Overview of Core Kubernetes Objects</h3>
+
+            <h3>1. Pod</h3>
+            <p><strong>What:</strong> Smallest deployable unit in Kubernetes</p>
+            <p><strong>Contains:</strong> One or more containers</p>
+            <p><strong>Lifetime:</strong> Ephemeral (can be created and destroyed)</p>
+            <p><strong>Use:</strong> Never create Pods directly; use Deployments</p>
+
+            <h3>2. Service</h3>
+            <p><strong>What:</strong> Stable endpoint for accessing pods</p>
+            <p><strong>Purpose:</strong> Provides service discovery and load balancing</p>
+            <p><strong>Types:</strong> ClusterIP, NodePort, LoadBalancer, ExternalName</p>
+            <p><strong>Benefit:</strong> Pods can change, but Service IP remains stable</p>
+
+            <h3>3. Deployment</h3>
+            <p><strong>What:</strong> Declarative way to manage pods</p>
+            <p><strong>Features:</strong> Scaling, rolling updates, rollbacks</p>
+            <p><strong>Manages:</strong> ReplicaSets and Pods</p>
+            <p><strong>Use:</strong> Primary way to deploy stateless applications</p>
+
+            <h3>4. ConfigMap</h3>
+            <p><strong>What:</strong> Store configuration data</p>
+            <p><strong>Format:</strong> Key-value pairs</p>
+            <p><strong>Use Cases:</strong> Environment variables, config files</p>
+            <p><strong>Benefit:</strong> Separate configuration from application code</p>
+
+            <h3>5. Secret</h3>
+            <p><strong>What:</strong> Store sensitive data</p>
+            <p><strong>Types:</strong> Opaque, TLS, ServiceAccount, Docker registry</p>
+            <p><strong>Encoding:</strong> Base64 encoded (not encrypted by default)</p>
+            <p><strong>Use:</strong> Passwords, API keys, certificates</p>
+
+            <h3>6. Namespace</h3>
+            <p><strong>What:</strong> Virtual cluster within a cluster</p>
+            <p><strong>Purpose:</strong> Isolate resources and teams</p>
+            <p><strong>Default:</strong> default, kube-system, kube-public</p>
+            <p><strong>Benefit:</strong> Multi-tenancy and resource organization</p>
+
+            <h3>Quick Reference Table</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Object</th>
+                        <th>Purpose</th>
+                        <th>Scope</th>
+                        <th>Typical Use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Pod</strong></td>
+                        <td>Run containers</td>
+                        <td>Namespace</td>
+                        <td>Basic unit (usually via Deployment)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Service</strong></td>
+                        <td>Network access</td>
+                        <td>Namespace</td>
+                        <td>Expose pods to network</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deployment</strong></td>
+                        <td>Manage pods</td>
+                        <td>Namespace</td>
+                        <td>Deploy applications</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ConfigMap</strong></td>
+                        <td>Store config</td>
+                        <td>Namespace</td>
+                        <td>Application configuration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Secret</strong></td>
+                        <td>Store secrets</td>
+                        <td>Namespace</td>
+                        <td>Sensitive data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Namespace</strong></td>
+                        <td>Isolate resources</td>
+                        <td>Cluster</td>
+                        <td>Multi-tenancy</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="key-point">
+                <strong>🔑 Remember:</strong> These six objects form the foundation of Kubernetes. Master these, and you'll understand 80% of what Kubernetes does.
+            </div>
+        </section>
+
+        <!-- Section 8: Your First Kubernetes Object: Pod -->
+        <section id="first-pod">
+            <h2><span class="section-icon">📦</span> Your First Kubernetes Object: Pod</h2>
+
+            <h3>What is a Pod?</h3>
+            <p>A Pod is the smallest deployable unit in Kubernetes. It's a wrapper around one or more containers (usually one) that runs together on the same node and shares network namespace.</p>
+
+            <h3>Pod Characteristics</h3>
+            <ul>
+                <li><strong>Ephemeral:</strong> Pods are temporary and can be created/destroyed</li>
+                <li><strong>Shared Network:</strong> All containers in a pod share the same IP address</li>
+                <li><strong>Shared Storage:</strong> Containers can share volumes</li>
+                <li><strong>Atomic:</strong> Pod is the smallest unit you can schedule</li>
+            </ul>
+
+            <h3>Pod Lifecycle</h3>
+            <div class="flow-chart">
+                <div class="flow-item">Pending</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">Running</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">Succeeded/Failed</div>
+            </div>
+
+            <h4>Pod Phases</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Pending</strong></td>
+                        <td>Pod accepted but containers not yet running (waiting for resources)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Running</strong></td>
+                        <td>Pod bound to node, at least one container running</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Succeeded</strong></td>
+                        <td>All containers terminated successfully (job pods)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Failed</strong></td>
+                        <td>At least one container terminated with failure</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Unknown</strong></td>
+                        <td>Pod state cannot be determined</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Creating Your First Pod</h3>
+
+            <h4>Simple Pod YAML</h4>
+            <pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: my-first-pod
+  labels:
+    app: hello-world
+spec:
+  containers:
+  - name: hello-container
+    image: nginx:latest
+    ports:
+    - containerPort: 80</code></pre>
+
+            <h4>Apply the Pod</h4>
+            <pre><code>$ kubectl apply -f pod.yaml
+pod/my-first-pod created</code></pre>
+
+            <h4>View the Pod</h4>
+            <pre><code>$ kubectl get pods
+NAME            READY   STATUS    RESTARTS   AGE
+my-first-pod    1/1     Running   0          10s</code></pre>
+
+            <h4>Get Pod Details</h4>
+            <pre><code>$ kubectl describe pod my-first-pod</code></pre>
+
+            <h4>View Pod Logs</h4>
+            <pre><code>$ kubectl logs my-first-pod</code></pre>
+
+            <h4>Execute Commands in Pod</h4>
+            <pre><code>$ kubectl exec -it my-first-pod -- /bin/bash</code></pre>
+
+            <h3>Pod with Multiple Containers</h3>
+            <pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-container-pod
+spec:
+  containers:
+  - name: web-container
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+  - name: app-container
+    image: my-app:latest
+    ports:
+    - containerPort: 8080</code></pre>
+
+            <h3>Pod with Resource Requests and Limits</h3>
+            <pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-limited-pod
+spec:
+  containers:
+  - name: app
+    image: my-app:latest
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"</code></pre>
+
+            <h3>Pod with Environment Variables</h3>
+            <pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: env-pod
+spec:
+  containers:
+  - name: app
+    image: my-app:latest
+    env:
+    - name: ENVIRONMENT
+      value: "production"
+    - name: DEBUG
+      value: "false"
+    - name: DATABASE_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: db-secret
+          key: password</code></pre>
+
+            <h3>Common kubectl Commands for Pods</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>kubectl get pods</code></td>
+                        <td>List all pods</td>
+                    </tr>
+                    <tr>
+                        <td><code>kubectl describe pod &lt;name&gt;</code></td>
+                        <td>Get detailed pod information</td>
+                    </tr>
+                    <tr>
+                        <td><code>kubectl logs &lt;pod-name&gt;</code></td>
+                        <td>View pod logs</td>
+                    </tr>
+                    <tr>
+                        <td><code>kubectl exec -it &lt;pod-name&gt; -- /bin/bash</code></td>
+                        <td>Execute command in pod</td>
+                    </tr>
+                    <tr>
+                        <td><code>kubectl port-forward &lt;pod-name&gt; 8080:80</code></td>
+                        <td>Forward local port to pod</td>
+                    </tr>
+                    <tr>
+                        <td><code>kubectl delete pod &lt;pod-name&gt;</code></td>
+                        <td>Delete a pod</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Important Notes About Pods</h3>
+            <div class="key-point">
+                <strong>⚠️ Critical:</strong> Never create Pods directly in production. Always use higher-level controllers like Deployments, StatefulSets, or DaemonSets. Pods are ephemeral and will be lost if they fail.
+            </div>
+
+            <div class="highlight">
+                <strong>💡 Best Practice:</strong> Use Pods for learning and debugging. For production workloads, use Deployments which manage Pods automatically, handle scaling, and provide rolling updates.
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Kubernetes Prep • Complete Reference Guide</p>
+        <p>Last Updated: June 4, 2026 | Based on Kubernetes OneNotes 2026</p>
+        <p>For official documentation, visit <a href="https://kubernetes.io/docs/" style="color: #22d3ee; text-decoration: none;">kubernetes.io/docs/</a></p>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">↑</div>
+
+    <script>
+        // Back to top functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
