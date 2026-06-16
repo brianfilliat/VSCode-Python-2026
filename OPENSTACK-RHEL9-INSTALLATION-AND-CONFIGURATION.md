@@ -62,7 +62,8 @@ sudo subscription-manager repos \
 
 # Enable OpenStack repo (Antelope = OpenStack 2023.1)
 sudo subscription-manager repos \
-  --enable=openstack-17.1-for-rhel-9-x86_64-rpms
+  --enable=openstack-17-tools-for-rhel-9-x86_64-rpms
+  openstack-17-tools-for-rhel-9-x86_64-rpms
 
 # Verify enabled repos
 sudo subscription-manager repos --list-enabled
@@ -75,16 +76,25 @@ sudo subscription-manager repos --list-enabled
 sudo dnf update -y
 
 # Install essential tools
-sudo dnf install -y vim curl wget net-tools git python3 python3-pip
-
+sudo dnf install -y vim curl wget net-tools git python3 python3-pip --allowerasing --skip-broken --nobest
 # Disable firewalld (Packstack manages its own rules)
 sudo systemctl disable --now firewalld
 
-# Disable NetworkManager (use network scripts instead)
-sudo systemctl disable --now NetworkManager
+# do not disable NetworkManager (use network scripts instead)
+systemctl enable --now NetworkManager
+systemctl status NetworkManager
+nmcli device status
+
+nmcli device status
+nmcli connection up eth0
 
 # Enable network service
+systemctl install --now network
 sudo systemctl enable --now network
+# Only if legacy network-scripts is absolutely required
+dnf install network-scripts
+systemctl enable --now network
+
 
 # Disable SELinux temporarily (re-enable after install)
 sudo setenforce 0
@@ -93,21 +103,23 @@ sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
 # Verify hostname resolves to IP
 hostname
 hostname -I
+ASUSVIVO2026
+172.21.204.100 
 ```
 
 ### 5. Set Static IP and Hostname
 
 ```bash
 # Set hostname
-sudo hostnamectl set-hostname openstack.local
+sudo hostnamectl set-hostname ASUSVIVO2026.openstack.local
 
 # Edit /etc/hosts
 sudo tee -a /etc/hosts << 'EOF'
-192.168.1.100   openstack.local openstack
+172.21.204.100   ASUSVIVO2026.openstack.local openstack
 EOF
 
 # Verify
-ping -c 2 openstack.local
+ping -c 2 ASUSVIVO2026.openstack.local
 ```
 
 ---
@@ -117,10 +129,33 @@ ping -c 2 openstack.local
 Packstack installs all OpenStack services on a single node using Puppet manifests.
 
 ### Step 1 — Install Packstack
+# Create RDO repo file manually
+cat > /etc/yum.repos.d/rdo-openstack.repo << 'EOF'
+[rdo-openstack]
+name=RDO OpenStack Caracal for RHEL 9
+baseurl=https://mirror.stream.centos.org/SIGs/9-stream/cloud/x86_64/openstack-caracal/
+enabled=1
+gpgcheck=0
+EOF
+
+# Refresh metadata
+dnf clean all
+dnf makecache
+
+# Verify repo shows up
+dnf repolist | grep rdo
 
 ```bash
 # Install OpenStack client and Packstack
 sudo dnf install -y python3-openstackclient openstack-packstack
+subscription-manager repos --list | grep -i packstack
+dnf install -y https://repos.fedorapeople.org/repos/openstack/openstack-antelope/rdo-release-antelope-1.el9.noarch.rpm
+dnf install -y python3-openstackclient openstack-packstack
+
+
+# 2. Enable RHOSP 17 Tools repo (provides python3-openstackclient)
+subscription-manager repos --enable=openstack-17-tools-for-rhel-9-x86_64-rpms
+
 
 # Verify installation
 packstack --version
@@ -140,16 +175,16 @@ Key settings to configure in the answer file:
 
 ```ini
 # Set the controller IP
-CONFIG_CONTROLLER_HOST=192.168.1.100
+CONFIG_CONTROLLER_HOST=172.21.204.100
 
 # Set compute node IP (same for all-in-one)
-CONFIG_COMPUTE_HOSTS=192.168.1.100
+CONFIG_COMPUTE_HOSTS=172.21.204.100
 
 # Set network node IP
-CONFIG_NETWORK_HOSTS=192.168.1.100
+CONFIG_NETWORK_HOSTS=172.21.204.100
 
 # Admin password
-CONFIG_KEYSTONE_ADMIN_PW=<admin-password>
+CONFIG_KEYSTONE_ADMIN_PW=$Time9fly
 
 # Enable/disable services
 CONFIG_HORIZON_INSTALL=y
@@ -172,7 +207,11 @@ CONFIG_NEUTRON_OVS_BRIDGE_IFACES=br-ex:eth1
 
 ```bash
 # All-in-one installation (uses answer file)
-sudo packstack --answer-file=/root/packstack-answers.txt
+grep -E "CONFIG_DEFAULT_PASSWORD|CONFIG_CONTROLLER_HOST|CONFIG_COMPUTE_HOSTS|CONFIG_NETWORK_HOSTS|CONFIG_STORAGE_HOST" /root/packstack-answers.txt
+sed -i 's/CONFIG_DEFAULT_PASSWORD=.*/CONFIG_DEFAULT_PASSWORD=YourPassword123/' /root/packstack-answers.txt
+
+packstack --answer-file=/root/packstack-answers.txt
+
 ```
 
 Or run with defaults (quickest):
@@ -185,6 +224,9 @@ sudo packstack --allinone
 
 Expected final output:
 ```
+Please check log file /var/tmp/packstack/20260611-171229-ihcsle8h/openstack-setup.log for more information
+tail /var/tmp/packstack/20260611-171229-ihcsle8h/openstack-setup.log
+sudo dnf install python3-openstackclient
  **** Installation completed successfully ******
 
 Additional information:
@@ -192,7 +234,7 @@ Additional information:
  * Time synchronization installation was skipped.
  * File /etc/profile.d/openstack-credentials.sh was created
  * To use the command line tools you need to source the file /root/keystonerc_admin
- * To use the Horizon web interface access http://192.168.1.100/dashboard
+ * To use the Horizon web interface access http://172.21.204.100/dashboard
  * The installation log file is available at: /var/tmp/packstack/...
 ```
 

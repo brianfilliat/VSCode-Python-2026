@@ -44,14 +44,20 @@ crc-windows-installer.exe
 
 # Verify installation
 crc version
-# Output: CRC version: 2.x.x
+# CRC version: 2.61.0+6eb443
+# OpenShift version: 4.21.14
+# MicroShift version: 4.21.7
 ```
 
 ### Step 3 — Setup CRC
 
 ```powershell
-# Initial setup (run once)
+# Initial setup (run once)   11.27GB to run  
 crc setup
+# INFO Using bundle path C:\Users\Mikef\.crc\cache\crc_hyperv_4.21.14_amd64.crcbundle 
+# INFO Checking minimum RAM requirements            
+# ERRO crc requires at least 11.27GB to run  
+https://developers.redhat.com/developer-sandbox
 ```
 
 Expected output:
