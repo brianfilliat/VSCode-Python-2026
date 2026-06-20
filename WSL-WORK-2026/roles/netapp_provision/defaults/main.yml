@@ -1,0 +1,11 @@
+---
+svm_name: "rhel9_app_svm"
+root_aggr: "aggr1"
+local_svm_user: "svm_admin"
+local_svm_pass: "ChangeMeSecurely99!"
+vol_name: "nfs_data_vol"
+vol_size: 100
+vol_size_unit: "gb"
+export_policy_name: "rhel9_hosts"
+allowed_client_subnet: "10.0.0.0/8"
+lif_name: "nfs_data_lif"

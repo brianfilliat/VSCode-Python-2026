@@ -1,0 +1,16 @@
+---
+- name: Secure ONTAP Automation
+  hosts: localhost
+  gather_facts: false
+  collections:
+    - netapp.ontap
+  vars_files:
+    - vault.yml
+  tasks:
+    - name: Gather Cluster Info
+      na_ontap_cluster_info:
+        hostname: "192.168.1.50"
+        username: "{{ vault_netapp_username }}"
+        password: "{{ vault_netapp_password }}"
+        https: true
+        validate_certs: false

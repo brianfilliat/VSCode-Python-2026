@@ -59,3 +59,9 @@ MySQLInstaller.yaml
 !sampledataoutput.png
 !sampleoutput.png
 /gitAdvance
+
+# Gemini agent configs and API keys
+.gemini/
+Gemini-config.json
+GOOGLE-GEMINI-API-KEY.txt
+GEMINI.md

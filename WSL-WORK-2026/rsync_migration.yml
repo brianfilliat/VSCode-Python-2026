@@ -1,0 +1,104 @@
+---
+# ==============================================================================
+# Playbook: rsync_migration.yml
+# Description: Automates data migration from a source host (e.g., local WSL, 
+#              development machine, or legacy server) to RHEL 9 client hosts
+#              and their NetApp NFS mounted shares.
+#
+# Prerequisite:
+# - SSH key-based authentication must be configured between the RHEL clients 
+#   and the source migration host.
+# - The target NFS volumes must be mounted on the RHEL clients.
+# ==============================================================================
+
+- name: Data Migration to NetApp NFS Mounts via rsync
+  hosts: rhel_clients
+  become: true         # Escalates to root to ensure proper file permissions
+  gather_facts: true
+
+  vars:
+    # Migration Source Details (e.g., your WSL development machine or legacy server)
+    source_user: "filliat"
+    source_host: "10.10.10.101"                   # Source system IP/hostname
+    source_dir: "/home/filliat/migration_src/"     # Source directory path (with trailing slash)
+    
+    # Migration Destination Details
+    dest_dir: "/mnt/netapp_nfs/migration_dest"     # Destination directory inside NetApp mount
+    dest_owner: "root"                             # Target owner of the migrated files
+    dest_group: "root"                             # Target group of the migrated files
+    dest_mode: "0755"                              # Target directory permissions
+    
+    # SSH Key Configuration for Remote Copy
+    ssh_private_key: "~/.ssh/id_rsa"               # Location of the SSH private key on RHEL clients
+    
+    # Migration Control Flags
+    rsync_dry_run: false                           # Set to true to preview transfers without writing
+    rsync_delete_extraneous: true                  # Set to true to delete files on destination not in source
+    rsync_archive_opts: "-avz"                     # Archive, Verbose, Compress flags
+
+  tasks:
+    - name: 1. Install rsync on the RHEL 9 clients
+      ansible.builtin.dnf:
+        name: rsync
+        state: present
+
+    - name: 2. Ensure destination directory exists on the NetApp NFS mount
+      ansible.builtin.file:
+        path: "{{ dest_dir }}"
+        state: directory
+        owner: "{{ dest_owner }}"
+        group: "{{ dest_group }}"
+        mode: "{{ dest_mode }}"
+
+    - name: 3. Verify SSH connection to migration source host
+      ansible.builtin.wait_for:
+        host: "{{ source_host }}"
+        port: 22
+        state: started
+        timeout: 10
+      delegate_to: "{{ inventory_hostname }}"
+
+    - name: 4. Perform DRY-RUN data migration (Safe preview of files to be copied)
+      ansible.builtin.command:
+        cmd: >
+          rsync {{ rsync_archive_opts }} --dry-run
+          {% if rsync_delete_extraneous %}--delete{% endif %}
+          -e "ssh -i {{ ssh_private_key }} -o StrictHostKeyChecking=no"
+          {{ source_user }}@{{ source_host }}:{{ source_dir }} {{ dest_dir }}
+      register: rsync_dry_run_results
+      changed_when: false
+      when: rsync_dry_run
+
+    - name: 5. Display DRY-RUN migration results
+      ansible.builtin.debug:
+        msg:
+          - "--- RSYNC MIGRATION DRY RUN PREVIEW ---"
+          - "{{ rsync_dry_run_results.stdout_lines }}"
+      when: rsync_dry_run
+
+    - name: 6. Execute LIVE data migration (Transferring files to NetApp NFS volume)
+      ansible.builtin.command:
+        cmd: >
+          rsync {{ rsync_archive_opts }}
+          {% if rsync_delete_extraneous %}--delete{% endif %}
+          -e "ssh -i {{ ssh_private_key }} -o StrictHostKeyChecking=no"
+          {{ source_user }}@{{ source_host }}:{{ source_dir }} {{ dest_dir }}
+      register: rsync_live_results
+      when: not rsync_dry_run
+
+    - name: 7. Display LIVE migration results and statistics
+      ansible.builtin.debug:
+        msg:
+          - "--- LIVE RSYNC MIGRATION COMPLETED ---"
+          - "{{ rsync_live_results.stdout_lines }}"
+      when: not rsync_dry_run
+
+    - name: 8. Verify destination file structure and permission integrity
+      ansible.builtin.command:
+        cmd: "ls -laR {{ dest_dir }}"
+      register: verify_dest_files
+      changed_when: false
+
+    - name: 9. Display verification file list
+      ansible.builtin.debug:
+        var: verify_dest_files.stdout_lines

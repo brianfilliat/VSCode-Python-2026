@@ -1,0 +1,19 @@
+---
+- name: Ensure nfs-utils is installed on RHEL 9
+  ansible.builtin.dnf:
+    name: nfs-utils
+    state: present
+
+- name: Ensure the local mount directory exists
+  ansible.builtin.file:
+    path: "{{ local_mount_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Mount NetApp volume and append to /etc/fstab
+  ansible.posix.mount:
+    path: "{{ local_mount_path }}"
+    src: "{{ nfs_server_ip }}:/{{ vol_name }}"
+    fstype: nfs
+    opts: "rw,relatime,rsize=65536,wsize=65536,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys"
+    state: mounted

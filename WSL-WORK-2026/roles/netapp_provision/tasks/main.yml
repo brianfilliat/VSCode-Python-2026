@@ -1,0 +1,73 @@
+---
+- name: 1. Create the SVM
+  netapp.ontap.na_ontap_svm:
+    state: present
+    name: "{{ svm_name }}"
+    root_volume_aggregate: "{{ root_aggr }}"
+    hostname: "{{ ansible_host }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+    https: "{{ https }}"
+    validate_certs: "{{ validate_certs }}"
+
+- name: 2. Create network LIF for NFS traffic
+  netapp.ontap.na_ontap_interface:
+    state: present
+    interface_name: "{{ lif_name }}"
+    vserver: "{{ svm_name }}"
+    home_node: "{{ lif_home_node }}"
+    home_port: "{{ lif_home_port }}"
+    address: "{{ lif_ip }}"
+    netmask: "{{ lif_netmask }}"
+    service_policy: "default-data-files" # Enables NFS and CIFS REST protocol handling
+    hostname: "{{ ansible_host }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+    https: "{{ https }}"
+    validate_certs: "{{ validate_certs }}"
+
+- name: 3. Create Local User inside SVM
+  netapp.ontap.na_ontap_user:
+    state: present
+    name: "{{ local_svm_user }}"
+    vserver: "{{ svm_name }}"
+    applications: ssh,http
+    role: vsadmin
+    user_password: "{{ local_svm_pass }}"
+    hostname: "{{ ansible_host }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+    https: "{{ https }}"
+    validate_certs: "{{ validate_certs }}"
+
+- name: 4. Create NFS Export Policy Rule
+  netapp.ontap.na_ontap_export_policy_rule:
+    state: present
+    policy_name: "{{ export_policy_name }}"
+    vserver: "{{ svm_name }}"
+    client_match: "{{ allowed_client_subnet }}"
+    ro_rule: sys
+    rw_rule: sys
+    super_user_security: sys
+    hostname: "{{ ansible_host }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+    https: "{{ https }}"
+    validate_certs: "{{ validate_certs }}"
+
+- name: 5. Create Volume with Export Policy
+  netapp.ontap.na_ontap_volume:
+    state: present
+    name: "{{ vol_name }}"
+    vserver: "{{ svm_name }}"
+    aggregate_name: "{{ root_aggr }}"
+    size: "{{ vol_size }}"
+    size_unit: "{{ vol_size_unit }}"
+    policy: "{{ export_policy_name }}"
+    junction_path: "/{{ vol_name }}"
+    space_guarantee: none
+    hostname: "{{ ansible_host }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+    https: "{{ https }}"
+    validate_certs: "{{ validate_certs }}"

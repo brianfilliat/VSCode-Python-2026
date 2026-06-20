@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "gemini-docs": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-http",
+        "https://gemini-api-docs-mcp.dev"
+      ]
+    }
+  }
+}

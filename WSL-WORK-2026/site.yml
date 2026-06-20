@@ -1,0 +1,9 @@
+---
+# ==============================================================================
+# Playbook: site.yml
+# Description: Master playbook coordinating the execution of NetApp ONTAP
+#              storage provisioning and NFS mounting on Linux client hosts.
+# ==============================================================================
+
+- import_playbook: provision_storage.yml
+- import_playbook: mount_nfs.yml

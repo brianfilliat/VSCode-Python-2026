@@ -1,0 +1,3 @@
+---
+vol_name: "nfs_data_vol"
+local_mount_path: "/mnt/netapp_nfs"

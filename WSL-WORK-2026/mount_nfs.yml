@@ -1,0 +1,7 @@
+---
+- name: Configure Linux Clients and Mount NFS Share
+  hosts: rhel_clients
+  become: true
+  gather_facts: true
+  roles:
+    - rhel_client

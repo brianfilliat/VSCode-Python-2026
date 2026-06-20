@@ -1,0 +1,10 @@
+---
+- name: Multi-Cluster NetApp Provisioning
+  hosts: netapp_clusters
+  gather_facts: false
+  collections:
+    - netapp.ontap
+  vars_files:
+    - vault.yml  # Holds vault_netapp_username and vault_netapp_password
+  roles:
+    - netapp_provision
