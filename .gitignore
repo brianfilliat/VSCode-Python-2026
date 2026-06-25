@@ -65,3 +65,7 @@ MySQLInstaller.yaml
 Gemini-config.json
 GOOGLE-GEMINI-API-KEY.txt
 GEMINI.md
+kubectl
+oc
+oc.rhel9
+oc.tar.gz
