@@ -1,4 +1,4 @@
-{
+﻿{
   "mcpServers": {
     "gemini-docs": {
       "command": "npx",
@@ -8,5 +8,6 @@
         "https://gemini-api-docs-mcp.dev"
       ]
     }
-  }
+  },
+  "antigravity.cliPath": "C:\\Users\\Mikef\\AppData\\Local\\agy\\bin\\agy.exe"
 }
